@@ -123,33 +123,41 @@ export default function ImageSlider() {
               </p>
             </div>
 
-            {/* House Party */}
+            {/* College Fest */}
             <div className="bg-white rounded-2xl p-8 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 border border-gray-100 group">
               <h2 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
                 <span className="w-1 h-5 bg-brand-red rounded-full block group-hover:scale-y-110 transition-transform" />
-                House Party Singer Bangalore
+                College Fest Singer Bangalore
               </h2>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Elevate your house party with live music that sets the perfect vibe. From acoustic
-                sets to high-energy performances, our singers adapt to any crowd size and ambiance,
-                making your private event truly one-of-a-kind.
+                Elevate your college fest with high-energy live music that sets the perfect vibe and gets the crowd jumping. From acoustic sets to full indie bands, our singers adapt perfectly to the youthful energy of campus events.
               </p>
             </div>
           </div>
 
-          {/* Corporate */}
-          <div className="md:col-span-2 bg-white rounded-2xl p-8 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 border border-gray-100 group">
-            <h2 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
-              <span className="w-1 h-6 bg-brand-red rounded-full block group-hover:scale-y-110 transition-transform" />
-              Corporate Event Singer Bangalore
-            </h2>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              Impress clients and employees alike with premium live music at your corporate events, annual galas,
-              product launches, and team-building activities. Urban Raaga offers professional corporate entertainment
-              artists who understand the importance of ambiance, professionalism, and audience engagement.
-              Our singers and bands are experienced in navigating formal settings while delivering performances
-              that leave lasting impressions. Choose from solo artists, duos, or full bands for your next corporate event in Bangalore.
-            </p>
+          {/* Corporate & Birthday */}
+          <div className="space-y-6">
+            <div className="bg-white rounded-2xl p-8 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 border border-gray-100 group">
+              <h2 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <span className="w-1 h-5 bg-brand-red rounded-full block group-hover:scale-y-110 transition-transform" />
+                Corporate Event Singer Bangalore
+              </h2>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Impress clients and employees alike with premium live music at your corporate events, annual galas,
+                and product launches. Our professional corporate entertainment
+                artists understand the importance of ambiance and audience engagement.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 border border-gray-100 group">
+              <h2 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <span className="w-1 h-5 bg-brand-red rounded-full block group-hover:scale-y-110 transition-transform" />
+                Birthday Party Singer Bangalore
+              </h2>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Celebrate your special day with incredible live performances at your birthday bash! Our singers bring the perfect mix of favorite nostalgic songs and modern hits, making every moment of your birthday celebration truly unforgettable.
+              </p>
+            </div>
           </div>
         </div>
       </div>

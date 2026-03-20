@@ -124,22 +124,22 @@ export const whyChooseUs = [
 export const sliderImages = [
   {
     id: 1,
-    url: "/slider-1.jpg",
-    alt: "Live singer performing on stage",
+    url: "/slider-cat-1.jpg",
+    alt: "College Fest Singer",
   },
   {
     id: 2,
-    url: "/slider-2.jpg",
-    alt: "Band performing at an event",
+    url: "/slider-cat-2.jpg",
+    alt: "Wedding Band Performing",
   },
   {
     id: 3,
-    url: "/slider-3.jpg",
-    alt: "Wedding singer performing",
+    url: "/slider-cat-3.jpg",
+    alt: "Corporate Event Live Music",
   },
   {
     id: 4,
-    url: "/slider-4.jpg",
-    alt: "Corporate event live music",
+    url: "/slider-cat-4.jpg",
+    alt: "Birthday Party Singer",
   },
 ];
