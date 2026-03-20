@@ -45,29 +45,29 @@ export const testimonials = [
 
 export const faqs = [
   {
-    question: "How do I book a singer in Bangalore through Urban Raaga?",
+    question: "How Do I Choose Between a Solo Singer, Duo, Trio, or Full Band?",
     answer:
-      "Booking is simple! Search for artists based on your event date, browse their profiles, shortlist your favourites, send a booking request, and pay a secure advance to confirm.",
+      "The right setup depends on the kind of experience you want your guests to have.\n\n• A solo singer creates a warm, intimate vibe — perfect for small gatherings or romantic moments.\n• A duo adds rhythm and depth, making it great for house parties and cozy celebrations.\n• A trio delivers a richer, more dynamic sound — ideal for weddings and corporate evenings.\n• A full band brings full-scale energy, turning your event into a live concert experience.",
   },
   {
-    question: "Are the artists verified?",
+    question: "💳 How Does Payment Work for Booking a Singer or Band?",
     answer:
-      "Yes, the artists listed on our platform go through a verification process to ensure basic performance quality and professionalism before they can accept bookings.",
+      "Booking with Urban Raaga is simple and secure.\n\n• A partial advance (typically 30–40%) is required to confirm your artist.\n• The remaining balance can be paid before or on the day of the event.\n• Payments can be made via secure online methods or bank transfers.\n\n👉 We ensure transparent pricing with no hidden charges.",
   },
   {
-    question: "What types of events do you cater to?",
+    question: "📍 Do You Provide Singers Across All Areas in Bangalore?",
     answer:
-      "We cover events primarily in Bangalore, including weddings, sangeet ceremonies, house parties, corporate events, birthday parties, and intimate gatherings.",
+      "Yes, we offer live singers and bands across Bangalore, including Indiranagar, Whitefield, Koramangala, HSR Layout, Electronic City, and more.",
   },
   {
-    question: "What is your cancellation policy?",
+    question: "🎤 Do You Provide Sound Systems and Setup?",
     answer:
-      "We offer flexible cancellations up to 72 hours before the event for a full refund of the advance. Cancellations within 72 hours may be subject to a partial refund depending on the specific booking terms.",
+      "Yes, we can arrange a complete sound setup, including microphones, speakers, and basic stage requirements if needed.\n\n👉 This can be customized based on your venue and event size.",
   },
   {
-    question: "Can I request specific songs?",
+    question: "📅 How Early Should I Book a Singer?",
     answer:
-      "Yes! Once your booking is confirmed, you can coordinate directly with the artist regarding song preferences and any special requirements you may have for your event.",
+      "We recommend booking at least 1–2 weeks in advance, especially during peak seasons like weddings and weekends.\n\n👉 Last-minute bookings are possible based on availability.",
   },
 ];
 

@@ -57,7 +57,7 @@ export default function FAQ() {
                 >
                   <div className="px-6 pb-5">
                     <div className="h-px bg-gray-100 mb-4" />
-                    <p className="text-gray-600 text-sm leading-relaxed">{faq.answer}</p>
+                    <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">{faq.answer}</p>
                   </div>
                 </div>
               </div>
