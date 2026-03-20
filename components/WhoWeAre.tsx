@@ -63,13 +63,19 @@ export default function WhoWeAre() {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl">
-              <Image
-                src="/slider-4.jpg"
-                alt="Live band performing"
-                fill
-                className="object-cover"
-              />
+            <div className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl group">
+              <motion.div 
+                whileHover={{ scale: 1.08 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="absolute inset-0 w-full h-full"
+              >
+                <Image
+                  src="/slider-4.jpg"
+                  alt="Live band performing"
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
               {/* Floating card */}

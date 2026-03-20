@@ -61,14 +61,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-6">
-              <Image 
-                src="/logo.png" 
-                alt="Urban Raaga Logo" 
-                width={160} 
-                height={64} 
-                className="h-14 w-auto object-contain rounded-xl overflow-hidden" 
-              />
+            <div className="flex items-center gap-2 mb-6 cursor-pointer">
+              <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
+                <Image 
+                  src="/logo.png" 
+                  alt="Urban Raaga Logo" 
+                  width={160} 
+                  height={64} 
+                  className="h-14 w-auto object-contain rounded-xl overflow-hidden" 
+                />
+              </motion.div>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-5">
               Bangalore&apos;s trusted platform to book live singers and bands for weddings, parties, and corporate events.
