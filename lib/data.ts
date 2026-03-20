@@ -29,7 +29,7 @@ export const testimonials = [
     review:
       "We hired a two-piece acoustic band for a small corporate gathering. Good quality artists, standard songs, and a clean setup. Will use them again.",
     event: "Corporate Event",
-    image: "https://images.unsplash.com/photo-1582233479966-2615456f4d2a?w=150&h=150&fit=crop",
+    image: "/ananya.png",
   },
   {
     id: 4,
