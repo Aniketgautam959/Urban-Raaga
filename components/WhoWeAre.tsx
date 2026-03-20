@@ -55,12 +55,12 @@ export default function WhoWeAre() {
             </div>
           </motion.div>
 
-          {/* Visual */}
+          {/* Visual - Premium Unmask Reveal */}
           <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            initial={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)", scale: 1.05 }}
+            whileInView={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1.4, ease: [0.77, 0, 0.175, 1] }}
             className="relative"
           >
             <div className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl group">
@@ -78,8 +78,12 @@ export default function WhoWeAre() {
               </motion.div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
-              {/* Floating card */}
-              <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur rounded-2xl p-4 shadow-xl">
+              {/* Floating card - Continuous Levitation */}
+              <motion.div 
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur rounded-2xl p-4 shadow-xl"
+              >
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-brand-red rounded-xl flex items-center justify-center text-white font-black text-lg flex-shrink-0">
                     U
@@ -100,7 +104,7 @@ export default function WhoWeAre() {
                     <p className="text-gray-700 text-xs font-semibold">Local to Bangalore</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             {/* Decorative element */}

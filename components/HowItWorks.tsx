@@ -49,9 +49,13 @@ export default function HowItWorks() {
               >
                 {/* Step circle */}
                 <div className="relative mb-6">
-                  <div className="w-20 h-20 bg-white rounded-full shadow-card group-hover:shadow-card-hover border-2 border-gray-100 group-hover:border-brand-red flex items-center justify-center text-3xl transition-all duration-300 group-hover:scale-110">
+                  <motion.div 
+                    whileHover={{ scale: 1.15, rotate: [0, -5, 5, 0] }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    className="w-20 h-20 bg-white rounded-full shadow-card group-hover:shadow-card-hover border-2 border-gray-100 group-hover:border-brand-red flex items-center justify-center text-3xl transition-colors duration-300"
+                  >
                     <span>{icons[idx]}</span>
-                  </div>
+                  </motion.div>
                   {/* Step number badge */}
                   <div className="absolute -top-1 -right-1 w-7 h-7 bg-brand-red rounded-full flex items-center justify-center shadow-md">
                     <span className="text-white text-xs font-bold">{step.step}</span>

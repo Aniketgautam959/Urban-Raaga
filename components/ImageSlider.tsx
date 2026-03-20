@@ -84,35 +84,34 @@ export default function ImageSlider() {
           style={{ aspectRatio: "16 / 7" }}
         >
 
-          {/* ── BACKGROUND IMAGES (crossfade stack) ── */}
-          {slides.map((slide, i) => (
-            <div
-              key={slide.id}
-              className="absolute inset-0 transition-opacity"
-              style={{
-                opacity: i === current ? 1 : 0,
-                transition: `opacity ${TRANSITION_DURATION}s ease-in-out`,
-                zIndex: i === current ? 2 : 1,
-              }}
+          {/* ── BACKGROUND IMAGES (premium kinetic swipe) ── */}
+          <AnimatePresence mode="popLayout">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, x: 150, scale: 1.1 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: -150, scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 80, damping: 20 }}
+              className="absolute inset-0"
+              style={{ zIndex: 1 }}
             >
-              {/* Ken Burns zoom animation via CSS */}
               <div
                 className="absolute inset-0"
                 style={{
-                  animation: i === current ? `kenBurns ${SLIDE_DURATION}ms ease-in-out forwards` : "none",
+                  animation: `kenBurns ${SLIDE_DURATION}ms ease-in-out forwards`,
                 }}
               >
                 <Image
-                  src={slide.url}
-                  alt={slide.alt}
+                  src={slides[current].url}
+                  alt={slides[current].alt}
                   fill
                   className="object-cover"
                   sizes="(max-width: 1280px) 100vw, 1280px"
-                  priority={i === 0}
+                  priority={current === 0}
                 />
               </div>
-            </div>
-          ))}
+            </motion.div>
+          </AnimatePresence>
 
           {/* ── GRADIENT OVERLAYS (cinematic vignette) ── */}
           <div
@@ -244,14 +243,21 @@ export default function ImageSlider() {
 
         {/* H1 + Intro */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="mt-20 max-w-4xl mx-auto mb-14 text-center"
         >
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 leading-tight text-balance">
+          <motion.h1 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 leading-tight text-balance"
+          >
             Live Singers in Bangalore for Weddings, Parties &amp; Events
-          </h1>
+          </motion.h1>
           <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto">
             Urban Raaga is a leading music agency offering the best <strong className="text-white">live singers in Bangalore</strong>, including{" "}
             <strong className="text-white">Kannada singers in Bangalore</strong>,{" "}

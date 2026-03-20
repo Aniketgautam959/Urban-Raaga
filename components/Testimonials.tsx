@@ -50,11 +50,12 @@ export default function Testimonials() {
           {testimonials.map((t, idx) => (
             <motion.div
               key={t.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -8, scale: 1.02 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.5 }}
-              className="bg-white border border-gray-100 rounded-2xl p-6 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 flex flex-col gap-4"
+              transition={{ delay: idx * 0.1, type: "spring", stiffness: 300, damping: 25 }}
+              className="bg-white border border-gray-100 rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-shadow duration-300 flex flex-col gap-4 cursor-pointer"
             >
               {/* Quote */}
               <div className="text-brand-red text-3xl font-serif leading-none">&ldquo;</div>
