@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function WhoWeAre() {
   return (
     <section className="py-24 bg-white" id="who-we-are">
@@ -47,12 +49,12 @@ export default function WhoWeAre() {
 
           {/* Visual */}
           <div className="relative">
-            <div className="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80"
-                alt="Urban Raaga live performance"
-                className="w-full h-full object-cover"
+            <div className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl">
+              <Image
+                src="/slider-4.jpg"
+                alt="Live band performing"
+                fill
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
