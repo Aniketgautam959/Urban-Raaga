@@ -230,34 +230,34 @@ export default function ImageSlider() {
           </p>
         </motion.div>
 
-        {/* 4 Keyword Sections */}
+          {/* 4 Keyword Sections */}
         <div className="max-w-5xl mx-auto space-y-6 mb-14">
           {[
             {
-              tag: "🎤",
+              icon: <svg className="w-6 h-6 text-white group-hover:text-brand-red transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>,
               title: "Professional Live Singers in Bangalore",
               body: "Looking to hire experienced live singers in Bangalore? Urban Raaga provides versatile singers for weddings, sangeet, receptions, birthdays, and corporate events. Our artists perform across Bollywood, Kannada, Hindi, Tamil, Telugu, and English music — ensuring every guest enjoys the celebration.",
               bullets: [],
             },
             {
-              tag: "🎧",
+              icon: <svg className="w-6 h-6 text-white group-hover:text-brand-red transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg>,
               title: "Top Kannada Singers in Bangalore",
               body: "Add a local touch to your celebration with talented Kannada singers in Bangalore. From evergreen classics to trending hits, our singers create the perfect atmosphere for:",
               bullets: ["Weddings & receptions", "Cultural events", "Private parties"],
             },
             {
-              tag: "🎸",
+              icon: <svg className="w-6 h-6 text-white group-hover:text-brand-red transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>,
               title: "English Singers in Bangalore for Premium Events",
               body: "Looking for international vibes? Our professional English singers in Bangalore bring a global music experience — from pop and rock to jazz and acoustic — and are perfect for:",
               bullets: ["Corporate events", "Luxury weddings", "Cocktail parties & private elite gatherings"],
             },
             {
-              tag: "🎶",
+              icon: <svg className="w-6 h-6 text-white group-hover:text-brand-red transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>,
               title: "Live Bands in Bangalore for High-Energy Performances",
               body: "Our live bands in Bangalore bring energy, excitement, and stage presence to your events. Choose from acoustic bands, Bollywood bands, and fusion & party bands — perfect for large-scale weddings, corporate shows, and nightlife events.",
               bullets: [],
             },
-          ].map(({ tag, title, body, bullets }, idx) => (
+          ].map(({ icon, title, body, bullets }, idx) => (
             <motion.div
               key={title}
               initial={{ opacity: 0, y: 24 }}
@@ -268,7 +268,7 @@ export default function ImageSlider() {
               style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(4px)" }}
             >
               <h2 className="text-lg sm:text-xl font-bold text-white mb-3 flex items-center gap-3">
-                <span className="text-2xl">{tag}</span>
+                <span className="flex-shrink-0">{icon}</span>
                 <span className="group-hover:text-brand-red transition-colors duration-200">{title}</span>
               </h2>
               <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-3">{body}</p>
@@ -295,7 +295,7 @@ export default function ImageSlider() {
           style={{ background: "rgba(255,255,255,0.04)" }}
         >
           <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
-            <span className="text-white font-semibold">📍 Serving All Areas in Bangalore —</span>{" "}
+            <span className="text-white font-semibold">Serving All Areas in Bangalore —</span>{" "}
             We provide live singers, Kannada singers, English singers, and live bands across{" "}
             <span className="text-white">Indiranagar, Whitefield, Koramangala, HSR Layout, Electronic City</span>, and nearby areas.
           </p>

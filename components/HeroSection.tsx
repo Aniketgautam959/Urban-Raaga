@@ -120,13 +120,15 @@ export default function HeroSection() {
             href="#"
             className="group flex items-center gap-2 bg-brand-red hover:bg-brand-red-dark text-white font-bold px-8 py-3.5 rounded-full text-sm shadow-xl shadow-red-900/30 hover:shadow-red-900/50 transition-all duration-200 hover:scale-105 active:scale-95"
           >
-            🎤 Search Live Singer
+            <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
+            Search Live Singer
           </Link>
           <Link
             href="tel:+919999999999"
             className="group flex items-center gap-2 bg-white/15 hover:bg-white/25 backdrop-blur border border-white/30 text-white font-bold px-8 py-3.5 rounded-full text-sm transition-all duration-200 hover:scale-105"
           >
-            📞 Call to Enquire
+            <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+            Call to Enquire
           </Link>
         </div>
 
