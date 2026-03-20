@@ -50,24 +50,24 @@ export const faqs = [
       "The right setup depends on the kind of experience you want your guests to have.\n\n• A solo singer creates a warm, intimate vibe — perfect for small gatherings or romantic moments.\n• A duo adds rhythm and depth, making it great for house parties and cozy celebrations.\n• A trio delivers a richer, more dynamic sound — ideal for weddings and corporate evenings.\n• A full band brings full-scale energy, turning your event into a live concert experience.",
   },
   {
-    question: "💳 How Does Payment Work for Booking a Singer or Band?",
+    question: "How Does Payment Work for Booking a Singer or Band?",
     answer:
-      "Booking with Urban Raaga is simple and secure.\n\n• A partial advance (typically 30–40%) is required to confirm your artist.\n• The remaining balance can be paid before or on the day of the event.\n• Payments can be made via secure online methods or bank transfers.\n\n👉 We ensure transparent pricing with no hidden charges.",
+      "Booking with Urban Raaga is simple and secure.\n\n• A partial advance (typically 30–40%) is required to confirm your artist.\n• The remaining balance can be paid before or on the day of the event.\n• Payments can be made via secure online methods or bank transfers.\n\nWe ensure transparent pricing with no hidden charges.",
   },
   {
-    question: "📍 Do You Provide Singers Across All Areas in Bangalore?",
+    question: "Do You Provide Singers Across All Areas in Bangalore?",
     answer:
       "Yes, we offer live singers and bands across Bangalore, including Indiranagar, Whitefield, Koramangala, HSR Layout, Electronic City, and more.",
   },
   {
-    question: "🎤 Do You Provide Sound Systems and Setup?",
+    question: "Do You Provide Sound Systems and Setup?",
     answer:
-      "Yes, we can arrange a complete sound setup, including microphones, speakers, and basic stage requirements if needed.\n\n👉 This can be customized based on your venue and event size.",
+      "Yes, we can arrange a complete sound setup, including microphones, speakers, and basic stage requirements if needed.\n\nThis can be customized based on your venue and event size.",
   },
   {
-    question: "📅 How Early Should I Book a Singer?",
+    question: "How Early Should I Book a Singer?",
     answer:
-      "We recommend booking at least 1–2 weeks in advance, especially during peak seasons like weddings and weekends.\n\n👉 Last-minute bookings are possible based on availability.",
+      "We recommend booking at least 1–2 weeks in advance, especially during peak seasons like weddings and weekends.\n\nLast-minute bookings are possible based on availability.",
   },
 ];
 
