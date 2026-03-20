@@ -124,22 +124,22 @@ export const whyChooseUs = [
 export const sliderImages = [
   {
     id: 1,
-    url: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&q=80",
+    url: "/slider-1.jpg",
     alt: "Live singer performing on stage",
   },
   {
     id: 2,
-    url: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=1200&q=80",
+    url: "/slider-2.jpg",
     alt: "Band performing at an event",
   },
   {
     id: 3,
-    url: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1200&q=80",
+    url: "/slider-3.jpg",
     alt: "Wedding singer performing",
   },
   {
     id: 4,
-    url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80",
+    url: "/slider-4.jpg",
     alt: "Corporate event live music",
   },
 ];

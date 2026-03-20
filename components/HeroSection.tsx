@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HeroSection() {
   const [location, setLocation] = useState("");
@@ -11,13 +12,14 @@ export default function HeroSection() {
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        backgroundImage:
-          "url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1800&q=80')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
     >
+        <Image
+          src="/slider-1.jpg"
+          alt="Live music concert"
+          fill
+          className="object-cover"
+          priority
+        />
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/80" />
 
