@@ -39,7 +39,7 @@ export const testimonials = [
     review:
       "A reliable platform to find local artists. Booked a singer for an anniversary dinner. The process of shortlisting to payment was smooth.",
     event: "Anniversary Party",
-    image: "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=150&h=150&fit=crop",
+    image: "/vikram.jpg",
   },
 ];
 
