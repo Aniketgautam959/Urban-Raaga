@@ -1,0 +1,158 @@
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
+import { sliderImages } from "@/lib/data";
+
+export default function ImageSlider() {
+  const [current, setCurrent] = useState(0);
+
+  const next = useCallback(() => {
+    setCurrent((prev) => (prev + 1) % sliderImages.length);
+  }, []);
+
+  const prev = () => {
+    setCurrent((prev) => (prev - 1 + sliderImages.length) % sliderImages.length);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(next, 4000);
+    return () => clearInterval(timer);
+  }, [next]);
+
+  return (
+    <section className="py-24 bg-gray-50" id="gallery">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <span className="inline-block text-brand-red text-sm font-bold uppercase tracking-widest mb-3">
+            Gallery
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
+            Live Performances That Wow
+          </h2>
+          <p className="text-gray-500 max-w-xl mx-auto text-base">
+            A glimpse of the magical moments created by our talented artists at real events.
+          </p>
+        </div>
+
+        {/* Slider */}
+        <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[16/7] bg-gray-900">
+          {sliderImages.map((img, idx) => (
+            <div
+              key={img.id}
+              className={`absolute inset-0 transition-opacity duration-1000 ${idx === current ? "opacity-100" : "opacity-0"}`}
+            >
+              <Image
+                src={img.url}
+                alt={img.alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1280px) 100vw, 1280px"
+                priority={idx === 0}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            </div>
+          ))}
+
+          {/* Controls */}
+          <button
+            onClick={prev}
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur hover:bg-white/40 rounded-full flex items-center justify-center transition-colors"
+            aria-label="Previous slide"
+          >
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={next}
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur hover:bg-white/40 rounded-full flex items-center justify-center transition-colors"
+            aria-label="Next slide"
+          >
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {/* Dots */}
+          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
+            {sliderImages.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                className={`rounded-full transition-all duration-300 ${i === current ? "w-6 h-2.5 bg-white" : "w-2.5 h-2.5 bg-white/50"}`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Caption */}
+          <div className="absolute bottom-12 left-6 text-white">
+            <p className="font-semibold text-sm bg-black/30 backdrop-blur rounded-full px-4 py-1.5">
+              {sliderImages[current].alt}
+            </p>
+          </div>
+        </div>
+
+        {/* SEO Content & Categories */}
+        <div className="mt-20 max-w-4xl mx-auto mb-16 text-center">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-6 leading-tight text-balance">
+            Live Singer in Bangalore for Weddings, Parties & Corporate Events
+          </h1>
+          <p className="text-gray-600 text-base sm:text-lg leading-relaxed text-balance max-w-3xl mx-auto">
+            Bring your events to life with the best live singers and bands in Bangalore. 
+            Whether you&apos;re hosting an intimate house party, a grand wedding reception, or an 
+            upscale corporate gala, our verified artists deliver world-class performances.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+
+          <div className="space-y-6">
+            {/* Wedding Singers */}
+            <div className="bg-white rounded-2xl p-8 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 border border-gray-100 group">
+              <h2 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <span className="w-1 h-5 bg-brand-red rounded-full block group-hover:scale-y-110 transition-transform" />
+                Wedding Singer Bangalore
+              </h2>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Make your wedding unforgettable with a live singer. Our curated wedding performers
+                specialize in romantic Hindi melodies, sangeet numbers, and classic Bollywood hits
+                that keep guests on the dance floor all night long.
+              </p>
+            </div>
+
+            {/* House Party */}
+            <div className="bg-white rounded-2xl p-8 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 border border-gray-100 group">
+              <h2 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <span className="w-1 h-5 bg-brand-red rounded-full block group-hover:scale-y-110 transition-transform" />
+                House Party Singer Bangalore
+              </h2>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Elevate your house party with live music that sets the perfect vibe. From acoustic
+                sets to high-energy performances, our singers adapt to any crowd size and ambiance,
+                making your private event truly one-of-a-kind.
+              </p>
+            </div>
+          </div>
+
+          {/* Corporate */}
+          <div className="md:col-span-2 bg-white rounded-2xl p-8 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 border border-gray-100 group">
+            <h2 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+              <span className="w-1 h-6 bg-brand-red rounded-full block group-hover:scale-y-110 transition-transform" />
+              Corporate Event Singer Bangalore
+            </h2>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Impress clients and employees alike with premium live music at your corporate events, annual galas,
+              product launches, and team-building activities. Urban Raaga offers professional corporate entertainment
+              artists who understand the importance of ambiance, professionalism, and audience engagement.
+              Our singers and bands are experienced in navigating formal settings while delivering performances
+              that leave lasting impressions. Choose from solo artists, duos, or full bands for your next corporate event in Bangalore.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
