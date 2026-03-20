@@ -9,7 +9,7 @@ export const testimonials = [
     review:
       "We booked a singer for our wedding reception and the performance was wonderful. The artist arrived on time, was professional, and the guests really enjoyed it.",
     event: "Wedding Reception",
-    avatar: "PS",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ export const testimonials = [
     review:
       "Urban Raaga helped us find a great singer for our house party. The booking process was straightforward and the artist set the perfect mood for the evening.",
     event: "House Party",
-    avatar: "RM",
+    image: "https://randomuser.me/api/portraits/men/36.jpg",
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ export const testimonials = [
     review:
       "We hired a two-piece acoustic band for a small corporate gathering. Good quality artists, standard songs, and a clean setup. Will use them again.",
     event: "Corporate Event",
-    avatar: "AG",
+    image: "https://randomuser.me/api/portraits/women/68.jpg",
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ export const testimonials = [
     review:
       "A reliable platform to find local artists. Booked a singer for an anniversary dinner. The process of shortlisting to payment was smooth.",
     event: "Anniversary Party",
-    avatar: "VN",
+    image: "https://randomuser.me/api/portraits/men/45.jpg",
   },
 ];
 

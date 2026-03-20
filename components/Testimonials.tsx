@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { testimonials } from "@/lib/data";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -68,8 +69,8 @@ export default function Testimonials() {
 
               {/* User */}
               <div className="flex items-center gap-3 pt-2 border-t border-gray-50">
-                <div className="w-10 h-10 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-sm">{t.avatar}</span>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 relative overflow-hidden bg-gray-100 border border-gray-200">
+                  <Image src={t.image} alt={t.name} fill className="object-cover" sizes="40px" />
                 </div>
                 <div>
                   <p className="font-bold text-gray-900 text-sm">{t.name}</p>
@@ -89,8 +90,8 @@ export default function Testimonials() {
               {testimonials[activeIndex].review}
             </p>
             <div className="flex items-center gap-3 pt-3 border-t border-gray-50">
-              <div className="w-10 h-10 bg-brand-red rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">{testimonials[activeIndex].avatar}</span>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center relative overflow-hidden bg-gray-100 border border-gray-200">
+                <Image src={testimonials[activeIndex].image} alt={testimonials[activeIndex].name} fill className="object-cover" sizes="40px" />
               </div>
               <div>
                 <p className="font-bold text-gray-900 text-sm">{testimonials[activeIndex].name}</p>
