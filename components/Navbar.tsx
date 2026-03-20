@@ -26,8 +26,8 @@ export default function Navbar() {
               src="/logo.png" 
               alt="Urban Raaga Logo" 
               width={160} 
-              height={48} 
-              className="h-10 w-auto object-contain rounded-xl overflow-hidden"
+              height={64} 
+              className="h-14 w-auto object-contain rounded-xl overflow-hidden border border-gray-100/50"
               priority
             />
           </Link>

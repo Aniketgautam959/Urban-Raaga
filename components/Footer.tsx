@@ -57,8 +57,8 @@ export default function Footer() {
                 src="/logo.png" 
                 alt="Urban Raaga Logo" 
                 width={160} 
-                height={48} 
-                className="h-12 w-auto object-contain rounded-xl overflow-hidden" 
+                height={64} 
+                className="h-14 w-auto object-contain rounded-xl overflow-hidden" 
               />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-5">
