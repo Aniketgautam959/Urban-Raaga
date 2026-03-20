@@ -80,27 +80,21 @@ export default function ImageSlider() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="relative rounded-2xl overflow-hidden bg-gray-900"
-          style={{ aspectRatio: "16 / 7" }}
+          className="relative rounded-[2rem] overflow-hidden bg-gray-900 shadow-2xl border border-white/5 mx-2 sm:mx-0"
+          style={{ height: "75vh", minHeight: "550px", maxHeight: "850px" }}
         >
 
-          {/* ── BACKGROUND IMAGES (premium kinetic swipe) ── */}
-          <AnimatePresence mode="popLayout">
+          {/* ── BACKGROUND IMAGES (premium circle reveal) ── */}
+          <AnimatePresence initial={false}>
             <motion.div
               key={current}
-              initial={{ opacity: 0, x: 150, scale: 1.1 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: -150, scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 80, damping: 20 }}
+              initial={{ clipPath: "circle(0% at 50% 50%)", zIndex: 10, scale: 1.1 }}
+              animate={{ clipPath: "circle(150% at 50% 50%)", zIndex: 10, scale: 1 }}
+              exit={{ zIndex: 0 }}
+              transition={{ duration: 1.4, ease: [0.77, 0, 0.175, 1] }}
               className="absolute inset-0"
-              style={{ zIndex: 1 }}
             >
-              <div
-                className="absolute inset-0"
-                style={{
-                  animation: `kenBurns ${SLIDE_DURATION}ms ease-in-out forwards`,
-                }}
-              >
+              <div className="absolute inset-0" style={{ animation: `kenBurns ${SLIDE_DURATION}ms ease-in-out forwards` }}>
                 <Image
                   src={slides[current].url}
                   alt={slides[current].alt}
@@ -113,129 +107,99 @@ export default function ImageSlider() {
             </motion.div>
           </AnimatePresence>
 
-          {/* ── GRADIENT OVERLAYS (cinematic vignette) ── */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.1) 70%, transparent 100%)",
-              zIndex: 10,
-            }}
-          />
-          {/* Side vignettes */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(to right, rgba(0,0,0,0.4) 0%, transparent 25%, transparent 75%, rgba(0,0,0,0.4) 100%)",
-              zIndex: 10,
-            }}
-          />
+          {/* ── OVERLAYS ── */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" style={{ zIndex: 11 }} />
+          <div className="absolute inset-0 bg-black/10 pointer-events-none mix-blend-overlay" style={{ zIndex: 11 }} />
 
-          {/* ── STARCLINCH-STYLE HEADLINE TEXT ── */}
-          <div
-            className="absolute bottom-0 left-0 right-0 flex flex-col items-center pb-14 px-4"
-            style={{ zIndex: 20 }}
-          >
-            {/* Static prefix */}
-            <p className="text-white/80 text-sm sm:text-base font-medium tracking-widest uppercase mb-2">
-              Book Live Music for
-            </p>
-
-            {/* Animated category (slide-up + fade — StarClinch signature) */}
-            <div className="overflow-hidden h-[3.5rem] sm:h-[4.5rem] flex items-center justify-center">
-              <AnimatePresence mode="wait">
-                <motion.h3
-                  key={current}
-                  initial={{ y: 40, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -30, opacity: 0 }}
-                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-3xl sm:text-5xl font-black text-white text-center leading-tight whitespace-nowrap"
-                >
-                  {slides[current].category}
-                </motion.h3>
-              </AnimatePresence>
+          {/* ── MASSIVE TYPOGRAPHY & CONTROLS ── */}
+          <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-12 md:p-16" style={{ zIndex: 20 }}>
+            {/* Top Bar: Counter */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <span className="text-white font-black text-xl sm:text-2xl">{String(current + 1).padStart(2, "0")}</span>
+                <div className="w-12 h-px bg-white/30" />
+                <span className="text-white/50 font-bold text-sm">{String(slides.length).padStart(2, "0")}</span>
+              </div>
             </div>
 
-            {/* Sub-label */}
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={`sub-${current}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4, delay: 0.15, ease: "easeOut" }}
-                className="mt-3 text-white/60 text-xs sm:text-sm font-medium tracking-wider"
-              >
-                {slides[current].alt}
-              </motion.p>
-            </AnimatePresence>
+            {/* Bottom Content: Type & Arrows */}
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
+              {/* Text */}
+              <div className="flex-1 max-w-4xl">
+                <motion.p
+                   initial={{ opacity: 0, x: -20 }}
+                   animate={{ opacity: 1, x: 0 }}
+                   className="text-brand-red font-bold tracking-[0.3em] sm:tracking-[0.5em] uppercase text-xs sm:text-sm mb-4 sm:mb-6 flex items-center gap-3"
+                >
+                  <span className="w-8 h-px bg-brand-red hidden sm:block"></span> Book Live Music For
+                </motion.p>
+                
+                <div className="overflow-hidden pb-2 sm:pb-4">
+                  <AnimatePresence mode="wait">
+                    <motion.h3
+                      key={current}
+                      initial={{ y: "100%", opacity: 0, rotateZ: 3 }}
+                      animate={{ y: "0%", opacity: 1, rotateZ: 0 }}
+                      exit={{ y: "-100%", opacity: 0, rotateZ: -3 }}
+                      transition={{ duration: 0.8, ease: [0.77, 0, 0.175, 1] }}
+                      className="text-4xl sm:text-6xl lg:text-[5.5rem] font-black text-white leading-[1.05] tracking-tighter"
+                    >
+                      {slides[current].category}
+                    </motion.h3>
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Controls */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 flex-shrink-0">
+                {/* Dots */}
+                <div className="flex sm:gap-2">
+                  {slides.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => { goTo(i); resetTimer(); }}
+                      className="group relative h-10 flex items-center justify-center sm:px-2 pr-4 sm:pr-2"
+                      aria-label={`Go to slide ${i + 1}`}
+                    >
+                      <span
+                        className="block h-1 rounded-full transition-all duration-500 ease-out"
+                        style={{
+                          width: i === current ? "2rem" : "0.5rem",
+                          background: i === current ? "#e11d48" : "rgba(255,255,255,0.3)",
+                        }}
+                      />
+                    </button>
+                  ))}
+                </div>
+
+                {/* Arrows */}
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => handleManual(prevSlide)}
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-300 backdrop-blur-md"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                  </button>
+                  <button
+                    onClick={() => handleManual(next)}
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-brand-red flex items-center justify-center text-white hover:bg-brand-red-dark hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(225,29,72,0.4)]"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-
-          {/* ── PROGRESS BAR ── */}
-          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/10" style={{ zIndex: 20 }}>
-            <motion.div
-              key={current}
-              className="h-full bg-brand-red"
-              initial={{ width: "0%" }}
-              animate={{ width: "100%" }}
-              transition={{ duration: SLIDE_DURATION / 1000, ease: "linear" }}
-            />
-          </div>
-
-          {/* ── NAV ARROWS ── */}
-          <button
-            onClick={() => handleManual(prevSlide)}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 group"
-            style={{ zIndex: 20, background: "rgba(255,255,255,0.12)", backdropFilter: "blur(8px)" }}
-            aria-label="Previous slide"
-          >
-            <svg className="w-5 h-5 text-white group-hover:text-brand-red transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          <button
-            onClick={() => handleManual(next)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 group"
-            style={{ zIndex: 20, background: "rgba(255,255,255,0.12)", backdropFilter: "blur(8px)" }}
-            aria-label="Next slide"
-          >
-            <svg className="w-5 h-5 text-white group-hover:text-brand-red transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-
-          {/* ── DOT NAVIGATION ── */}
-          <div className="absolute top-5 right-5 flex flex-col gap-1.5" style={{ zIndex: 20 }}>
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => { goTo(i); resetTimer(); }}
-                aria-label={`Go to slide ${i + 1}`}
-                className="group flex items-center gap-2 justify-end"
-              >
-                <span
-                  className="block rounded-full transition-all duration-300"
-                  style={{
-                    width: i === current ? "24px" : "6px",
-                    height: "6px",
-                    background: i === current ? "#e11d48" : "rgba(255,255,255,0.4)",
-                    boxShadow: i === current ? "0 0 8px rgba(225,29,72,0.6)" : "none",
-                  }}
-                />
-              </button>
-            ))}
-          </div>
-
-          {/* ── SLIDE COUNTER ── */}
-          <div
-            className="absolute top-5 left-5 text-white/50 text-xs font-mono tracking-widest"
-            style={{ zIndex: 20 }}
-          >
-            <span className="text-white font-bold">{String(current + 1).padStart(2, "0")}</span>
-            <span> / {String(slides.length).padStart(2, "0")}</span>
+          
+          {/* Progress Indication Line at absolute bottom */}
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10" style={{ zIndex: 20 }}>
+             <motion.div
+               key={current}
+               className="h-full bg-brand-red"
+               initial={{ width: "0%" }}
+               animate={{ width: "100%" }}
+               transition={{ duration: SLIDE_DURATION / 1000, ease: "linear" }}
+             />
           </div>
         </motion.div>
 
