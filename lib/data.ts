@@ -142,4 +142,19 @@ export const sliderImages = [
     url: "/slider-cat-4.jpg",
     alt: "Birthday Party Singer",
   },
+  {
+    id: 5,
+    url: "/slider-1.jpg",
+    alt: "Acoustic Cafe Session",
+  },
+  {
+    id: 6,
+    url: "/slider-2.jpg",
+    alt: "Outdoor Music Festival",
+  },
+  {
+    id: 7,
+    url: "/slider-3.jpg",
+    alt: "Intimate B&W Performance",
+  },
 ];

@@ -1,4 +1,7 @@
+"use client";
+
 import { whyChooseUs } from "@/lib/data";
+import { motion } from "framer-motion";
 
 export default function WhyChooseUs() {
   const icons = [
@@ -12,7 +15,12 @@ export default function WhyChooseUs() {
     <section className="py-24 bg-white" id="why-choose-us">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-14">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-14"
+        >
           <span className="inline-block text-brand-red text-sm font-bold uppercase tracking-widest mb-3">
             Why Urban Raaga
           </span>
@@ -22,12 +30,16 @@ export default function WhyChooseUs() {
           <p className="text-gray-500 max-w-2xl mx-auto text-base">
             We make live music booking simple, safe, and spectacular — so you can focus on celebrating.
           </p>
-        </div>
+        </motion.div>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {whyChooseUs.map((item, idx) => (
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1, duration: 0.5 }}
               key={idx}
               className="group relative bg-white border border-gray-100 rounded-2xl p-7 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 overflow-hidden"
             >
@@ -45,7 +57,7 @@ export default function WhyChooseUs() {
 
               {/* Bottom accent bar */}
               <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-red to-pink-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

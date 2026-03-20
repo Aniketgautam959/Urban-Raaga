@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function HeroSection() {
   const [location, setLocation] = useState("");
@@ -38,9 +39,14 @@ export default function HeroSection() {
         ))}
       </div>
 
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 text-center pt-20">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 text-center pt-20"
+      >
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-semibold px-5 py-2 rounded-full mb-8 animate-fade-in shadow-xl shadow-black/10">
+        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-semibold px-5 py-2 rounded-full mb-8 shadow-xl shadow-black/10">
           <span className="w-2 h-2 bg-brand-red rounded-full animate-pulse shadow-sm shadow-brand-red" />
           Bangalore&apos;s Trusted Live Music Booking Platform
         </div>
@@ -130,7 +136,7 @@ export default function HeroSection() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">

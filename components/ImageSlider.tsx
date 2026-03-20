@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { sliderImages } from "@/lib/data";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ImageSlider() {
   const [current, setCurrent] = useState(0);
@@ -24,7 +25,12 @@ export default function ImageSlider() {
     <section className="py-24 bg-gray-50" id="gallery">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
           <span className="inline-block text-brand-red text-sm font-bold uppercase tracking-widest mb-3">
             Gallery
           </span>
@@ -34,26 +40,35 @@ export default function ImageSlider() {
           <p className="text-gray-500 max-w-xl mx-auto text-base">
             A glimpse of the magical moments created by our talented artists at real events.
           </p>
-        </div>
+        </motion.div>
 
         {/* Slider */}
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[16/7] bg-gray-900">
-          {sliderImages.map((img, idx) => (
-            <div
-              key={img.id}
-              className={`absolute inset-0 transition-opacity duration-1000 ${idx === current ? "opacity-100" : "opacity-0"}`}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[16/7] bg-gray-900"
+        >
+          <AnimatePresence mode="popLayout">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              className="absolute inset-0"
             >
               <Image
-                src={img.url}
-                alt={img.alt}
+                src={sliderImages[current].url}
+                alt={sliderImages[current].alt}
                 fill
                 className="object-cover"
                 sizes="(max-width: 1280px) 100vw, 1280px"
-                priority={idx === 0}
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-            </div>
-          ))}
+            </motion.div>
+          </AnimatePresence>
 
           {/* Controls */}
           <button
@@ -93,10 +108,15 @@ export default function ImageSlider() {
               {sliderImages[current].alt}
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* SEO Content & Categories */}
-        <div className="mt-20 max-w-4xl mx-auto mb-16 text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-20 max-w-4xl mx-auto mb-16 text-center"
+        >
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-6 leading-tight text-balance">
             Live Singer in Bangalore for Weddings, Parties & Corporate Events
           </h1>
@@ -105,7 +125,7 @@ export default function ImageSlider() {
             Whether you&apos;re hosting an intimate house party, a grand wedding reception, or an 
             upscale corporate gala, our verified artists deliver world-class performances.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
 

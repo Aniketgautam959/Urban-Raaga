@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { testimonials } from "@/lib/data";
+import { motion } from "framer-motion";
 
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -27,7 +28,12 @@ export default function Testimonials() {
     <section className="py-20 bg-white" id="testimonials">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-14">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-14"
+        >
           <span className="inline-block text-brand-red text-sm font-bold uppercase tracking-widest mb-3">
             Client Reviews
           </span>
@@ -37,13 +43,17 @@ export default function Testimonials() {
           <p className="text-gray-500 max-w-2xl mx-auto text-base">
             Happy clients across Bangalore have celebrated with Urban Raaga.
           </p>
-        </div>
+        </motion.div>
 
         {/* Desktop Grid */}
         <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {testimonials.map((t) => (
-            <div
+          {testimonials.map((t, idx) => (
+            <motion.div
               key={t.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1, duration: 0.5 }}
               className="bg-white border border-gray-100 rounded-2xl p-6 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 flex flex-col gap-4"
             >
               {/* Quote */}
@@ -65,7 +75,7 @@ export default function Testimonials() {
                   <p className="text-gray-400 text-xs">{t.event} · {t.location}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

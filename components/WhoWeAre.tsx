@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function WhoWeAre() {
   return (
@@ -6,7 +9,12 @@ export default function WhoWeAre() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <span className="inline-block text-brand-red text-sm font-bold uppercase tracking-widest mb-3">
               About Us
             </span>
@@ -45,10 +53,16 @@ export default function WhoWeAre() {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Visual */}
-          <div className="relative">
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
             <div className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl">
               <Image
                 src="/slider-4.jpg"
@@ -86,7 +100,7 @@ export default function WhoWeAre() {
             {/* Decorative element */}
             <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-brand-red-light rounded-3xl -z-10" />
             <div className="absolute -top-4 -left-4 w-20 h-20 bg-gray-100 rounded-2xl -z-10" />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

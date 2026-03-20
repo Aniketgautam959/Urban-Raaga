@@ -1,4 +1,7 @@
+"use client";
+
 import { howItWorksSteps } from "@/lib/data";
+import { motion } from "framer-motion";
 
 export default function HowItWorks() {
   const icons = [
@@ -12,7 +15,12 @@ export default function HowItWorks() {
     <section className="py-24 bg-gray-50" id="how-it-works">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-14">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-14"
+        >
           <span className="inline-block text-brand-red text-sm font-bold uppercase tracking-widest mb-3">
             Simple Process
           </span>
@@ -22,7 +30,7 @@ export default function HowItWorks() {
           <p className="text-gray-500 max-w-2xl mx-auto text-base">
             Book your favourite artist in just 4 easy steps. No hassle, no confusion.
           </p>
-        </div>
+        </motion.div>
 
         {/* Steps */}
         <div className="relative">
@@ -31,7 +39,14 @@ export default function HowItWorks() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {howItWorksSteps.map((step, idx) => (
-              <div key={idx} className="group flex flex-col items-center text-center">
+              <motion.div 
+                key={idx} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1, duration: 0.5 }}
+                className="group flex flex-col items-center text-center"
+              >
                 {/* Step circle */}
                 <div className="relative mb-6">
                   <div className="w-20 h-20 bg-white rounded-full shadow-card group-hover:shadow-card-hover border-2 border-gray-100 group-hover:border-brand-red flex items-center justify-center text-3xl transition-all duration-300 group-hover:scale-110">
@@ -46,7 +61,7 @@ export default function HowItWorks() {
                 {/* Content */}
                 <h3 className="font-bold text-gray-900 text-lg mb-2">{step.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed max-w-[220px]">{step.description}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

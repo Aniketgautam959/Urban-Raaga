@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const footerLinks = {
   Company: [
@@ -28,7 +31,13 @@ export default function Footer() {
   return (
     <footer className="bg-gray-950 text-white" id="footer">
       {/* Top CTA Banner */}
-      <div className="bg-gradient-to-r from-brand-red to-red-700 py-12 px-4">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="bg-gradient-to-r from-brand-red to-red-700 py-12 px-4"
+      >
         <div className="max-w-5xl mx-auto text-center">
           <h3 className="text-2xl sm:text-3xl font-black mb-3">
             Ready to Book Your Live Singer?
@@ -45,7 +54,7 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
