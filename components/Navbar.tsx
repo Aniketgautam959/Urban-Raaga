@@ -14,6 +14,7 @@ export default function Navbar() {
     { label: "Bands", href: "/#" },
     { label: "How It Works", href: "/#how-it-works" },
     { label: "About Us", href: "/#who-we-are" },
+    { label: "Refund Policy", href: "/refund-cancellation" },
     { label: "Contact", href: "/#footer" },
   ];
 

@@ -19,9 +19,9 @@ const footerLinks = {
   ],
   Support: [
     { label: "Contact Us", href: "#" },
-    { label: "FAQs", href: "#faq" },
+    { label: "FAQs", href: "/#faq" },
     { label: "Privacy Policy", href: "#" },
-    { label: "Refund Policy", href: "#" },
+    { label: "Refund Policy", href: "/refund-cancellation" },
   ],
 };
 
@@ -138,7 +138,7 @@ export default function Footer() {
           <div className="flex gap-4">
             <Link href="#" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Privacy Policy</Link>
             <Link href="#" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Terms of Service</Link>
-            <Link href="#" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Refund Policy</Link>
+            <Link href="/refund-cancellation" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Refund Policy</Link>
           </div>
         </div>
       </div>
