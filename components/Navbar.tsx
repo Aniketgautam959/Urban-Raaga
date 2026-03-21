@@ -15,7 +15,7 @@ export default function Navbar() {
     { label: "How It Works", href: "/#how-it-works" },
     { label: "About Us", href: "/#who-we-are" },
     { label: "Refund Policy", href: "/refund-cancellation" },
-    { label: "Contact", href: "/#footer" },
+    { label: "Contact", href: "/contact" },
   ];
 
   return (
@@ -49,7 +49,7 @@ export default function Navbar() {
 
           {/* CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <Link href="tel:+919999999999" className="text-sm font-semibold text-brand-red border border-brand-red rounded-full px-4 py-1.5 hover:bg-brand-red-light transition-colors">
+            <Link href="tel:01169261547" className="text-sm font-semibold text-brand-red border border-brand-red rounded-full px-4 py-1.5 hover:bg-brand-red-light transition-colors">
               📞 Call Us
             </Link>
             <Link href="/#hero" className="text-sm font-semibold bg-brand-red text-white rounded-full px-5 py-1.5 hover:bg-brand-red-dark transition-colors shadow-md">
@@ -87,7 +87,7 @@ export default function Navbar() {
             </Link>
           ))}
           <div className="pt-2 flex gap-3">
-            <Link href="tel:+919999999999" className="flex-1 text-center text-sm font-semibold text-brand-red border border-brand-red rounded-full px-4 py-2">
+            <Link href="tel:01169261547" className="flex-1 text-center text-sm font-semibold text-brand-red border border-brand-red rounded-full px-4 py-2">
               📞 Call Us
             </Link>
             <Link href="/#hero" className="flex-1 text-center text-sm font-semibold bg-brand-red text-white rounded-full px-4 py-2">
