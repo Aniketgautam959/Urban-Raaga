@@ -8,12 +8,13 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: "Home", href: "#" },
-    { label: "Singers", href: "#" },
-    { label: "Bands", href: "#" },
-    { label: "How It Works", href: "#how-it-works" },
-    { label: "About Us", href: "#who-we-are" },
-    { label: "Contact", href: "#footer" },
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/services" },
+    { label: "Singers", href: "/#" },
+    { label: "Bands", href: "/#" },
+    { label: "How It Works", href: "/#how-it-works" },
+    { label: "About Us", href: "/#who-we-are" },
+    { label: "Contact", href: "/#footer" },
   ];
 
   return (
@@ -50,7 +51,7 @@ export default function Navbar() {
             <Link href="tel:+919999999999" className="text-sm font-semibold text-brand-red border border-brand-red rounded-full px-4 py-1.5 hover:bg-brand-red-light transition-colors">
               📞 Call Us
             </Link>
-            <Link href="#hero" className="text-sm font-semibold bg-brand-red text-white rounded-full px-5 py-1.5 hover:bg-brand-red-dark transition-colors shadow-md">
+            <Link href="/#hero" className="text-sm font-semibold bg-brand-red text-white rounded-full px-5 py-1.5 hover:bg-brand-red-dark transition-colors shadow-md">
               Book Now
             </Link>
           </div>
@@ -88,7 +89,7 @@ export default function Navbar() {
             <Link href="tel:+919999999999" className="flex-1 text-center text-sm font-semibold text-brand-red border border-brand-red rounded-full px-4 py-2">
               📞 Call Us
             </Link>
-            <Link href="#" className="flex-1 text-center text-sm font-semibold bg-brand-red text-white rounded-full px-4 py-2">
+            <Link href="/#hero" className="flex-1 text-center text-sm font-semibold bg-brand-red text-white rounded-full px-4 py-2">
               Book Now
             </Link>
           </div>
