@@ -13,6 +13,15 @@ module.exports = {
           "red-light": "#FFF0F3",
         },
       },
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+      },
+      animation: {
+        marquee: "marquee 35s linear infinite",
+      },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
       },

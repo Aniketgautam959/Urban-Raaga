@@ -6,6 +6,7 @@ import Testimonials from "@/components/Testimonials";
 import ImageSlider from "@/components/ImageSlider";
 import WhoWeAre from "@/components/WhoWeAre";
 import FAQ from "@/components/FAQ";
+import OurClients from "@/components/OurClients";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <ImageSlider />
       <WhoWeAre />
       <FAQ />
+      <OurClients />
       <Footer />
     </main>
   );
