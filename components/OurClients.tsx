@@ -52,7 +52,7 @@ const LogoBlock = ({ brand }: { brand: any }) => {
           <span className="flex flex-col text-left"><span className="leading-tight">Goldman</span><span className="leading-tight">Sachs</span></span>
         ) : brand.name === "Meesho" ? (
           <span className="flex items-center gap-1">
-            <span className="text-3xl font-bold bg-white text-brand-red px-1 rounded-sm leading-none pt-1">m</span>
+            <span className="text-3xl font-bold bg-white text-black px-1 rounded-sm leading-none pt-1">m</span>
             {brand.name}
           </span>
         ) : (
@@ -65,7 +65,7 @@ const LogoBlock = ({ brand }: { brand: any }) => {
 
 export default function OurClients() {
   return (
-    <section className="py-24 bg-brand-red relative overflow-hidden flex flex-col items-center">
+    <section className="py-24 bg-[#0B090F] relative overflow-hidden flex flex-col items-center">
       {/* Import Caveat font for the hand-written look */}
       <style dangerouslySetInnerHTML={{ __html: `@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap');` }} />
 
@@ -74,7 +74,7 @@ export default function OurClients() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-5xl md:text-6xl lg:text-7xl font-bold text-white drop-shadow-sm mb-2 pb-2 tracking-tight"
+          className="text-5xl md:text-6xl lg:text-7xl font-bold text-brand-red mb-2 pb-2 tracking-tight"
         >
           Our Clients
         </motion.h2>
@@ -86,11 +86,11 @@ export default function OurClients() {
           transition={{ delay: 0.3 }}
           className="relative inline-block mt-4"
         >
-          <span className="text-white text-3xl md:text-4xl tracking-wide block relative z-10" style={{ fontFamily: "'Caveat', cursive" }}>
+          <span className="text-white/90 text-3xl md:text-4xl tracking-wide block relative z-10" style={{ fontFamily: "'Caveat', cursive" }}>
             Happy clients, Happy us
           </span>
           {/* Hand drawn arrow approximation */}
-          <svg className="absolute -right-16 top-4 w-16 h-16 text-white opacity-90" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+          <svg className="absolute -right-16 top-4 w-16 h-16 text-white/50" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
             <path d="M10,20 Q60,-10 80,40" />
             <path d="M70,35 L80,40 L85,30" />
           </svg>
