@@ -57,13 +57,13 @@ export default function WhoWeAre() {
 
           {/* Visual - Premium Unmask Reveal */}
           <motion.div 
-            initial={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)", scale: 1.05 }}
-            whileInView={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1.4, ease: [0.77, 0, 0.175, 1] }}
-            className="relative"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+            className="relative mt-8 lg:mt-0"
           >
-            <div className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl group">
+            <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl group">
               <motion.div 
                 whileHover={{ scale: 1.08 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
