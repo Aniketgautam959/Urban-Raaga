@@ -10,8 +10,6 @@ export default function Navbar() {
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "Services", href: "/services" },
-    { label: "Singers", href: "/#" },
-    { label: "Bands", href: "/#" },
     { label: "How It Works", href: "/#how-it-works" },
     { label: "About Us", href: "/#who-we-are" },
     { label: "Refund Policy", href: "/refund-cancellation" },
