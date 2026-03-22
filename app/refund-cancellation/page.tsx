@@ -162,7 +162,7 @@ export default function RefundCancellationPage() {
 
       {/* ❓ FAQ SECTION */}
       <section className="py-20 bg-black border-t border-white/10">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -170,28 +170,60 @@ export default function RefundCancellationPage() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
-              Frequently Asked Question
+              Frequently Asked Questions
             </h2>
-            <div className="w-16 h-1 bg-[#FF2E2E] mx-auto rounded-full" />
+            <div className="w-16 h-1 bg-[#FF2E2E] mx-auto rounded-full mb-4" />
+            <p className="text-gray-400">Booking, Payment, Refund &amp; Cancellation</p>
           </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-[#FF2E2E]/30 transition-colors"
-          >
-            <h3 className="text-xl font-bold text-white mb-3 flex items-start gap-4">
-              <span className="text-[#FF2E2E] shrink-0">Q.</span>
-              Why do I need to pay an advance booking amount?
-            </h3>
-            <div className="flex items-start gap-4">
-               <span className="text-gray-500 font-bold shrink-0">A.</span>
-               <p className="text-gray-400 leading-relaxed">
-                 The advance payment ensures artist availability and confirms your booking. Since artists block their date exclusively for your event, this amount secures the commitment.
-               </p>
-            </div>
-          </motion.div>
+          <div className="space-y-6">
+            {[
+              {
+                q: "Why do I need to pay an advance booking amount?",
+                a: "An advance payment (typically 30–40%) is required to confirm your booking and block the artist for your event date.\n\nSince our artists are reserved exclusively for your event, advance payment ensures commitment from both sides and avoids last-minute cancellations."
+              },
+              {
+                q: "Can I reschedule my event after paying the advance?",
+                a: "Rescheduling is allowed only once and is subject to artist availability.\n\nThe request must be made at least 5 days before the event, and the new date should fall within 30 days of the original booking.\n\nIf the artist is unavailable on the new date, the booking will be treated as cancelled."
+              },
+              {
+                q: "Is a venue inspection required before booking?",
+                a: "In most cases, a physical inspection is not required.\n\nHowever, for larger events or specific technical setups, our team may request basic details such as venue size, stage setup, or sound requirements to ensure a smooth performance."
+              },
+              {
+                q: "What happens if I cancel or change my event date?",
+                a: "Cancellation and changes are subject to our refund policy:\n\n• More than 10 days before event → Partial refund may apply\n• 5–10 days before event → No refund, rescheduling may be allowed\n• Less than 5 days → No refund\n\nAny major changes in event details may also impact availability or pricing."
+              },
+              {
+                q: "How do I make the payment for booking?",
+                a: "Once your enquiry is confirmed, our team will contact you with booking details.\n\nYou can make the advance payment via:\n\n• UPI (Google Pay / PhonePe)\n• Bank transfer\n\nFor company invoice and bank transfer payments, 18% GST will be applicable."
+              },
+              {
+                q: "How long does it take to receive a refund?",
+                a: "Eligible refunds (if applicable) are processed within 7–10 working days from the date of approval.\n\nRefunds are made via the original payment method or bank transfer.\nPlease note that transaction or payment gateway charges are non-refundable."
+              }
+            ].map((faq, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-[#FF2E2E]/30 transition-colors"
+              >
+                <h3 className="text-xl font-bold text-white mb-4 flex items-start gap-4">
+                  <span className="text-[#FF2E2E] shrink-0">Q.</span>
+                  {faq.q}
+                </h3>
+                <div className="flex items-start gap-4">
+                  <span className="text-gray-500 font-bold shrink-0">A.</span>
+                  <p className="text-gray-400 leading-relaxed whitespace-pre-line">
+                    {faq.a}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
