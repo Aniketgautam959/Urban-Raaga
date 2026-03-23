@@ -64,10 +64,6 @@ export const artists: Artist[] = [
     ],
     priceIndicator: "starts from ₹30,000",
     images: [
-      "/artists/devashish/1.png",
-      "/artists/devashish/2.png",
-      "/artists/devashish/3.png",
-      "/artists/devashish/4.png",
       "/artists/devashish/5.jpg",
       "/artists/devashish/6.jpg",
       "/artists/devashish/7.jpg",
