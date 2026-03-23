@@ -308,12 +308,7 @@ export default function ResultsPage() {
               ))}
             </div>
 
-            {/* Pagination / Load More */}
-            <div className="mt-12 text-center">
-              <button className="px-8 py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold rounded-full transition-all text-sm">
-                Load More Results
-              </button>
-            </div>
+
 
           </div>
         </div>
