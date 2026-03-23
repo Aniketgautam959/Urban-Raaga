@@ -25,16 +25,32 @@ const BANGALORE_LOCALITIES = [
   "Banashankari, Bangalore",
 ];
 
+const EVENT_TYPES = [
+  "Wedding / Sangeet",
+  "Corporate Event",
+  "Private / House Party",
+  "Birthday Celebration",
+  "Anniversary",
+  "Reception",
+  "College Fest",
+  "Other"
+];
+
 export default function ServicesPage() {
   const [location, setLocation] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [date, setDate] = useState("");
+  const [eventType, setEventType] = useState("");
+  const [showEventSuggestions, setShowEventSuggestions] = useState(false);
+  const [budget, setBudget] = useState("");
 
   const filteredLocalities = BANGALORE_LOCALITIES.filter((loc) =>
     loc.toLowerCase().includes(location.toLowerCase())
   );
-  const [eventType, setEventType] = useState("");
-  const [budget, setBudget] = useState("");
+
+  const filteredEventTypes = EVENT_TYPES.filter((type) => 
+    type.toLowerCase().includes(eventType.toLowerCase())
+  );
 
   return (
     <main className="min-h-screen bg-[#0F0F0F] text-white selection:bg-[#FF2E2E] selection:text-white">
@@ -160,7 +176,7 @@ export default function ServicesPage() {
               </div>
 
               {/* Event Type */}
-              <div className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/10 focus-within:border-[#FF2E2E] transition-colors">
+              <div className="relative flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/10 focus-within:border-[#FF2E2E] transition-colors z-[50]">
                 <svg className="w-5 h-5 text-[#FF2E2E] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                 </svg>
@@ -168,9 +184,40 @@ export default function ServicesPage() {
                   type="text"
                   placeholder="Event Type"
                   value={eventType}
-                  onChange={(e) => setEventType(e.target.value)}
+                  onChange={(e) => {
+                    setEventType(e.target.value);
+                    setShowEventSuggestions(true);
+                  }}
+                  onFocus={() => setShowEventSuggestions(true)}
+                  onBlur={() => setTimeout(() => setShowEventSuggestions(false), 200)}
                   className="w-full bg-transparent text-sm text-white placeholder-gray-400 outline-none font-medium"
                 />
+
+                <AnimatePresence>
+                  {showEventSuggestions && filteredEventTypes.length > 0 && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute top-[calc(100%+8px)] left-0 right-0 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[100] max-h-60 overflow-y-auto"
+                    >
+                      {filteredEventTypes.map((type) => (
+                        <button
+                          key={type}
+                          onMouseDown={(e) => e.preventDefault()}
+                          onClick={() => {
+                            setEventType(type);
+                            setShowEventSuggestions(false);
+                          }}
+                          className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2 border-b border-gray-50 last:border-none transition-colors"
+                        >
+                          <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                          <span className="truncate">{type}</span>
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Budget */}
