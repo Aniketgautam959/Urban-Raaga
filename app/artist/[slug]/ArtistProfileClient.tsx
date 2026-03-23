@@ -65,12 +65,9 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
               </span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 mb-4 tracking-tight drop-shadow-2xl">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 mb-8 tracking-tight drop-shadow-2xl">
               {artist.name}
             </h1>
-            <p className="text-2xl md:text-3xl text-gray-300 font-bold mb-8 tracking-wide drop-shadow-lg">
-              {artist.title}
-            </p>
 
             <div className="flex flex-wrap items-center gap-4 text-sm font-semibold text-gray-400">
               <span className="flex items-center gap-2">
