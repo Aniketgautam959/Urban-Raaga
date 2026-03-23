@@ -97,7 +97,6 @@ export const artists: Artist[] = [
     originalPriceIndicator: "₹35,000",
     bookingAmount: "₹7,500",
     images: [
-      "/artists/pallavi/0.png",
       "/artists/pallavi/0.jpg",
       "/artists/pallavi/1.jpg",
       "/artists/pallavi/2.jpg",
