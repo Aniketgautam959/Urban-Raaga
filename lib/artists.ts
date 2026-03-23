@@ -163,13 +163,13 @@ export const artists: Artist[] = [
       { category: "Weddings", events: ["Receptions", "Sangeet", "Light Music"] }
     ],
     pricing: [
-      { type: "Solo", price: 11500 },
-      { type: "Duo", price: 22500 },
-      { type: "Trio", price: 32500 }
+      { type: "Solo", price: 15000 },
+      { type: "Duo", price: 25000 },
+      { type: "Trio", price: 35000 }
     ],
-    priceIndicator: "starts from ₹11,500",
-    originalPriceIndicator: "₹15,000",
-    bookingAmount: "₹3,450",
+    priceIndicator: "starts from ₹15,000",
+    originalPriceIndicator: "₹20,000",
+    bookingAmount: "₹4,500",
     images: ["/artists/rahul/1.png", "/artists/rahul/2.png"],
     videos: [
       "https://drive.google.com/file/d/1ujrWkBiIZRkApotXr_pWdZZqPV1VgxTY/preview",
