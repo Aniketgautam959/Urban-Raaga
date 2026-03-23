@@ -105,7 +105,7 @@ export default function ServicesPage() {
           </p>
 
           {/* 🔍 SEARCH / FILTER BAR */}
-          <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-3 sm:p-4 max-w-5xl mx-auto mb-8">
+          <div className="relative z-50 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-3 sm:p-4 max-w-5xl mx-auto mb-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
               {/* Location */}
               <div className="relative flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/10 focus-within:border-[#FF2E2E] transition-colors z-[60]">
