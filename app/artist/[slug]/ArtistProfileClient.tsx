@@ -37,9 +37,17 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
       case "top performer":
         return "bg-amber-500/20 text-amber-400 border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.2)]";
       case "established artist":
+      case "seasoned artist":
         return "bg-blue-500/20 text-blue-300 border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.2)]";
       case "urban raaga's choice":
+      case "emerging artist":
         return "bg-gradient-to-r from-purple-600/30 to-pink-600/30 text-purple-200 border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.2)]";
+      case "budget friendly":
+        return "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.2)]";
+      case "multi-language performer":
+      case "multi lang":
+      case "multi-language live band":
+        return "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.2)]";
       default:
         return "bg-[#FF2E2E]/20 text-[#FF2E2E] border border-[#FF2E2E]/30 shadow-[0_0_15px_rgba(255,46,46,0.2)]";
     }
