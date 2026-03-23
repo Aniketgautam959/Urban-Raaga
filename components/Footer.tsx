@@ -20,7 +20,7 @@ const footerLinks = {
   Support: [
     { label: "Contact Us", href: "/contact" },
     { label: "FAQs", href: "/#faq" },
-    { label: "Privacy Policy", href: "#" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Refund Policy", href: "/refund-cancellation" },
   ],
 };
@@ -136,7 +136,7 @@ export default function Footer() {
             © 2026 Urban Raaga. All rights reserved.
           </p>
           <div className="flex gap-4">
-            <Link href="#" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Privacy Policy</Link>
+            <Link href="/privacy-policy" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Privacy Policy</Link>
             <Link href="#" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Terms of Service</Link>
             <Link href="/refund-cancellation" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Refund Policy</Link>
           </div>
