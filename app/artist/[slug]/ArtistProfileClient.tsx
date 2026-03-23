@@ -18,6 +18,19 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
   const [guests, setGuests] = useState("");
   const [requirements, setRequirements] = useState("");
 
+  const getBadgeStyle = (badge: string) => {
+    switch(badge.toLowerCase()) {
+      case "top performer":
+        return "bg-amber-500/20 text-amber-400 border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.2)]";
+      case "established artist":
+        return "bg-blue-500/20 text-blue-300 border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.2)]";
+      case "urban raaga's choice":
+        return "bg-gradient-to-r from-purple-600/30 to-pink-600/30 text-purple-200 border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.2)]";
+      default:
+        return "bg-[#FF2E2E]/20 text-[#FF2E2E] border border-[#FF2E2E]/30 shadow-[0_0_15px_rgba(255,46,46,0.2)]";
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[#0F0F0F] text-white selection:bg-[#FF2E2E] selection:text-white pb-0">
       <Navbar />
@@ -33,28 +46,29 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
           className="object-cover"
           priority
         />
-        {/* Dark Overlays for text readability */}
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0F] via-[#0F0F0F]/80 to-transparent" />
+        {/* Dark Overlays for text readability and premium look */}
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0F] via-[#0F0F0F]/90 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F0F0F]/80 to-transparent w-full md:w-2/3" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row md:items-end justify-between gap-8 mb-4">
           <div className="flex-1">
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-3 mb-6">
               {artist.badges.map(badge => (
-                <span key={badge} className="px-3 py-1 bg-[#FF2E2E] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-lg flex items-center gap-1.5">
-                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                <span key={badge} className={`px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-full backdrop-blur-md flex items-center gap-1.5 transition-all hover:scale-105 cursor-default ${getBadgeStyle(badge)}`}>
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
                   {badge}
                 </span>
               ))}
-              <span className="px-3 py-1 bg-white/10 backdrop-blur-md text-white border border-white/20 text-xs font-bold uppercase tracking-wider rounded-lg flex items-center gap-1.5">
-                 {artist.rating} Rating
+              <span className="px-4 py-1.5 bg-white/5 backdrop-blur-md text-gray-200 border border-white/10 text-xs font-bold uppercase tracking-widest rounded-full flex items-center gap-1.5">
+                 <span className="text-yellow-500">★</span> {artist.rating} Rating
               </span>
             </div>
             
-            <h1 className="text-4xl md:text-6xl font-black text-white mb-2 tracking-tight">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 mb-4 tracking-tight drop-shadow-2xl">
               {artist.name}
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 font-medium mb-6">
+            <p className="text-2xl md:text-3xl text-gray-300 font-bold mb-8 tracking-wide drop-shadow-lg">
               {artist.title}
             </p>
 
