@@ -3,13 +3,36 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+const BANGALORE_LOCALITIES = [
+  "Indiranagar, Bangalore",
+  "Whitefield, Bangalore",
+  "Koramangala, Bangalore",
+  "HSR Layout, Bangalore",
+  "Electronic City, Bangalore",
+  "Jayanagar, Bangalore",
+  "JP Nagar, Bangalore",
+  "BTM Layout, Bangalore",
+  "Marathahalli, Bangalore",
+  "Bellandur, Bangalore",
+  "Malleshwaram, Bangalore",
+  "Rajajinagar, Bangalore",
+  "Yelahanka, Bangalore",
+  "Hebbal, Bangalore",
+  "Banashankari, Bangalore",
+];
+
 export default function ServicesPage() {
   const [location, setLocation] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [date, setDate] = useState("");
+
+  const filteredLocalities = BANGALORE_LOCALITIES.filter((loc) =>
+    loc.toLowerCase().includes(location.toLowerCase())
+  );
   const [eventType, setEventType] = useState("");
   const [budget, setBudget] = useState("");
 
@@ -69,7 +92,7 @@ export default function ServicesPage() {
           <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-3 sm:p-4 max-w-5xl mx-auto mb-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
               {/* Location */}
-              <div className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/10 focus-within:border-[#FF2E2E] transition-colors">
+              <div className="relative flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/10 focus-within:border-[#FF2E2E] transition-colors z-[60]">
                 <svg className="w-5 h-5 text-[#FF2E2E] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -78,21 +101,61 @@ export default function ServicesPage() {
                   type="text"
                   placeholder="Location"
                   value={location}
-                  onChange={(e) => setLocation(e.target.value)}
+                  onChange={(e) => {
+                    setLocation(e.target.value);
+                    setShowSuggestions(true);
+                  }}
+                  onFocus={() => setShowSuggestions(true)}
+                  onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                   className="w-full bg-transparent text-sm text-white placeholder-gray-400 outline-none font-semibold"
                 />
+
+                <AnimatePresence>
+                  {showSuggestions && location && filteredLocalities.length > 0 && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute top-[calc(100%+8px)] left-0 right-0 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[100] max-h-60 overflow-y-auto"
+                    >
+                      {filteredLocalities.map((loc) => (
+                        <button
+                          key={loc}
+                          onMouseDown={(e) => e.preventDefault()}
+                          onClick={() => {
+                            setLocation(loc);
+                            setShowSuggestions(false);
+                          }}
+                          className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2 border-b border-gray-50 last:border-none transition-colors"
+                        >
+                          <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>
+                          <span className="truncate">{loc}</span>
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Date */}
-              <div className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/10 focus-within:border-[#FF2E2E] transition-colors">
+              <div className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/10 focus-within:border-[#FF2E2E] transition-colors relative z-40">
                 <svg className="w-5 h-5 text-[#FF2E2E] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 <input
-                  type="date"
+                  type={date ? "date" : "text"}
+                  placeholder="dd/mm/yyyy"
+                  onFocus={(e) => {
+                    e.target.type = "date";
+                    e.target.showPicker && e.target.showPicker();
+                  }}
+                  onBlur={(e) => {
+                    if (!e.target.value) e.target.type = "text";
+                  }}
                   value={date}
+                  min={new Date().toLocaleDateString('en-CA')}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full bg-transparent text-sm text-gray-300 outline-none font-medium"
+                  className={`w-full bg-transparent text-sm outline-none font-medium cursor-pointer ${!date ? 'text-gray-400' : 'text-gray-300'}`}
                 />
               </div>
 
