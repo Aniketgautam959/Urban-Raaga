@@ -124,6 +124,40 @@ export const artists: Artist[] = [
       description: "Book Rahul for house parties, corporate events, and weddings in Bangalore. He sings in English, Kannada, and Hindi.",
       keywords: "english singer in bangalore, kannada singer, bollywood singer, live acoustic music"
     }
+  },
+  {
+    id: "3",
+    slug: "hashtag-band",
+    name: "HASHTAG Band",
+    title: "Live Band in Bangalore",
+    shortDescription: "Book HASHTAG Band, a high-energy live band in Bangalore known for delivering dynamic performances across multiple languages including Hindi, Kannada, English, Tamil, and Telugu.",
+    fullDescription: "HASHTAG Band is a versatile live music group based in Bangalore, specializing in multi-language performances that connect with every audience.\n\nWith expertise across Bollywood, regional, and international music, the band delivers powerful stage performances tailored to different event types.\n\nTheir ability to seamlessly switch between languages and genres makes them one of the most flexible and in-demand live bands in Bangalore.",
+    badges: ["Multi-Language Live Band", "Top Performer"],
+    rating: 4.8,
+    totalBookings: "22",
+    genres: ["Hindi", "Kannada", "English", "Tamil", "Telugu", "Bollywood"],
+    location: "Bangalore",
+    availableIn: ["Indiranagar", "Koramangala", "Whitefield", "HSR Layout", "JP Nagar"],
+    bestFor: [
+      { category: "Weddings", events: ["Receptions", "Sangeet", "Main Event"] },
+      { category: "Corporate Events", events: ["Annual Day", "Gala Dinners"] },
+      { category: "Large Celebrations", events: ["Concerts", "Festivals"] }
+    ],
+    pricing: [
+      { type: "Duo Performance", price: 20000 },
+      { type: "Trio Performance", price: 30000 }
+    ],
+    priceIndicator: "starts from ₹20,000",
+    originalPriceIndicator: "₹25,000",
+    bookingAmount: "₹6,000",
+    images: [
+      "/artists/hashtag/1.jpg"
+    ],
+    seo: {
+      title: "HASHTAG Band - Live Band in Bangalore | Urban Raaga",
+      description: "Book HASHTAG Band, a high-energy live band in Bangalore delivering dynamic performances across Hindi, Kannada, English, Tamil, and Telugu.",
+      keywords: "live band in Bangalore, Bollywood band Bangalore, Kannada band Bangalore, English band Bangalore, wedding band Bangalore"
+    }
   }
 ];
 
