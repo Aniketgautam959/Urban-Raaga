@@ -132,7 +132,7 @@ export const artists: Artist[] = [
     title: "Live Band in Bangalore",
     shortDescription: "Book HASHTAG Band, a high-energy live band in Bangalore known for delivering dynamic performances across multiple languages including Hindi, Kannada, English, Tamil, and Telugu.",
     fullDescription: "HASHTAG Band is a versatile live music group based in Bangalore, specializing in multi-language performances that connect with every audience.\n\nWith expertise across Bollywood, regional, and international music, the band delivers powerful stage performances tailored to different event types.\n\nTheir ability to seamlessly switch between languages and genres makes them one of the most flexible and in-demand live bands in Bangalore.",
-    badges: ["Seasoned Artist", "Budget Friendly", "Multi Lang"],
+    badges: ["Seasoned Artist", "Budget Friendly", "Multi-Language Performer"],
     rating: 4.8,
     totalBookings: "22",
     genres: ["Hindi", "Kannada", "English", "Tamil", "Telugu", "Bollywood"],
