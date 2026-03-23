@@ -36,6 +36,13 @@ const EVENT_TYPES = [
   "Other"
 ];
 
+const BUDGET_OPTIONS = [
+  "Under ₹20,000",
+  "₹20,000 - ₹50,000",
+  "₹50,000 - ₹1,00,000",
+  "Above ₹1,00,000"
+];
+
 export default function ServicesPage() {
   const [location, setLocation] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -43,6 +50,7 @@ export default function ServicesPage() {
   const [eventType, setEventType] = useState("");
   const [showEventSuggestions, setShowEventSuggestions] = useState(false);
   const [budget, setBudget] = useState("");
+  const [showBudgetSuggestions, setShowBudgetSuggestions] = useState(false);
 
   const filteredLocalities = BANGALORE_LOCALITIES.filter((loc) =>
     loc.toLowerCase().includes(location.toLowerCase())
@@ -50,6 +58,10 @@ export default function ServicesPage() {
 
   const filteredEventTypes = EVENT_TYPES.filter((type) => 
     type.toLowerCase().includes(eventType.toLowerCase())
+  );
+
+  const filteredBudgets = BUDGET_OPTIONS.filter((b) => 
+    b.toLowerCase().includes(budget.toLowerCase())
   );
 
   return (
@@ -221,7 +233,7 @@ export default function ServicesPage() {
               </div>
 
               {/* Budget */}
-              <div className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/10 focus-within:border-[#FF2E2E] transition-colors">
+              <div className="relative flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/10 focus-within:border-[#FF2E2E] transition-colors z-[40]">
                 <svg className="w-5 h-5 text-[#FF2E2E] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -229,9 +241,42 @@ export default function ServicesPage() {
                   type="text"
                   placeholder="Budget"
                   value={budget}
-                  onChange={(e) => setBudget(e.target.value)}
+                  onChange={(e) => {
+                    setBudget(e.target.value);
+                    setShowBudgetSuggestions(true);
+                  }}
+                  onFocus={() => setShowBudgetSuggestions(true)}
+                  onBlur={() => setTimeout(() => setShowBudgetSuggestions(false), 200)}
                   className="w-full bg-transparent text-sm text-white placeholder-gray-400 outline-none font-medium"
                 />
+
+                <AnimatePresence>
+                  {showBudgetSuggestions && filteredBudgets.length > 0 && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute top-[calc(100%+8px)] left-0 right-0 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[100] max-h-60 overflow-y-auto"
+                    >
+                      {filteredBudgets.map((bInfo) => (
+                        <button
+                          key={bInfo}
+                          onMouseDown={(e) => e.preventDefault()}
+                          onClick={() => {
+                            setBudget(bInfo);
+                            setShowBudgetSuggestions(false);
+                          }}
+                          className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2 border-b border-gray-50 last:border-none transition-colors"
+                        >
+                          <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span className="truncate">{bInfo}</span>
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Search Button */}
