@@ -1,11 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function RefundCancellationPage() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   return (
     <main className="min-h-screen bg-[#0F0F0F] text-white selection:bg-[#FF2E2E] selection:text-white pb-0">
       <Navbar />
@@ -202,27 +205,46 @@ export default function RefundCancellationPage() {
                 q: "How long does it take to receive a refund?",
                 a: "Eligible refunds (if applicable) are processed within 7–10 working days from the date of approval.\n\nRefunds are made via the original payment method or bank transfer.\nPlease note that transaction or payment gateway charges are non-refundable."
               }
-            ].map((faq, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-[#FF2E2E]/30 transition-colors"
-              >
-                <h3 className="text-xl font-bold text-white mb-4 flex items-start gap-4">
-                  <span className="text-[#FF2E2E] shrink-0">Q.</span>
-                  {faq.q}
-                </h3>
-                <div className="flex items-start gap-4">
-                  <span className="text-gray-500 font-bold shrink-0">A.</span>
-                  <p className="text-gray-400 leading-relaxed whitespace-pre-line">
-                    {faq.a}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+            ].map((faq, idx) => {
+              const isOpen = openIndex === idx;
+              return (
+                <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className={`bg-white/5 border rounded-2xl overflow-hidden transition-all duration-300 ${isOpen ? "border-[#FF2E2E]/50 shadow-[0_0_15px_rgba(255,46,46,0.1)]" : "border-white/10 hover:border-[#FF2E2E]/30"}`}
+                >
+                  <button
+                    onClick={() => setOpenIndex(isOpen ? null : idx)}
+                    className="w-full flex items-center justify-between gap-4 p-6 sm:p-8 text-left group"
+                  >
+                    <h3 className="text-lg sm:text-xl font-bold text-white flex items-start gap-4">
+                      <span className="text-[#FF2E2E] shrink-0">Q.</span>
+                      {faq.q}
+                    </h3>
+                    <div className={`shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 ${isOpen ? "bg-[#FF2E2E] border-[#FF2E2E] rotate-45" : "border-white/20 group-hover:border-[#FF2E2E]"}`}>
+                      <svg className={`w-4 h-4 transition-colors ${isOpen ? "text-white" : "text-gray-400 group-hover:text-[#FF2E2E]"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v12M6 12h12" />
+                      </svg>
+                    </div>
+                  </button>
+
+                  <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
+                    <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-0">
+                      <div className="h-px bg-white/10 mb-6" />
+                      <div className="flex items-start gap-4">
+                        <span className="text-gray-500 font-bold shrink-0">A.</span>
+                        <p className="text-gray-400 leading-relaxed whitespace-pre-line">
+                          {faq.a}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
