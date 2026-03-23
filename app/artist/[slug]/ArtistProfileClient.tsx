@@ -187,10 +187,11 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
           </div>
 
           {/* Sticky Sidebar (Pricing & Specs) */}
-          <aside className="w-full lg:w-96 flex-shrink-0 space-y-8">
+          <aside className="w-full lg:w-96 flex-shrink-0">
+            <div className="sticky top-32 space-y-8">
             
             {/* Pricing Card */}
-            <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-8 sticky top-28 shadow-2xl">
+            <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl">
               <h2 className="text-xl font-bold text-white mb-6 uppercase tracking-widest text-center text-gray-400 text-sm">Packages &amp; Pricing</h2>
               
               <div className="space-y-4 mb-8">
@@ -249,6 +250,7 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
               </div>
             </div>
             
+            </div>
           </aside>
 
         </div>
