@@ -249,12 +249,7 @@ export default function ServicesPage() {
             >
               Book Now
             </Link>
-            <Link
-              href="#quote"
-              className="group flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white font-bold px-8 py-3.5 rounded-full text-sm transition-all duration-200 hover:scale-105"
-            >
-              Get Free Quote
-            </Link>
+
           </div>
         </motion.div>
       </section>
@@ -571,12 +566,7 @@ export default function ServicesPage() {
             >
               Book Now
             </Link>
-            <Link
-              href="#quote"
-              className="group flex items-center justify-center gap-2 w-full sm:w-auto bg-white hover:bg-gray-100 text-[#0F0F0F] font-bold px-10 py-4 rounded-full text-base shadow-xl transition-all duration-300 hover:scale-105"
-            >
-              Get Free Quote
-            </Link>
+
             <Link
               href="tel:+919999999999"
               className="group flex items-center justify-center gap-2 w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white font-bold px-10 py-4 rounded-full text-base transition-all duration-300 hover:scale-105"
