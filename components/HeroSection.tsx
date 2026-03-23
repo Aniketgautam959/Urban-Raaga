@@ -157,7 +157,15 @@ export default function HeroSection() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               <input
-                type="date"
+                type={date ? "date" : "text"}
+                placeholder="dd/mm/yyyy"
+                onFocus={(e) => {
+                  e.target.type = "date";
+                  e.target.showPicker && e.target.showPicker();
+                }}
+                onBlur={(e) => {
+                  if (!e.target.value) e.target.type = "text";
+                }}
                 value={date}
                 min={new Date().toLocaleDateString('en-CA')}
                 onChange={(e) => setDate(e.target.value)}
