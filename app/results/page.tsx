@@ -157,12 +157,15 @@ export default function ResultsPage() {
                     </div>
 
                     {/* Badges */}
-                    <div className="flex flex-wrap gap-2 mb-3">
+                    <div className="flex flex-wrap gap-2 mb-4">
                       {artist.badges.map(badge => (
-                        <span key={badge} className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full backdrop-blur-md flex items-center gap-1.5 ${getBadgeStyle(badge)}`}>
+                        <span key={badge} className={`px-3 py-1.5 text-xs font-bold uppercase tracking-widest rounded-full backdrop-blur-md flex items-center gap-1.5 ${getBadgeStyle(badge)}`}>
                           <span className="text-current opacity-70">★</span> {badge}
                         </span>
                       ))}
+                      <span className="px-3 py-1.5 bg-white/5 backdrop-blur-md text-gray-200 border border-white/10 text-xs font-bold uppercase tracking-widest rounded-full flex items-center gap-1.5">
+                         <span className="text-yellow-500">★</span> {artist.rating} Rating
+                      </span>
                     </div>
 
                     {/* Genres */}
