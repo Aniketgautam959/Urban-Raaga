@@ -41,7 +41,7 @@ export const artists: Artist[] = [
     fullDescription: "With experience of 1000+ live shows, Devashish has performed for renowned personalities like Kajol and Aashish Chaudhary, along with multiple international shows in the UAE.\n\nHis expertise in Bollywood, Sufi, and retro music makes him a perfect choice for weddings, corporate events, and private parties.",
     badges: ["Top Performer", "Established Artist", "Urban Raaga's Choice"],
     rating: 4.9,
-    totalBookings: "1000",
+    totalBookings: "1000+",
     genres: ["Bollywood", "Hindi Romantic", "Sufi", "Retro Classics", "Party Hits"],
     location: "Bangalore",
     availableIn: ["Indiranagar", "Whitefield", "Koramangala", "HSR Layout", "Sarjapur Road"],

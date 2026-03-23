@@ -162,11 +162,11 @@ export default function ResultsPage() {
                     {/* Badges */}
                     <div className="flex flex-wrap gap-1.5 mb-3">
                       {artist.badges.map(badge => (
-                        <span key={badge} className={`px-2 py-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider rounded-full backdrop-blur-md flex items-center gap-1 ${getBadgeStyle(badge)}`}>
+                        <span key={badge} className={`px-2 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider rounded-full backdrop-blur-md flex items-center gap-1 ${getBadgeStyle(badge)}`}>
                           <span className="text-current opacity-70">★</span> {badge}
                         </span>
                       ))}
-                      <span className="px-2 py-1 bg-white/5 backdrop-blur-md text-gray-200 border border-white/10 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider rounded-full flex items-center gap-1">
+                      <span className="px-2 py-0.5 bg-white/5 backdrop-blur-md text-gray-200 border border-white/10 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider rounded-full flex items-center gap-1">
                          <span className="text-yellow-500">★</span> {artist.rating} Rating
                       </span>
                     </div>
@@ -187,10 +187,17 @@ export default function ResultsPage() {
                         From {artist.location}
                       </p>
                       
-                      <p className="text-gray-300 font-medium text-[15px] flex items-center gap-1.5">
-                        <span className="text-gray-400 text-lg leading-none">🎤</span> {artist.totalBookings} <span className="text-gray-600 mx-1">|</span>
-                        <span className="text-red-500 text-[15px] leading-none">❤️</span> {artist.rating}
-                      </p>
+                      <div className="flex items-center gap-3 text-gray-300 font-medium text-sm">
+                        <span className="flex items-center gap-1.5">
+                          <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                          {artist.totalBookings} Bookings
+                        </span>
+                        <span className="text-gray-600">|</span>
+                        <span className="flex items-center gap-1.5">
+                          <span className="text-yellow-500">★</span>
+                          {artist.rating} Rating
+                        </span>
+                      </div>
                     </div>
 
                     <div className="pt-5 border-t border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full">
