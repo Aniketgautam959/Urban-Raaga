@@ -41,12 +41,13 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
           <div className="flex-1">
             <div className="flex flex-wrap gap-2 mb-4">
               {artist.badges.map(badge => (
-                <span key={badge} className="px-3 py-1 bg-[#FF2E2E] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-lg">
-                  ★ {badge}
+                <span key={badge} className="px-3 py-1 bg-[#FF2E2E] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-lg flex items-center gap-1.5">
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                  {badge}
                 </span>
               ))}
-              <span className="px-3 py-1 bg-white/10 backdrop-blur-md text-white border border-white/20 text-xs font-bold uppercase tracking-wider rounded-lg flex items-center gap-1">
-                <span className="text-yellow-400">★</span> {artist.rating} Rating
+              <span className="px-3 py-1 bg-white/10 backdrop-blur-md text-white border border-white/20 text-xs font-bold uppercase tracking-wider rounded-lg flex items-center gap-1.5">
+                 {artist.rating} Rating
               </span>
             </div>
             
@@ -58,11 +59,13 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
             </p>
 
             <div className="flex flex-wrap items-center gap-4 text-sm font-semibold text-gray-400">
-              <span className="flex items-center gap-1">
-                📍 {artist.location}
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                {artist.location}
               </span>
-              <span className="flex items-center gap-1">
-                🎤 {artist.totalBookings} Bookings
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                {artist.totalBookings} Bookings
               </span>
             </div>
           </div>
@@ -97,7 +100,9 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
             {/* About Artist */}
             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 sm:p-10">
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <span className="w-8 h-8 rounded-full bg-[#FF2E2E]/20 flex items-center justify-center text-[#FF2E2E]">👤</span>
+                <span className="w-8 h-8 rounded-full bg-[#FF2E2E]/10 flex items-center justify-center text-[#FF2E2E]">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                </span>
                 About {artist.name.split(" ")[0]}
               </h2>
               <div className="prose prose-invert prose-lg max-w-none text-gray-300 leading-relaxed whitespace-pre-wrap">
@@ -108,7 +113,9 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
             {/* Performance Details */}
             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 sm:p-10">
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <span className="w-8 h-8 rounded-full bg-[#FF2E2E]/20 flex items-center justify-center text-[#FF2E2E]">🎪</span>
+                <span className="w-8 h-8 rounded-full bg-[#FF2E2E]/10 flex items-center justify-center text-[#FF2E2E]">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                </span>
                 Best For Events
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -117,8 +124,8 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
                     <h3 className="text-lg font-bold text-gray-200 mb-3">{item.category}</h3>
                     <ul className="space-y-2">
                       {item.events.map(event => (
-                        <li key={event} className="flex items-center gap-2 text-gray-400">
-                          <span className="text-[#FF2E2E]">•</span> {event}
+                        <li key={event} className="flex items-center gap-2 text-gray-400 inline-flex">
+                          <span className="text-[#FF2E2E]">■</span> {event}
                         </li>
                       ))}
                     </ul>
@@ -130,14 +137,34 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
             {/* Media Gallery Grid */}
             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 sm:p-10">
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <span className="w-8 h-8 rounded-full bg-[#FF2E2E]/20 flex items-center justify-center text-[#FF2E2E]">📸</span>
+                <span className="w-8 h-8 rounded-full bg-[#FF2E2E]/10 flex items-center justify-center text-[#FF2E2E]">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                </span>
                 Performance Gallery
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              
+              {/* Videos */}
+              {artist.videos && artist.videos.length > 0 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                  {artist.videos.map((src, index) => (
+                    <div key={index} className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden group bg-black shadow-lg">
+                      <iframe 
+                        src={src} 
+                        className="w-full h-full border-0 absolute inset-0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowFullScreen
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Photos */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {artist.images.map((src, index) => (
                   <div key={index} className="relative w-full aspect-square rounded-2xl overflow-hidden group">
                     <Image src={src} alt={`Gallery ${index + 1}`} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors pointer-events-none" />
                   </div>
                 ))}
               </div>
