@@ -3,11 +3,34 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+
+const BANGALORE_LOCALITIES = [
+  "Indiranagar, Bangalore",
+  "Whitefield, Bangalore",
+  "Koramangala, Bangalore",
+  "HSR Layout, Bangalore",
+  "Electronic City, Bangalore",
+  "Jayanagar, Bangalore",
+  "JP Nagar, Bangalore",
+  "BTM Layout, Bangalore",
+  "Marathahalli, Bangalore",
+  "Bellandur, Bangalore",
+  "Malleshwaram, Bangalore",
+  "Rajajinagar, Bangalore",
+  "Yelahanka, Bangalore",
+  "Hebbal, Bangalore",
+  "Banashankari, Bangalore",
+];
 
 export default function HeroSection() {
   const [location, setLocation] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [date, setDate] = useState("");
+
+  const filteredLocalities = BANGALORE_LOCALITIES.filter((loc) =>
+    loc.toLowerCase().includes(location.toLowerCase())
+  );
 
   return (
     <section
@@ -80,18 +103,52 @@ export default function HeroSection() {
         <div className="bg-white rounded-2xl shadow-2xl p-3 sm:p-4 max-w-3xl mx-auto mb-8">
           <div className="flex flex-col sm:flex-row gap-3">
             {/* Location */}
-            <div className="flex-1 flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 border border-gray-100 focus-within:border-brand-red transition-colors">
-              <svg className="w-5 h-5 text-brand-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <input
-                type="text"
-                placeholder="Enter locality (e.g. Indiranagar)"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                className="flex-1 bg-transparent text-sm text-gray-800 placeholder-gray-400 outline-none font-semibold"
-              />
+            <div className="flex-1 relative">
+              <div className="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 border border-gray-100 focus-within:border-brand-red transition-colors h-full">
+                <svg className="w-5 h-5 text-brand-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Enter locality (e.g. Indiranagar)"
+                  value={location}
+                  onChange={(e) => {
+                    setLocation(e.target.value);
+                    setShowSuggestions(true);
+                  }}
+                  onFocus={() => setShowSuggestions(true)}
+                  onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+                  className="flex-1 bg-transparent text-sm text-gray-800 placeholder-gray-400 outline-none font-semibold w-full"
+                />
+              </div>
+
+              {/* Suggestions Dropdown */}
+              <AnimatePresence>
+                {showSuggestions && location && filteredLocalities.length > 0 && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute top-[calc(100%+8px)] left-0 right-0 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[100] max-h-60 overflow-y-auto"
+                  >
+                    {filteredLocalities.map((loc) => (
+                      <button
+                        key={loc}
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => {
+                          setLocation(loc);
+                          setShowSuggestions(false);
+                        }}
+                        className="w-full text-left px-5 py-3 text-sm text-gray-700 font-medium hover:bg-gray-50 hover:text-brand-red border-b border-gray-50 last:border-0 transition-colors flex items-center gap-3"
+                      >
+                        <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>
+                        <span className="truncate">{loc}</span>
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Date */}
