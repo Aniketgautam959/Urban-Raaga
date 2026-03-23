@@ -112,8 +112,8 @@ export default function ContactPage() {
               <div className="space-y-8">
                 <div>
                   <h4 className="text-sm font-medium text-gray-500 uppercase tracking-widest mb-2">Email Support</h4>
-                  <Link href="mailto:support@urbanraaga.com" className="text-lg sm:text-xl font-bold text-white hover:text-[#FF2E2E] transition-colors break-words">
-                    support@urbanraaga.com
+                  <Link href="mailto:support@bangaloresinger.in" className="text-lg sm:text-xl font-bold text-white hover:text-[#FF2E2E] transition-colors break-words">
+                    support@bangaloresinger.in
                   </Link>
                 </div>
 

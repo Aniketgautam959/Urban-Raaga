@@ -159,8 +159,9 @@ export default function HeroSection() {
               <input
                 type="date"
                 value={date}
+                min={new Date().toLocaleDateString('en-CA')}
                 onChange={(e) => setDate(e.target.value)}
-                className="flex-1 bg-transparent text-sm text-gray-800 placeholder-gray-400 outline-none font-medium"
+                className={`flex-1 bg-transparent text-sm outline-none font-medium w-full cursor-pointer ${!date ? 'text-gray-400' : 'text-gray-800'}`}
               />
             </div>
 
