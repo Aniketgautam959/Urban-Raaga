@@ -159,12 +159,21 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                   {artist.videos.map((src, index) => (
                     <div key={index} className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden group bg-black shadow-lg">
-                      <iframe 
-                        src={src} 
-                        className="w-full h-full border-0 absolute inset-0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowFullScreen
-                      />
+                      {src.endsWith('.mp4') ? (
+                        <video 
+                          src={src} 
+                          controls
+                          controlsList="nodownload"
+                          className="w-full h-full object-cover absolute inset-0"
+                        />
+                      ) : (
+                        <iframe 
+                          src={src} 
+                          className="w-full h-full border-0 absolute inset-0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                          allowFullScreen
+                        />
+                      )}
                     </div>
                   ))}
                 </div>

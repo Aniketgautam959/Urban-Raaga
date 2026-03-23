@@ -153,6 +153,11 @@ export const artists: Artist[] = [
     images: [
       "/artists/hashtag/1.jpg"
     ],
+    videos: [
+      "/artists/hashtag/vid1.mp4",
+      "/artists/hashtag/vid2.mp4",
+      "/artists/hashtag/vid3.mp4"
+    ],
     seo: {
       title: "HASHTAG Band - Live Band in Bangalore | Urban Raaga",
       description: "Book HASHTAG Band, a high-energy live band in Bangalore delivering dynamic performances across Hindi, Kannada, English, Tamil, and Telugu.",
