@@ -33,16 +33,23 @@ export default function ResultsPage() {
     switch(badge.toLowerCase()) {
       case "top performer":
         return "bg-amber-500/20 text-amber-400 border border-amber-500/30";
+      case "premium performer":
+        return "bg-yellow-500/20 text-yellow-300 border border-yellow-500/30";
+      case "soulful":
+        return "bg-orange-500/20 text-orange-400 border border-orange-500/30";
       case "established artist":
       case "seasoned artist":
         return "bg-blue-500/20 text-blue-300 border border-blue-500/30";
       case "urban raaga's choice":
       case "emerging artist":
         return "bg-gradient-to-r from-purple-600/30 to-pink-600/30 text-purple-300 border border-purple-500/30";
+      case "23+ years experience":
+        return "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30";
       case "budget friendly":
         return "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
       case "multi-language performer":
       case "multi lang":
+      case "multilingual":
       case "multi-language live band":
         return "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30";
       default:
