@@ -196,7 +196,15 @@ export default function ResultsPage() {
                     <div className="pt-5 border-t border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full">
                       <div>
                         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Starting from</p>
-                        <p className="text-xl font-bold text-white">{artist.priceIndicator}</p>
+                        <div className="flex items-center gap-2">
+                           {artist.originalPriceIndicator && (
+                             <p className="text-sm font-medium text-gray-500 line-through">{artist.originalPriceIndicator}</p>
+                           )}
+                           <p className="text-xl font-bold text-white">{artist.priceIndicator}</p>
+                        </div>
+                        {artist.bookingAmount && (
+                          <p className="text-xs text-[#FF2E2E] mt-1 font-semibold">Booking Amount: {artist.bookingAmount}</p>
+                        )}
                       </div>
                       
                       <Link 

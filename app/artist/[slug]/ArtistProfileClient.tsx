@@ -193,9 +193,15 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
               
               <div className="space-y-4 mb-8">
                 {artist.pricing.map(pkg => (
-                  <div key={pkg.type} className="flex items-center justify-between p-4 bg-black/40 rounded-xl border border-white/5">
-                    <span className="font-bold text-white">{pkg.type}</span>
-                    <span className="font-black text-[#FF2E2E]">₹{pkg.price.toLocaleString("en-IN")}</span>
+                  <div key={pkg.type} className="flex flex-col p-4 bg-black/40 rounded-xl border border-white/5">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-bold text-white">{pkg.type}</span>
+                      <div className="flex items-center gap-3">
+                        <span className="text-sm font-medium text-gray-500 line-through">₹{(pkg.price + 5000).toLocaleString("en-IN")}</span>
+                        <span className="font-black text-[#FF2E2E] text-lg">₹{pkg.price.toLocaleString("en-IN")}</span>
+                      </div>
+                    </div>
+                    <span className="text-xs text-gray-400 text-right">Booking Amount: <strong className="text-white">₹{(pkg.price * 0.3).toLocaleString("en-IN")}</strong> (30%)</span>
                   </div>
                 ))}
               </div>
