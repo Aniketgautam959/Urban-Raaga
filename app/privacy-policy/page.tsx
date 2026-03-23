@@ -45,8 +45,8 @@ export default function PrivacyPolicyPage() {
           >
             <div className="prose prose-invert prose-lg max-w-none">
               
-              <h3 className="text-2xl font-bold text-white flex items-center gap-3 mb-4">
-                <span className="text-2xl">📋</span> Information We Collect
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Information We Collect
               </h3>
               <p className="text-gray-300 font-medium mb-3">We may collect the following information:</p>
               <ul className="list-disc list-inside text-gray-400 space-y-2 mb-10 marker:text-[#FF2E2E]">
@@ -59,8 +59,8 @@ export default function PrivacyPolicyPage() {
 
               <div className="w-full h-px bg-white/10 my-10" />
 
-              <h3 className="text-2xl font-bold text-white flex items-center gap-3 mb-4">
-                <span className="text-2xl">🎯</span> How We Use Your Information
+              <h3 className="text-2xl font-bold text-white mb-4">
+                How We Use Your Information
               </h3>
               <p className="text-gray-300 font-medium mb-3">We use your information to:</p>
               <ul className="list-disc list-inside text-gray-400 space-y-2 mb-10 marker:text-[#FF2E2E]">
@@ -72,8 +72,8 @@ export default function PrivacyPolicyPage() {
 
               <div className="w-full h-px bg-white/10 my-10" />
 
-              <h3 className="text-2xl font-bold text-white flex items-center gap-3 mb-4">
-                <span className="text-2xl">📞</span> Communication
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Communication
               </h3>
               <p className="text-gray-400 leading-relaxed mb-10">
                 By submitting your details, you agree that our team may contact you via Phone calls, WhatsApp, or Email for booking-related communication and service updates.
@@ -81,8 +81,8 @@ export default function PrivacyPolicyPage() {
 
               <div className="w-full h-px bg-white/10 my-10" />
 
-              <h3 className="text-2xl font-bold text-white flex items-center gap-3 mb-4">
-                <span className="text-2xl">🔐</span> Data Protection
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Data Protection
               </h3>
               <p className="text-gray-400 leading-relaxed mb-10">
                 We take reasonable steps to protect your personal information and prevent unauthorized access, misuse, or disclosure. However, no online system is completely secure, and we cannot guarantee absolute security.
@@ -90,8 +90,8 @@ export default function PrivacyPolicyPage() {
 
               <div className="w-full h-px bg-white/10 my-10" />
 
-              <h3 className="text-2xl font-bold text-white flex items-center gap-3 mb-4">
-                <span className="text-2xl">🤝</span> Information Sharing
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Information Sharing
               </h3>
               <p className="text-gray-300 font-medium mb-3">We do not sell or rent your personal information. We may share your details only with:</p>
               <ul className="list-disc list-inside text-gray-400 space-y-2 mb-10 marker:text-[#FF2E2E]">
@@ -101,8 +101,8 @@ export default function PrivacyPolicyPage() {
 
               <div className="w-full h-px bg-white/10 my-10" />
 
-              <h3 className="text-2xl font-bold text-white flex items-center gap-3 mb-4">
-                <span className="text-2xl">💳</span> Payments
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Payments
               </h3>
               <ul className="list-disc list-inside text-gray-400 space-y-2 mb-10 marker:text-[#FF2E2E]">
                 <li>All payments are processed via secure methods such as UPI or bank transfer.</li>
@@ -111,8 +111,8 @@ export default function PrivacyPolicyPage() {
 
               <div className="w-full h-px bg-white/10 my-10" />
 
-              <h3 className="text-2xl font-bold text-white flex items-center gap-3 mb-4">
-                <span className="text-2xl">🍪</span> Cookies
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Cookies
               </h3>
               <p className="text-gray-400 leading-relaxed mb-10">
                 Our website may use cookies to enhance user experience and analyze website traffic.
@@ -120,8 +120,8 @@ export default function PrivacyPolicyPage() {
 
               <div className="w-full h-px bg-white/10 my-10" />
 
-              <h3 className="text-2xl font-bold text-white flex items-center gap-3 mb-4">
-                <span className="text-2xl">🔄</span> Changes to This Policy
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Changes to This Policy
               </h3>
               <p className="text-gray-400 leading-relaxed mb-10">
                 Urban Raaga reserves the right to update this Privacy Policy at any time. Changes will be posted on this page.
@@ -129,14 +129,14 @@ export default function PrivacyPolicyPage() {
 
               <div className="w-full h-px bg-white/10 my-10" />
 
-              <h3 className="text-2xl font-bold text-white flex items-center gap-3 mb-4">
-                <span className="text-2xl">📞</span> Contact Us
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Contact Us
               </h3>
               <p className="text-gray-400 mb-2">If you have any questions regarding this Privacy Policy, please contact us:</p>
               <ul className="space-y-2 text-gray-300">
-                <li><span className="font-semibold text-white">📞 Phone:</span> 01169261547</li>
-                <li><span className="font-semibold text-white">💬 WhatsApp:</span> 9424700519</li>
-                <li><span className="font-semibold text-white">📍 Address:</span> 24, Indiranagar 2nd Stage, Bengaluru, Karnataka – 560038</li>
+                <li><span className="font-semibold text-white">Phone:</span> 01169261547</li>
+                <li><span className="font-semibold text-white">WhatsApp:</span> 9424700519</li>
+                <li><span className="font-semibold text-white">Address:</span> 24, Indiranagar 2nd Stage, Bengaluru, Karnataka – 560038</li>
               </ul>
 
             </div>
