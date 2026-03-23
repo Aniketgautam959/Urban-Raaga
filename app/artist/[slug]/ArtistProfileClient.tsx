@@ -25,11 +25,15 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   // Form states for booking
+  const [fullName, setFullName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [eventType, setEventType] = useState("");
   const [date, setDate] = useState("");
   const [eventLocation, setEventLocation] = useState("");
   const [showLocationSuggestions, setShowLocationSuggestions] = useState(false);
   const [guests, setGuests] = useState("");
+  const [indoorOutdoor, setIndoorOutdoor] = useState("");
+  const [soundRequirement, setSoundRequirement] = useState("");
   const [requirements, setRequirements] = useState("");
 
   const getBadgeStyle = (badge: string) => {
@@ -336,6 +340,33 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
               {/* Form Body */}
               <div className="p-8 space-y-6 max-h-[70vh] overflow-y-auto custom-scrollbar">
                 
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pb-6 border-b border-white/10">
+                  {/* Full Name */}
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-400 mb-2">Full Name *</label>
+                    <input 
+                      type="text" 
+                      placeholder="Your Name"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      className="w-full bg-white/5 border border-white/10 text-white rounded-xl px-4 py-3 outline-none focus:border-[#FF2E2E] transition-colors"
+                    />
+                  </div>
+
+                  {/* Phone Number */}
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-400 mb-2 text-[#FF2E2E]">WhatsApp Number *</label>
+                    <input 
+                      type="tel" 
+                      placeholder="+91"
+                      required
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      className="w-full bg-white/5 border border-[#FF2E2E]/30 text-white rounded-xl px-4 py-3 outline-none focus:border-[#FF2E2E] transition-colors"
+                    />
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Event Type */}
                   <div>
@@ -423,6 +454,34 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
                       <option className="bg-gray-900" value="500+">500+</option>
                     </select>
                   </div>
+
+                  {/* Venue Type */}
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-400 mb-2">Venue Setting</label>
+                    <select 
+                      value={indoorOutdoor} 
+                      onChange={(e) => setIndoorOutdoor(e.target.value)}
+                      className="w-full bg-white/5 border border-white/10 text-white rounded-xl px-4 py-3 outline-none focus:border-[#FF2E2E] transition-colors"
+                    >
+                      <option value="" disabled className="bg-gray-900">Indoor or Outdoor?</option>
+                      <option value="Indoor" className="bg-gray-900">Indoor</option>
+                      <option value="Outdoor" className="bg-gray-900">Outdoor</option>
+                    </select>
+                  </div>
+
+                  {/* Sound Setup */}
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-400 mb-2">Sound & Equipment</label>
+                    <select 
+                      value={soundRequirement} 
+                      onChange={(e) => setSoundRequirement(e.target.value)}
+                      className="w-full bg-white/5 border border-white/10 text-white rounded-xl px-4 py-3 outline-none focus:border-[#FF2E2E] transition-colors"
+                    >
+                      <option value="" disabled className="bg-gray-900">Select Requirement</option>
+                      <option value="Available at Venue" className="bg-gray-900">Available at Venue</option>
+                      <option value="Need Urban Raaga to arrange" className="bg-gray-900">Need Urban Raaga to arrange</option>
+                    </select>
+                  </div>
                 </div>
 
                 {/* Additional Needs */}
@@ -451,7 +510,12 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
                   </button>
                   <button 
                     onClick={() => {
-                      alert("Booking Enquiry Sent! The team will contact you shortly.");
+                      if (!fullName || !phoneNumber) {
+                        alert("Please provide your Full Name and WhatsApp Number so we can reach you!");
+                        return;
+                      }
+                      const message = `Hi Urban Raaga! I want to book ${artist.name}.\n\n*Name:* ${fullName}\n*Phone:* ${phoneNumber}\n*Event Type:* ${eventType || 'Not specified'}\n*Date:* ${date || 'Not specified'}\n*Location:* ${eventLocation || 'Not specified'}\n*Guests:* ${guests || 'Not specified'}\n*Venue:* ${indoorOutdoor || 'Not specified'}\n*Sound:* ${soundRequirement || 'Not specified'}\n*Requirements:* ${requirements || 'None'}`;
+                      window.open(`https://wa.me/919424700519?text=${encodeURIComponent(message)}`, '_blank');
                       setIsBookingModalOpen(false);
                     }}
                     className="px-8 py-3 bg-[#FF2E2E] text-white font-bold rounded-full hover:bg-red-700 transition-colors shadow-lg shadow-red-500/30"
