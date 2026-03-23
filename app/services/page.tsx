@@ -235,9 +235,12 @@ export default function ServicesPage() {
               </div>
 
               {/* Search Button */}
-              <button className="bg-[#FF2E2E] hover:bg-red-700 text-white font-bold text-sm px-8 py-3 rounded-xl transition-all duration-200 shadow-[0_0_15px_rgba(255,46,46,0.4)] active:scale-95 flex-shrink-0 w-full lg:w-auto">
+              <Link 
+                href="/results"
+                className="bg-[#FF2E2E] hover:bg-red-700 text-white font-bold text-sm px-8 py-3 rounded-xl transition-all duration-200 shadow-[0_0_15px_rgba(255,46,46,0.4)] active:scale-95 flex-shrink-0 w-full lg:w-auto flex items-center justify-center whitespace-nowrap"
+              >
                 Search
-              </button>
+              </Link>
             </div>
           </div>
 

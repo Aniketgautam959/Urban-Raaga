@@ -174,16 +174,19 @@ export default function HeroSection() {
             </div>
 
             {/* Search Button */}
-            <button className="bg-brand-red hover:bg-brand-red-dark text-white font-bold text-sm px-8 py-3 rounded-xl transition-all duration-200 shadow-lg hover:shadow-brand-red/30 active:scale-95 flex-shrink-0">
+            <Link 
+              href="/results"
+              className="bg-[#FF2E2E] hover:bg-red-700 text-white font-bold text-sm px-8 py-3 rounded-xl transition-all duration-200 shadow-[0_0_15px_rgba(255,46,46,0.4)] active:scale-95 flex-shrink-0 w-full lg:w-auto text-center"
+            >
               Search
-            </button>
+            </Link>
           </div>
         </div>
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
-            href="#"
+            href="/results"
             className="group flex items-center gap-2 bg-brand-red hover:bg-brand-red-dark text-white font-bold px-8 py-3.5 rounded-full text-sm shadow-xl shadow-red-900/30 hover:shadow-red-900/50 transition-all duration-200 hover:scale-105 active:scale-95"
           >
             <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
