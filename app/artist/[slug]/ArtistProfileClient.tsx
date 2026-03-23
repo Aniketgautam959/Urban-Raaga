@@ -23,6 +23,7 @@ const LOCATION_OPTIONS = [
 
 export default function ArtistProfileClient({ artist }: { artist: Artist }) {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [lightboxMedia, setLightboxMedia] = useState<{ url: string; type: 'image' | 'video' | 'youtube' } | null>(null);
 
   // Form states for booking
   const [fullName, setFullName] = useState("");
@@ -191,21 +192,33 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
               {artist.videos && artist.videos.length > 0 && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                   {artist.videos.map((src, index) => (
-                    <div key={index} className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden group bg-black shadow-lg">
+                    <div 
+                      key={index} 
+                      onClick={() => setLightboxMedia({ url: src, type: src.endsWith('.mp4') ? 'video' : 'youtube' })}
+                      className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden group bg-black shadow-lg cursor-pointer"
+                    >
                       {src.endsWith('.mp4') ? (
-                        <video 
-                          src={src} 
-                          controls
-                          controlsList="nodownload"
-                          className="w-full h-full object-cover absolute inset-0"
-                        />
+                        <>
+                          <video 
+                            src={src} 
+                            className="w-full h-full object-cover absolute inset-0 opacity-80 group-hover:opacity-100 transition-opacity"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                             <div className="w-12 h-12 rounded-full bg-[#FF2E2E]/90 backdrop-blur-md flex items-center justify-center text-white shadow-[0_0_25px_rgba(255,46,46,0.6)] group-hover:scale-110 transition-transform">
+                                <svg className="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                             </div>
+                          </div>
+                        </>
                       ) : (
-                        <iframe 
-                          src={src} 
-                          className="w-full h-full border-0 absolute inset-0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                          allowFullScreen
-                        />
+                        <div className="relative w-full h-full pointer-events-none group-hover:opacity-90 transition-opacity">
+                          <iframe 
+                            src={src} 
+                            className="w-full h-full border-0 absolute inset-0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowFullScreen
+                          />
+                          <div className="absolute inset-0 bg-transparent z-10" />
+                        </div>
                       )}
                     </div>
                   ))}
@@ -215,7 +228,11 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
               {/* Photos */}
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {artist.images.map((src, index) => (
-                  <div key={index} className="relative w-full aspect-square rounded-2xl overflow-hidden group">
+                  <div 
+                    key={index} 
+                    onClick={() => setLightboxMedia({ url: src, type: 'image' })}
+                    className="relative w-full aspect-square rounded-2xl overflow-hidden group cursor-pointer"
+                  >
                     <Image src={src} alt={`Gallery ${index + 1}`} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors pointer-events-none" />
                   </div>
@@ -530,5 +547,62 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
       </AnimatePresence>
 
     </main>
-  );
+
+    {/* =======================
+        LIGHTBOX MODAL 
+       ======================= */}
+    <AnimatePresence>
+      {lightboxMedia && (
+        <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-black/95 backdrop-blur-xl"
+            onClick={() => setLightboxMedia(null)}
+          />
+          
+          <button 
+            onClick={() => setLightboxMedia(null)}
+            className="absolute top-6 right-6 z-[130] w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+          >
+            ✕
+          </button>
+
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className="relative z-[125] w-full max-w-5xl max-h-[90vh] flex items-center justify-center pointer-events-none"
+          >
+            {lightboxMedia.type === 'image' && (
+              <img 
+                src={lightboxMedia.url} 
+                alt="Gallery Fullscreen" 
+                className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl pointer-events-auto"
+              />
+            )}
+            {lightboxMedia.type === 'video' && (
+              <video 
+                src={lightboxMedia.url} 
+                controls 
+                autoPlay 
+                className="w-full max-h-[90vh] rounded-lg shadow-2xl outline-none pointer-events-auto bg-black"
+              />
+            )}
+            {lightboxMedia.type === 'youtube' && (
+              <div className="w-full aspect-video rounded-lg overflow-hidden shadow-2xl pointer-events-auto">
+                <iframe 
+                  src={`${lightboxMedia.url}?autoplay=1`} 
+                  className="w-full h-full border-0"
+                  allow="autoplay; fullscreen" 
+                  allowFullScreen
+                />
+              </div>
+            )}
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  </>);
 }
