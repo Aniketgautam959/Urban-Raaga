@@ -66,7 +66,8 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
   };
 
   return (
-    <main className="min-h-screen bg-[#0F0F0F] text-white selection:bg-[#FF2E2E] selection:text-white pb-0">
+    <>
+      <main className="min-h-screen bg-[#0F0F0F] text-white selection:bg-[#FF2E2E] selection:text-white pb-0">
       <Navbar />
 
       {/* =======================
@@ -575,14 +576,14 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
             exit={{ opacity: 0, scale: 0.9 }}
             className="relative z-[125] w-full max-w-5xl max-h-[90vh] flex items-center justify-center pointer-events-none"
           >
-            {lightboxMedia.type === 'image' && (
+            {lightboxMedia?.type === 'image' && (
               <img 
                 src={lightboxMedia.url} 
                 alt="Gallery Fullscreen" 
                 className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl pointer-events-auto"
               />
             )}
-            {lightboxMedia.type === 'video' && (
+            {lightboxMedia?.type === 'video' && (
               <video 
                 src={lightboxMedia.url} 
                 controls 
@@ -590,7 +591,7 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
                 className="w-full max-h-[90vh] rounded-lg shadow-2xl outline-none pointer-events-auto bg-black"
               />
             )}
-            {lightboxMedia.type === 'youtube' && (
+            {lightboxMedia?.type === 'youtube' && (
               <div className="w-full aspect-video rounded-lg overflow-hidden shadow-2xl pointer-events-auto">
                 <iframe 
                   src={`${lightboxMedia.url}?autoplay=1`} 
