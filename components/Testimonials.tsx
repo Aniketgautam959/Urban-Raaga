@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { testimonials } from "@/lib/data";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 function StarRating({ rating }: { rating: number }) {
@@ -24,6 +24,13 @@ function StarRating({ rating }: { rating: number }) {
 
 export default function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((current) => (current + 1) % testimonials.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section className="py-20 bg-white" id="testimonials">
@@ -83,21 +90,32 @@ export default function Testimonials() {
 
         {/* Mobile Slider */}
         <div className="md:hidden">
-          <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-card">
-            <div className="text-brand-red text-3xl font-serif leading-none mb-3">&ldquo;</div>
-            <StarRating rating={testimonials[activeIndex].rating} />
-            <p className="text-gray-600 text-sm leading-relaxed mt-3 mb-5">
-              {testimonials[activeIndex].review}
-            </p>
-            <div className="flex items-center gap-3 pt-3 border-t border-gray-50">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center relative overflow-hidden bg-gray-100 border border-gray-200">
-                <Image src={testimonials[activeIndex].image} alt={testimonials[activeIndex].name} fill className="object-cover" sizes="40px" />
-              </div>
-              <div>
-                <p className="font-bold text-gray-900 text-sm">{testimonials[activeIndex].name}</p>
-                <p className="text-gray-400 text-xs">{testimonials[activeIndex].event} · {testimonials[activeIndex].location}</p>
-              </div>
-            </div>
+          <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-card min-h-[220px] flex flex-col justify-between relative overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="w-full flex-1 flex flex-col"
+              >
+                <div className="text-brand-red text-3xl font-serif leading-none mb-3">&ldquo;</div>
+                <StarRating rating={testimonials[activeIndex].rating} />
+                <p className="text-gray-600 text-sm leading-relaxed mt-3 mb-5 flex-1 line-clamp-4">
+                  {testimonials[activeIndex].review}
+                </p>
+                <div className="flex items-center gap-3 pt-3 border-t border-gray-50 flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center relative overflow-hidden bg-gray-100 border border-gray-200">
+                    <Image src={testimonials[activeIndex].image} alt={testimonials[activeIndex].name} fill className="object-cover" sizes="40px" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-gray-900 text-sm">{testimonials[activeIndex].name}</p>
+                    <p className="text-gray-400 text-xs">{testimonials[activeIndex].event} · {testimonials[activeIndex].location}</p>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* Dots */}
