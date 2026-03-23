@@ -240,7 +240,8 @@ export const artists: Artist[] = [
     ],
     videos: [
       "/artists/pallavi/vid1.mp4",
-      "/artists/pallavi/vid2.mp4"
+      "/artists/pallavi/vid2.mp4",
+      "/artists/pallavi/vid3.mp4"
     ],
     seo: {
       title: "Female Singer in Bangalore | Pallavi | Bollywood & Multilingual Singer",
