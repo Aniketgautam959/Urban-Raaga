@@ -9,10 +9,24 @@ import Footer from "@/components/Footer";
 import { artists } from "@/lib/artists";
 import { useRouter } from "next/navigation";
 
+const LOCATION_OPTIONS = [
+  "Bangalore",
+  "Indiranagar",
+  "Koramangala",
+  "Whitefield",
+  "HSR Layout",
+  "JP Nagar",
+  "Delhi-NCR",
+  "Mumbai",
+  "Hyderabad",
+  "Goa"
+];
+
 export default function ResultsPage() {
   const router = useRouter();
   const [date, setDate] = useState("");
   const [location, setLocation] = useState("Bangalore");
+  const [showLocationSuggestions, setShowLocationSuggestions] = useState(false);
 
   const getBadgeStyle = (badge: string) => {
     switch(badge.toLowerCase()) {
@@ -50,12 +64,46 @@ export default function ResultsPage() {
               <div className="space-y-6">
                 
                 {/* Location */}
-                <div>
+                <div className="relative">
                   <label className="block text-sm font-semibold text-gray-400 uppercase tracking-widest mb-2">Location</label>
                   <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 flex items-center gap-3">
                     <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} className="bg-transparent text-sm text-white outline-none w-full" />
+                    <input 
+                      type="text" 
+                      value={location} 
+                      onChange={(e) => {
+                        setLocation(e.target.value);
+                        setShowLocationSuggestions(true);
+                      }}
+                      onFocus={() => setShowLocationSuggestions(true)}
+                      onBlur={() => setTimeout(() => setShowLocationSuggestions(false), 200)}
+                      className="bg-transparent text-sm text-white outline-none w-full"
+                      placeholder="Enter city or area"
+                    />
                   </div>
+
+                  {/* Autocomplete Dropdown */}
+                  {showLocationSuggestions && (
+                    <div className="absolute top-[80px] left-0 right-0 bg-[#1A1A1A] border border-white/10 rounded-xl overflow-hidden z-[60] shadow-2xl max-h-60 overflow-y-auto">
+                      {LOCATION_OPTIONS.filter(loc => loc.toLowerCase().includes(location.toLowerCase())).length > 0 ? (
+                        LOCATION_OPTIONS.filter(loc => loc.toLowerCase().includes(location.toLowerCase())).map((loc) => (
+                          <div
+                            key={loc}
+                            className="px-4 py-3 hover:bg-[#FF2E2E]/20 hover:text-white text-gray-300 font-medium cursor-pointer transition-colors text-sm flex items-center gap-2"
+                            onClick={() => {
+                              setLocation(loc);
+                              setShowLocationSuggestions(false);
+                            }}
+                          >
+                            <svg className="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+                            {loc}
+                          </div>
+                        ))
+                      ) : (
+                        <div className="px-4 py-3 text-sm text-gray-500">No locations found</div>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Date */}
