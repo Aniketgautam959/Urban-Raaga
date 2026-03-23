@@ -171,9 +171,9 @@ export const artists: Artist[] = [
     bookingAmount: "₹4,500",
     images: ["/artists/rahul/1.png", "/artists/rahul/2.png"],
     videos: [
-      "https://drive.google.com/file/d/1ujrWkBiIZRkApotXr_pWdZZqPV1VgxTY/preview",
-      "https://drive.google.com/file/d/1F2mW7p9XW8ZyKzbplIXhUvZaGLCxDD5I/preview",
-      "https://drive.google.com/file/d/1CyY3WPjlg0Xe_Rx4NF3yTLAApJm4e_mK/preview"
+      "https://www.youtube.com/embed/EszPKw0BxMY",
+      "https://www.youtube.com/embed/BR91aMO5E3I",
+      "https://www.youtube.com/embed/2nhUd3WfeHQ"
     ],
     seo: {
       title: "Rahul - Acoustic English & Bollywood Singer in Bangalore",
