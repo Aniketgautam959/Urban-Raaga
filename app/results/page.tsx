@@ -27,6 +27,7 @@ export default function ResultsPage() {
   const [date, setDate] = useState("");
   const [location, setLocation] = useState("Bangalore");
   const [showLocationSuggestions, setShowLocationSuggestions] = useState(false);
+  const [sortBy, setSortBy] = useState("Recommended");
 
   const getBadgeStyle = (badge: string) => {
     switch(badge.toLowerCase()) {
@@ -160,24 +161,42 @@ export default function ResultsPage() {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
               <div>
                 <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-                  Top Singers in <span className="text-[#FF2E2E]">{location}</span>
+                  Top Singers in <span className="text-[#FF2E2E]">{location || "Bangalore"}</span>
                 </h1>
                 <p className="text-gray-400 mt-2 font-medium">Showing highly rated professionals available for your event.</p>
               </div>
 
               <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 flex items-center gap-2">
                 <span className="text-sm text-gray-400">Sort by:</span>
-                <select className="bg-transparent text-sm text-white outline-none cursor-pointer">
-                  <option className="bg-gray-900">Recommended</option>
-                  <option className="bg-gray-900">Highest Rated</option>
-                  <option className="bg-gray-900">Price: Low to High</option>
+                <select 
+                  className="bg-transparent text-sm text-white outline-none cursor-pointer"
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                >
+                  <option value="Recommended" className="bg-gray-900">Recommended</option>
+                  <option value="Highest Rated" className="bg-gray-900">Highest Rated</option>
+                  <option value="Price: Low to High" className="bg-gray-900">Price: Low to High</option>
+                  <option value="Price: High to Low" className="bg-gray-900">Price: High to Low</option>
                 </select>
               </div>
             </div>
 
             {/* Cards List */}
             <div className="space-y-6">
-              {artists.map((artist, idx) => (
+              {[...artists].sort((a, b) => {
+                if (sortBy === "Highest Rated") {
+                  return b.rating - a.rating;
+                } else if (sortBy === "Price: Low to High") {
+                  const pA = Math.min(...(a.pricing?.map(p => p.price) || [0]));
+                  const pB = Math.min(...(b.pricing?.map(p => p.price) || [0]));
+                  return pA - pB;
+                } else if (sortBy === "Price: High to Low") {
+                  const pA = Math.min(...(a.pricing?.map(p => p.price) || [0]));
+                  const pB = Math.min(...(b.pricing?.map(p => p.price) || [0]));
+                  return pB - pA;
+                }
+                return 0;
+              }).map((artist, idx) => (
                 <motion.div 
                   key={artist.id}
                   onClick={() => router.push(`/artist/${artist.slug}`)}
