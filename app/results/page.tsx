@@ -149,21 +149,21 @@ export default function ResultsPage() {
                   {/* Card Details */}
                   <div className="flex-1 py-1 flex flex-col h-full w-full">
                     
-                    {/* Name & Title */}
-                    <div className="mb-4">
-                      <h3 className="text-3xl font-bold text-white group-hover:text-[#FF2E2E] transition-colors leading-tight">
-                        {artist.name}: <span className="text-gray-300 font-medium">{artist.title}</span>
+                    {/* Name */}
+                    <div className="mb-3">
+                      <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#FF2E2E] transition-colors leading-tight">
+                        {artist.name}
                       </h3>
                     </div>
 
                     {/* Badges */}
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="flex flex-wrap gap-1.5 mb-3">
                       {artist.badges.map(badge => (
-                        <span key={badge} className={`px-3 py-1.5 text-xs font-bold uppercase tracking-widest rounded-full backdrop-blur-md flex items-center gap-1.5 ${getBadgeStyle(badge)}`}>
+                        <span key={badge} className={`px-2 py-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider rounded-full backdrop-blur-md flex items-center gap-1 ${getBadgeStyle(badge)}`}>
                           <span className="text-current opacity-70">★</span> {badge}
                         </span>
                       ))}
-                      <span className="px-3 py-1.5 bg-white/5 backdrop-blur-md text-gray-200 border border-white/10 text-xs font-bold uppercase tracking-widest rounded-full flex items-center gap-1.5">
+                      <span className="px-2 py-1 bg-white/5 backdrop-blur-md text-gray-200 border border-white/10 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider rounded-full flex items-center gap-1">
                          <span className="text-yellow-500">★</span> {artist.rating} Rating
                       </span>
                     </div>
