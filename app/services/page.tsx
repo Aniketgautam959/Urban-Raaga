@@ -391,7 +391,7 @@ export default function ServicesPage() {
       </section>
 
       {/* 🎤 SERVICES WE OFFER (TEXT SECTIONS) */}
-      <section className="py-20 relative border-t border-white/10">
+      <section id="services-list" className="py-20 relative border-t border-white/10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -406,7 +406,7 @@ export default function ServicesPage() {
           </motion.div>
 
           <div className="space-y-10 text-gray-300 text-base sm:text-lg">
-            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+            <motion.div id="wedding-singers" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
                 <span className="w-2 h-2 bg-[#FF2E2E] rounded-full" /> Wedding Singers in Bangalore
               </h3>
@@ -456,11 +456,11 @@ export default function ServicesPage() {
             </motion.div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-6">
-               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white/5 p-6 rounded-2xl border border-white/10">
+               <motion.div id="corporate-events" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white/5 p-6 rounded-2xl border border-white/10">
                  <h4 className="text-xl font-bold text-white mb-2">Corporate Event Singers</h4>
                  <p className="text-gray-400 text-sm">Professional performers for office parties, annual events, and product launches in Bangalore.</p>
                </motion.div>
-               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-white/5 p-6 rounded-2xl border border-white/10">
+               <motion.div id="house-party" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-white/5 p-6 rounded-2xl border border-white/10">
                  <h4 className="text-xl font-bold text-white mb-2">Party Singers</h4>
                  <p className="text-gray-400 text-sm">Perfect performers for house parties, birthdays, and anniversaries in Bangalore.</p>
                </motion.div>

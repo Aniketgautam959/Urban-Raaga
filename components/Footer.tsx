@@ -12,10 +12,10 @@ const footerLinks = {
     { label: "Blog", href: "#" },
   ],
   Services: [
-    { label: "Wedding Singers", href: "#" },
-    { label: "House Party Singers", href: "#" },
-    { label: "Corporate Events", href: "#" },
-    { label: "Birthday Parties", href: "#" },
+    { label: "Wedding Singers", href: "/services#wedding-singers" },
+    { label: "House Party Singers", href: "/services#house-party" },
+    { label: "Corporate Events", href: "/services#corporate-events" },
+    { label: "Birthday Parties", href: "/services#birthday-parties" },
   ],
   Support: [
     { label: "Contact Us", href: "/contact" },
