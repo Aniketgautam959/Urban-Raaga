@@ -408,12 +408,12 @@ export default function ResultsPage() {
                     className="group relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-4 sm:p-6 hover:border-[#FF2E2E]/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,46,46,0.1)] flex flex-col sm:flex-row gap-6 lg:gap-8 items-start cursor-pointer"
                   >
                     {/* Card Image */}
-                    <div className="w-full sm:w-56 h-56 rounded-2xl overflow-hidden relative flex-shrink-0 bg-gray-900">
+                    <div className="w-full sm:w-56 aspect-square sm:h-56 rounded-2xl overflow-hidden relative flex-shrink-0 bg-gray-900">
                       <Image
                         src={artist.images[0]}
                         alt={artist.name}
                         fill
-                        className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
                     </div>
