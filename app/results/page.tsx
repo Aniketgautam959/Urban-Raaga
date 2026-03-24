@@ -6,6 +6,10 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ArtistWhyChooseUs from "@/components/ArtistWhyChooseUs";
+import HowItWorks from "@/components/HowItWorks";
+import Testimonials from "@/components/Testimonials";
+import FAQ from "@/components/FAQ";
 import { artists } from "@/lib/artists";
 import { useRouter } from "next/navigation";
 
@@ -484,6 +488,14 @@ export default function ResultsPage() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Embedded Trust Sections */}
+      <ArtistWhyChooseUs />
+      <div className="[&_section]:!bg-[#0F0F0F] [&_h2]:!text-white [&_h3]:!text-white [&_p]:!text-gray-400 [&_.text-gray-900]:!text-white [&_.text-gray-600]:!text-gray-400 [&_.text-gray-500]:!text-gray-400 [&_.bg-white]:!bg-white/5 [&_.bg-gray-50]:!bg-[#0F0F0F] [&_.border-gray-100]:!border-white/10 [&_.shadow-card]:!shadow-none [&_.text-gray-800]:!text-gray-300">
+        <HowItWorks />
+        <Testimonials />
+        <FAQ />
       </div>
 
       <Footer />
