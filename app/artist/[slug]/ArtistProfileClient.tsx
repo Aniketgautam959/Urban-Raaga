@@ -377,7 +377,7 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
               className="relative w-full max-w-2xl bg-[#141414] border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
             >
               {/* Header */}
-              <div className="px-8 py-6 border-b border-white/10 flex items-center justify-between bg-white/5">
+              <div className="px-8 py-6 border-b border-white/10 flex items-center justify-between bg-white/5 shrink-0">
                 <div>
                   <h3 className="text-xl font-bold text-white mb-1">Book {artist.name}</h3>
                   <p className="text-sm text-gray-400">Fill details to check availability and get custom quotes.</p>
@@ -561,7 +561,7 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
               </div>
 
               {/* Footer CTA */}
-              <div className="px-8 py-6 border-t border-white/10 bg-black/20 flex items-center justify-between">
+              <div className="px-8 py-6 border-t border-white/10 bg-black/20 flex items-center justify-between shrink-0">
                 <p className="text-xs text-gray-500">* Advance is required to lock dates.</p>
                 <div className="flex gap-4">
                   <button 

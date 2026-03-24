@@ -45,13 +45,13 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[110] flex items-start justify-center p-4 overflow-y-auto">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black/85 backdrop-blur-md"
+            className="absolute inset-0 bg-black/80 backdrop-blur-md"
             onClick={onClose}
           />
 
@@ -60,10 +60,10 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
             initial={{ opacity: 0, scale: 0.95, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 30 }}
-            className="relative w-full max-w-2xl bg-[#141414] border border-white/10 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+            className="relative w-full max-w-2xl bg-[#141414] border border-white/10 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col my-auto"
           >
             {/* Header */}
-            <div className="px-8 py-7 border-b border-white/5 flex items-start justify-between bg-white/[0.02]">
+            <div className="px-8 py-7 border-b border-white/5 flex items-start justify-between bg-white/[0.02] shrink-0">
               <div>
                 <h3 className="text-2xl font-black text-white mb-1.5 tracking-tight">Send an Enquiry</h3>
                 <p className="text-sm text-gray-400">Fill details to check availability and get custom quotes.</p>
@@ -77,7 +77,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
             </div>
 
             {/* Form Body */}
-            <div className="p-8 space-y-7 overflow-y-auto custom-scrollbar flex-1">
+            <div className="p-8 space-y-7 overflow-y-auto custom-scrollbar" style={{ maxHeight: 'calc(90vh - 200px)' }}>
               {/* Name + Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pb-2">
                 <div className="space-y-2">
@@ -230,7 +230,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
             </div>
 
             {/* Footer */}
-            <div className="px-8 py-6 border-t border-white/5 bg-white/[0.02] flex items-center justify-between">
+            <div className="px-8 py-6 border-t border-white/5 bg-white/[0.02] flex items-center justify-between shrink-0">
               <p className="text-[10px] sm:text-xs text-gray-500 font-medium tracking-tight uppercase">* Advance is required to lock dates.</p>
               <div className="flex gap-4">
                 <button
