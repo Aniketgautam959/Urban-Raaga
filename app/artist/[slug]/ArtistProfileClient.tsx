@@ -6,6 +6,10 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ArtistWhyChooseUs from "@/components/ArtistWhyChooseUs";
+import HowItWorks from "@/components/HowItWorks";
+import Testimonials from "@/components/Testimonials";
+import FAQ from "@/components/FAQ";
 import type { Artist } from "@/lib/artists";
 
 const LOCATION_OPTIONS = [
@@ -318,6 +322,12 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
 
         </div>
       </section>
+
+      {/* Embedded Sections */}
+      <ArtistWhyChooseUs />
+      <HowItWorks />
+      <Testimonials />
+      <FAQ />
 
       <Footer />
 
