@@ -38,7 +38,7 @@ export default function ContactPage() {
       </section>
 
       {/* 📞 CONTACT DETAILS SECTION */}
-      <section className="py-16 relative">
+      <section id="enquiry" className="py-16 relative">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             

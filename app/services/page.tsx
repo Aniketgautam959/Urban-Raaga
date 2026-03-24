@@ -292,7 +292,7 @@ export default function ServicesPage() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="#book"
+              href="/contact#enquiry"
               className="group flex items-center gap-2 bg-[#FF2E2E] hover:bg-red-700 text-white font-bold px-8 py-3.5 rounded-full text-sm shadow-[0_0_15px_rgba(255,46,46,0.4)] transition-all duration-200 hover:scale-105 active:scale-95"
             >
               Book Now
@@ -609,7 +609,7 @@ export default function ServicesPage() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
             <Link
-              href="#book"
+              href="/contact#enquiry"
               className="group flex items-center justify-center gap-2 w-full sm:w-auto bg-[#FF2E2E] hover:bg-red-700 text-white font-bold px-10 py-4 rounded-full text-base shadow-[0_0_20px_rgba(255,46,46,0.5)] transition-all duration-300 hover:scale-105 active:scale-95"
             >
               Book Now

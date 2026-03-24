@@ -50,7 +50,7 @@ export default function Navbar() {
             <Link href="tel:01169261547" className="text-sm font-semibold text-brand-red border border-brand-red rounded-full px-4 py-1.5 hover:bg-brand-red-light transition-colors">
               📞 Call Us
             </Link>
-            <Link href="/#hero" className="text-sm font-semibold bg-brand-red text-white rounded-full px-5 py-1.5 hover:bg-brand-red-dark transition-colors shadow-md">
+            <Link href="/contact#enquiry" className="text-sm font-semibold bg-brand-red text-white rounded-full px-5 py-1.5 hover:bg-brand-red-dark transition-colors shadow-md">
               Book Now
             </Link>
           </div>
@@ -88,7 +88,7 @@ export default function Navbar() {
             <Link href="tel:01169261547" className="flex-1 text-center text-sm font-semibold text-brand-red border border-brand-red rounded-full px-4 py-2">
               📞 Call Us
             </Link>
-            <Link href="/#hero" className="flex-1 text-center text-sm font-semibold bg-brand-red text-white rounded-full px-4 py-2">
+            <Link href="/contact#enquiry" className="flex-1 text-center text-sm font-semibold bg-brand-red text-white rounded-full px-4 py-2">
               Book Now
             </Link>
           </div>
