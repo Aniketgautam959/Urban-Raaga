@@ -19,10 +19,9 @@ const LOCATION_OPTIONS = [
   "Whitefield",
   "HSR Layout",
   "JP Nagar",
-  "Delhi-NCR",
-  "Mumbai",
-  "Hyderabad",
-  "Goa"
+  "Jayanagar",
+  "Hebbal",
+  "Marathahalli"
 ];
 
 export default function ArtistProfileClient({ artist }: { artist: Artist }) {
@@ -40,6 +39,30 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
   const [indoorOutdoor, setIndoorOutdoor] = useState("");
   const [soundRequirement, setSoundRequirement] = useState("");
   const [requirements, setRequirements] = useState("");
+
+  // Dynamic pricing computation
+  const computePrice = () => {
+    const solo = artist.pricing?.find(p => p.type === "Solo")?.price || 0;
+    const duo = artist.pricing?.find(p => p.type === "Duo")?.price || solo * 1.5;
+    const trio = artist.pricing?.find(p => p.type === "Trio")?.price || solo * 2;
+
+    let base = eventType === "Duo" ? duo : eventType === "Trio" ? trio : solo;
+
+    // Guest multiplier
+    if (guests === "50-200") base = Math.round(base * 1.15);
+    else if (guests === "200-500") base = Math.round(base * 1.35);
+    else if (guests === "500+") base = Math.round(base * 1.6);
+
+    // Venue modifier
+    if (indoorOutdoor === "Outdoor") base = Math.round(base * 1.2);
+
+    // Sound modifier
+    if (soundRequirement === "Need Urban Raaga to arrange") base = Math.round(base + 5000);
+
+    return base;
+  };
+
+  const dynamicPrice = computePrice();
 
   const getBadgeStyle = (badge: string) => {
     switch(badge.toLowerCase()) {
@@ -359,6 +382,15 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
                   <h3 className="text-xl font-bold text-white mb-1">Book {artist.name}</h3>
                   <p className="text-sm text-gray-400">Fill details to check availability and get custom quotes.</p>
                 </div>
+                <div className="text-right flex-shrink-0 ml-4">
+                  {dynamicPrice > 0 && (
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-0.5">Est. Price</p>
+                      <p className="text-xl font-black text-[#FF2E2E]">₹{dynamicPrice.toLocaleString("en-IN")}</p>
+                    </div>
+                  )}
+                </div>
+
                 <button 
                   onClick={() => setIsBookingModalOpen(false)}
                   className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"

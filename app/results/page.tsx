@@ -15,14 +15,14 @@ import { useRouter } from "next/navigation";
 
 const LOCATION_OPTIONS = [
   "Bangalore", "Indiranagar", "Koramangala", "Whitefield",
-  "HSR Layout", "JP Nagar", "Delhi-NCR", "Mumbai", "Hyderabad", "Goa"
+  "HSR Layout", "JP Nagar", "Jayanagar", "Hebbal", "Marathahalli"
 ];
 
 const SETUP_OPTIONS = ["Solo", "Duo", "Trio Ensemble", "Full Band"];
 const GUEST_OPTIONS = ["Up to 20", "21 to 50", "51 to 100", "101 to 200", "More than 200"];
-const OCCASION_OPTIONS = ["Wedding", "Corporate Event", "House Party", "Other Private Event"];
+const BUDGET_OPTIONS = ["Under ₹15,000", "₹15,000 – ₹30,000", "₹30,000 – ₹60,000", "₹60,000+"];
 const VENUE_OPTIONS = ["Indoor", "Outdoor", "Banquet Hall", "Open Air", "Living Room"];
-const GENRE_OPTIONS = ["Bollywood", "Sufi", "Retro", "Indie", "English", "Kannada", "Tamil", "Classical", "Pop", "Rock", "Folk"];
+const GENRE_OPTIONS = ["Bollywood", "Sufi", "Retro Classics", "Indie", "English", "Kannada", "Tamil", "Classical", "Pop", "Rock", "Folk"];
 
 function RadioGroup({
   label,
@@ -79,10 +79,10 @@ export default function ResultsPage() {
   const [date, setDate] = useState("");
   const [setupType, setSetupType] = useState("");
   const [guestCount, setGuestCount] = useState("");
-  const [occasion, setOccasion] = useState("");
   const [venueType, setVenueType] = useState("");
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState("Recommended");
+  const [budget, setBudget] = useState("");
 
   const getBadgeStyle = (badge: string) => {
     switch (badge.toLowerCase()) {
@@ -121,13 +121,13 @@ export default function ResultsPage() {
   const resetFilters = () => {
     setSetupType("");
     setGuestCount("");
-    setOccasion("");
+    setBudget("");
     setVenueType("");
     setSelectedGenres([]);
     setDate("");
   };
 
-  const hasActiveFilters = setupType || guestCount || occasion || venueType || selectedGenres.length > 0;
+  const hasActiveFilters = setupType || guestCount || budget || venueType || selectedGenres.length > 0;
 
   const filteredArtists = useMemo(() => {
     let list = [...artists];
@@ -144,6 +144,18 @@ export default function ResultsPage() {
       list = list.filter((a) =>
         a.pricing?.some((p) => p.type.toLowerCase().includes(setupType.toLowerCase().split(" ")[0]))
       );
+    }
+
+    // Budget filter
+    if (budget) {
+      list = list.filter((a) => {
+        const minPrice = Math.min(...(a.pricing?.map((p) => p.price) || [0]));
+        if (budget === "Under ₹15,000") return minPrice < 15000;
+        if (budget === "₹15,000 – ₹30,000") return minPrice >= 15000 && minPrice <= 30000;
+        if (budget === "₹30,000 – ₹60,000") return minPrice > 30000 && minPrice <= 60000;
+        if (budget === "₹60,000+") return minPrice > 60000;
+        return true;
+      });
     }
 
     // Sort
@@ -271,12 +283,12 @@ export default function ResultsPage() {
                   onChange={setGuestCount}
                 />
 
-                {/* Occasion */}
+                {/* Budget */}
                 <RadioGroup
-                  label="Occasion"
-                  options={OCCASION_OPTIONS}
-                  value={occasion}
-                  onChange={setOccasion}
+                  label="Budget"
+                  options={BUDGET_OPTIONS}
+                  value={budget}
+                  onChange={setBudget}
                 />
 
                 {/* Venue Type */}
@@ -354,10 +366,10 @@ export default function ResultsPage() {
                     <button onClick={() => setGuestCount("")} className="hover:text-white">✕</button>
                   </span>
                 )}
-                {occasion && (
+                {budget && (
                   <span className="px-3 py-1 bg-[#FF2E2E]/10 border border-[#FF2E2E]/30 text-[#FF2E2E] text-xs font-semibold rounded-full flex items-center gap-1.5">
-                    {occasion}
-                    <button onClick={() => setOccasion("")} className="hover:text-white">✕</button>
+                    {budget}
+                    <button onClick={() => setBudget("")} className="hover:text-white">✕</button>
                   </span>
                 )}
                 {venueType && (
