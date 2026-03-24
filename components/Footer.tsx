@@ -3,6 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import EnquiryModal from "@/components/EnquiryModal";
 
 const footerLinks = {
   Company: [
@@ -28,6 +30,7 @@ const footerLinks = {
 const cities = ["Bangalore"];
 
 export default function Footer() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <footer className="bg-gray-950 text-white" id="footer">
       {/* Top CTA Banner */}
@@ -50,10 +53,13 @@ export default function Footer() {
               <svg className="w-4 h-4 border-brand-red text-brand-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
               Search Singers
             </Link>
-            <Link href="tel:01169261547" className="inline-flex items-center justify-center gap-2 border-2 border-white text-white font-bold px-8 py-3 rounded-full text-sm hover:bg-white/10 transition-colors">
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center justify-center gap-2 border-2 border-white text-white font-bold px-8 py-3 rounded-full text-sm hover:bg-white/10 transition-colors focus:outline-none"
+            >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
               Call to Enquire
-            </Link>
+            </button>
           </div>
         </div>
       </motion.div>
@@ -142,6 +148,11 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      <EnquiryModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </footer>
   );
 }

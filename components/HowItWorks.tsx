@@ -1,9 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { howItWorksSteps } from "@/lib/data";
 import { motion } from "framer-motion";
+import EnquiryModal from "@/components/EnquiryModal";
 
 export default function HowItWorks() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const icons = [
     <svg key="search" className="w-8 h-8 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>,
     <svg key="heart" className="w-8 h-8 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>,
@@ -48,7 +52,10 @@ export default function HowItWorks() {
                 className="group flex flex-col items-center text-center"
               >
                 {/* Step circle */}
-                <div className="relative mb-6">
+                <button 
+                  onClick={() => setIsModalOpen(true)}
+                  className="relative mb-6 cursor-pointer focus:outline-none"
+                >
                   <motion.div 
                     whileHover={{ scale: 1.15, rotate: [0, -5, 5, 0] }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -60,7 +67,7 @@ export default function HowItWorks() {
                   <div className="absolute -top-1 -right-1 w-7 h-7 bg-brand-red rounded-full flex items-center justify-center shadow-md">
                     <span className="text-white text-xs font-bold">{step.step}</span>
                   </div>
-                </div>
+                </button>
 
                 {/* Content */}
                 <h3 className="font-bold text-gray-900 text-lg mb-2">{step.title}</h3>
@@ -75,11 +82,20 @@ export default function HowItWorks() {
           <h3 className="text-2xl font-bold text-gray-900 mb-6 font-space-grotesk tracking-tight">
             Ready to book a live singer for your event?
           </h3>
-          <button className="bg-brand-red hover:bg-[#c90022] text-white font-bold px-10 py-4 rounded-full text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 focus:ring-4 focus:ring-brand-red/30 focus:outline-none">
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            className="inline-block bg-brand-red hover:bg-[#c90022] text-white font-bold px-10 py-4 rounded-full text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 focus:ring-4 focus:ring-brand-red/30 focus:outline-none"
+          >
             Start Booking Now
           </button>
         </div>
       </div>
+
+      {/* Enquiry Modal */}
+      <EnquiryModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </section>
   );
 }

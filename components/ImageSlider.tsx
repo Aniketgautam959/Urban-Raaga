@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import { sliderImages } from "@/lib/data";
 import { motion, AnimatePresence } from "framer-motion";
+import EnquiryModal from "@/components/EnquiryModal";
 
 // Extend slider data with category labels for the StarClinch-style text carousel
 const slides = [
@@ -22,6 +23,7 @@ const TRANSITION_DURATION = 1.3; // seconds for crossfade
 export default function ImageSlider() {
   const [current, setCurrent] = useState(0);
   const [prev, setPrev] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const goTo = useCallback((index: number) => {
@@ -315,14 +317,20 @@ export default function ImageSlider() {
           <p className="text-white/80 text-sm sm:text-base mb-5 max-w-xl mx-auto">
             Whether you need live singers, a Kannada singer, an English singer, or a full live band — Urban Raaga is your trusted music partner.
           </p>
-          <a
-            href="#contact"
-            className="inline-block bg-white text-brand-red font-bold text-sm px-8 py-3 rounded-full hover:scale-105 transition-transform duration-200 shadow-lg"
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="inline-block bg-white text-brand-red font-bold text-sm px-8 py-3 rounded-full hover:scale-105 transition-transform duration-200 shadow-lg focus:outline-none"
           >
-            Contact Us — Check Availability &amp; Pricing
-          </a>
+            Contact Us — Check Availability & Pricing
+          </button>
         </motion.div>
       </div>
+
+      {/* Enquiry Modal */}
+      <EnquiryModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
 
       {/* ── Ken Burns keyframe ── (injected as a style tag) ── */}
       <style>{`

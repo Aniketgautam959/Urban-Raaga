@@ -3,9 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import EnquiryModal from "@/components/EnquiryModal";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navLinks = [
     { label: "Home", href: "/" },
@@ -50,9 +52,12 @@ export default function Navbar() {
             <Link href="tel:01169261547" className="text-sm font-semibold text-brand-red border border-brand-red rounded-full px-4 py-1.5 hover:bg-brand-red-light transition-colors">
               📞 Call Us
             </Link>
-            <Link href="/contact#enquiry" className="text-sm font-semibold bg-brand-red text-white rounded-full px-5 py-1.5 hover:bg-brand-red-dark transition-colors shadow-md">
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="text-sm font-semibold bg-brand-red text-white rounded-full px-5 py-1.5 hover:bg-brand-red-dark transition-colors shadow-md focus:outline-none"
+            >
               Book Now
-            </Link>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -88,12 +93,24 @@ export default function Navbar() {
             <Link href="tel:01169261547" className="flex-1 text-center text-sm font-semibold text-brand-red border border-brand-red rounded-full px-4 py-2">
               📞 Call Us
             </Link>
-            <Link href="/contact#enquiry" className="flex-1 text-center text-sm font-semibold bg-brand-red text-white rounded-full px-4 py-2">
+            <button 
+              onClick={() => {
+                setIsModalOpen(true);
+                setMenuOpen(false);
+              }}
+              className="flex-1 text-center text-sm font-semibold bg-brand-red text-white rounded-full px-4 py-2 focus:outline-none"
+            >
               Book Now
-            </Link>
+            </button>
           </div>
         </div>
       )}
+
+      {/* Enquiry Modal */}
+      <EnquiryModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </header>
   );
 }
