@@ -45,7 +45,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[110] flex items-start justify-center p-4 overflow-y-auto">
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -60,7 +60,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
             initial={{ opacity: 0, scale: 0.95, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 30 }}
-            className="relative w-full max-w-2xl bg-[#141414] border border-white/10 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col my-auto"
+            className="relative w-full max-w-2xl bg-[#141414] border border-white/10 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
           >
             {/* Header */}
             <div className="px-8 py-7 border-b border-white/5 flex items-start justify-between bg-white/[0.02] shrink-0">
@@ -77,7 +77,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
             </div>
 
             {/* Form Body */}
-            <div className="p-8 space-y-7 overflow-y-auto custom-scrollbar" style={{ maxHeight: 'calc(90vh - 200px)' }}>
+            <div className="p-8 space-y-7 overflow-y-auto custom-scrollbar flex-1">
               {/* Name + Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pb-2">
                 <div className="space-y-2">
