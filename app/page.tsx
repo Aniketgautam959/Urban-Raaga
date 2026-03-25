@@ -25,10 +25,13 @@ const organizationSchema = {
   "description": "Urban Raaga is Bangalore's trusted platform to book live singers and bands for weddings, parties, and corporate events.",
   "telephone": "+919424700519",
   "email": "support@bangaloresinger.in",
+  "priceRange": "₹₹",
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "24, Indiranagar 2nd Stage",
     "addressLocality": "Bangalore",
     "addressRegion": "Karnataka",
+    "postalCode": "560038",
     "addressCountry": "IN"
   },
   "aggregateRating": {
