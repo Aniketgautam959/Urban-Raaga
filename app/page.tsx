@@ -10,8 +10,28 @@ import OurClients from "@/components/OurClients";
 import Footer from "@/components/Footer";
 
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Urban Raaga",
+    "image": "https://urbanraaga.com/logo.png",
+    "description": "Urban Raaga is Bangalore's trusted platform to book live singers and bands for weddings, parties, and corporate events.",
+    "telephone": "+919424700519",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bangalore",
+      "addressRegion": "Karnataka",
+      "addressCountry": "IN"
+    },
+    "url": "https://urbanraaga.com"
+  };
+
   return (
     <main className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
       <HeroSection />
       <WhyChooseUs />

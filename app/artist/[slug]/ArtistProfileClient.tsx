@@ -103,7 +103,7 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
       <section className="relative w-full h-[60vh] min-h-[500px] flex items-end pb-12 pt-32">
         <Image
           src={artist.images[0]}
-          alt={artist.name}
+          alt={`${artist.name} - Live Singer for Booking in Bangalore`}
           fill
           className="object-cover object-top"
           priority
@@ -261,7 +261,7 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
                     onClick={() => setLightboxMedia({ url: src, type: 'image' })}
                     className="relative w-full aspect-square rounded-2xl overflow-hidden group cursor-pointer"
                   >
-                    <Image src={src} alt={`Gallery ${index + 1}`} fill className="object-cover object-top group-hover:scale-110 transition-transform duration-700" />
+                    <Image src={src} alt={`${artist.name} Live Performance Gallery ${index + 1}`} fill className="object-cover object-top group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors pointer-events-none" />
                   </div>
                 ))}

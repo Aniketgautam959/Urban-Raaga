@@ -73,7 +73,7 @@ export default function Footer() {
               <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
                 <Image 
                   src="/logo.png" 
-                  alt="Urban Raaga Logo" 
+                  alt="Urban Raaga - Live Music Booking Platform Logo" 
                   width={160} 
                   height={64} 
                   className="h-14 w-auto object-contain rounded-xl overflow-hidden" 

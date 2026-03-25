@@ -45,7 +45,7 @@ export default function HeroSection() {
         >
           <Image
             src="/slider-1.jpg"
-            alt="Live music concert"
+            alt="Live music concert and band performance in Bangalore by Urban Raaga"
             fill
             className="object-cover"
             priority

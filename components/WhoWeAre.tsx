@@ -71,7 +71,7 @@ export default function WhoWeAre() {
               >
                 <Image
                   src="/slider-4.jpg"
-                  alt="Live band performing"
+                  alt="Live band and singers performing at a wedding event in Bangalore"
                   fill
                   className="object-cover"
                 />

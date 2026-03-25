@@ -125,36 +125,36 @@ export const sliderImages = [
   {
     id: 1,
     url: "/slider-cat-1.jpg",
-    alt: "College Fest Singer",
+    alt: "College Fest Singer in Bangalore",
   },
   {
     id: 2,
     url: "/slider-cat-2.jpg",
-    alt: "Wedding Band Performing",
+    alt: "Wedding Band Performing in Bangalore",
   },
   {
     id: 3,
     url: "/slider-cat-3.jpg",
-    alt: "Corporate Event Live Music",
+    alt: "Corporate Event Live Music in Bangalore",
   },
   {
     id: 4,
     url: "/slider-cat-4.jpg",
-    alt: "Birthday Party Singer",
+    alt: "Birthday Party Singer in Bangalore",
   },
   {
     id: 5,
     url: "/slider-1.jpg",
-    alt: "Acoustic Cafe Session",
+    alt: "Acoustic Cafe Session in Bangalore",
   },
   {
     id: 6,
     url: "/slider-2.jpg",
-    alt: "Outdoor Music Festival",
+    alt: "Outdoor Music Festival in Bangalore",
   },
   {
     id: 7,
     url: "/slider-3.jpg",
-    alt: "Intimate B&W Performance",
+    alt: "Intimate B&W Performance in Bangalore",
   },
 ];

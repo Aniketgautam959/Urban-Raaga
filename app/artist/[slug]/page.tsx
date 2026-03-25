@@ -25,5 +25,22 @@ export default function ArtistPage({ params }: { params: { slug: string } }) {
     notFound();
   }
 
-  return <ArtistProfileClient artist={artist} />;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": artist.name,
+    "image": artist.images[0].startsWith("http") ? artist.images[0] : `https://urbanraaga.com${artist.images[0]}`,
+    "description": artist.seo.description,
+    "url": `https://urbanraaga.com/artist/${params.slug}`
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ArtistProfileClient artist={artist} />
+    </>
+  );
 }

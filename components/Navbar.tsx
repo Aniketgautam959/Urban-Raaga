@@ -24,7 +24,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-2 group">
             <Image 
               src="/logo.png" 
-              alt="Urban Raaga Logo" 
+              alt="Urban Raaga - Live Music Booking Platform Logo" 
               width={160} 
               height={64} 
               className="h-14 w-auto object-contain rounded-xl overflow-hidden border border-gray-100/50"
