@@ -3,15 +3,15 @@ import "./globals.css";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
-  title: "Urban Raaga – Book Live Singer & Band for Events in Bangalore",
+  title: "Book Live Singers in Bangalore – Verified Artists for Weddings & Events",
   description:
-    "Urban Raaga is your trusted platform to book live singers and bands for weddings, house parties, corporate events and more in Bangalore and across India. Verified artists, easy booking, secure payments.",
+    "Book verified live singers and bands in Bangalore for weddings, parties & corporate events. Easy booking, secure payments & top-rated performers. Get quotes now!",
   keywords:
     "live singer bangalore, book singer for wedding, hire band for event, live music booking, urban raaga",
   openGraph: {
-    title: "Urban Raaga – Book Live Singer & Band for Your Event",
+    title: "Book Live Singers in Bangalore – Verified Artists for Weddings & Events",
     description:
-      "Discover and book verified live singers and bands for any occasion. Urban Raaga – making every event musical.",
+      "Book verified live singers and bands in Bangalore for weddings, parties & corporate events. Easy booking, secure payments & top-rated performers. Get quotes now!",
     type: "website",
   },
 };
