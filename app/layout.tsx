@@ -7,11 +7,11 @@ const BASE_URL = "https://www.bangaloresinger.in";
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Book Live Singers in Bangalore – Verified Artists for Weddings & Events",
+    default: "Live Singers in Bangalore | Wedding, Party & Corporate Event Music | Urban Raaga",
     template: "%s | Bangalore Singer",
   },
   description:
-    "Book verified live singers and bands in Bangalore for weddings, parties & corporate events. Easy booking, secure payments & top-rated performers. Get quotes now!",
+    "Book live singers in Bangalore for weddings, corporate events and parties. Hire Bollywood, Kannada, English singers and live bands with Urban Raaga.",
   keywords:
     "live singer bangalore, book singer for wedding, hire band for event, live music booking, urban raaga, bangalore singer",
   alternates: {

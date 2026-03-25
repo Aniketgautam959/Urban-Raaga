@@ -23,6 +23,7 @@ export interface Artist {
   originalPriceIndicator?: string;
   bookingAmount?: string;
   images: string[];
+  imageAlts?: string[];
   videos?: string[];
   seo: {
     title: string;
@@ -59,15 +60,16 @@ export const artists: Artist[] = [
     originalPriceIndicator: "₹35,000",
     bookingAmount: "₹9,000",
     images: ["/artists/devashish/5.jpg", "/artists/devashish/6.jpg", "/artists/devashish/7.jpg", "/artists/devashish/8.jpg"],
+    imageAlts: ["Bollywood Wedding Singer in Bangalore – Devashish Music"],
     videos: [
       "https://www.youtube.com/embed/yzfW4Wnji2I",
       "https://www.youtube.com/embed/SU9O7CPasPw",
       "https://www.youtube.com/embed/JQHKu5PMs9Y"
     ],
     seo: {
-      title: "Wedding Singer in Bangalore | Devashish Music | Urban Raaga",
-      description: "Book Devashish Music, the best wedding singer in Bangalore. Known for amazing Bollywood and Sufi performances at weddings and corporate events across India.",
-      keywords: "wedding singer in bangalore, live performer, sufi singer, bollywood singer, devashish music"
+      title: "Bollywood Wedding Singer in Bangalore | Devashish Music | Urban Raaga",
+      description: "Book Devashish Music, a professional Bollywood wedding singer in Bangalore with 1000+ shows and celebrity performances. Ideal for sangeet, reception and premium events.",
+      keywords: "bollywood wedding singer in bangalore, devashish music, wedding singer bangalore, sangeet singer, sufi singer"
     }
   },
   {
@@ -102,11 +104,12 @@ export const artists: Artist[] = [
       "/artists/pallavi/3.jpg",
       "/artists/pallavi/4.jpg"
     ],
+    imageAlts: ["Female Singer in Bangalore for Corporate and Wedding Events – Pallavi"],
     videos: ["/artists/pallavi/vid1.mp4", "/artists/pallavi/vid2.mp4", "/artists/pallavi/vid3.mp4"],
     seo: {
-      title: "Female Singer in Bangalore | Pallavi | Bollywood & Multilingual Singer",
-      description: "Book Pallavi, a female singer in Bangalore with 23+ years experience performing Bollywood, Kannada, Tamil, Telugu and English songs for weddings and events.",
-      keywords: "female singer in Bangalore, Bollywood singer Bangalore, Kannada singer Bangalore, Tamil singer Bangalore, Telugu singer Bangalore, English singer Bangalore"
+      title: "Female Singer in Bangalore | Bollywood, Kannada & Multilingual Artist",
+      description: "Hire Pallavi, a female singer in Bangalore with 23+ years experience performing Bollywood, Kannada, Tamil, Telugu and English songs for weddings and events.",
+      keywords: "female singer in bangalore, female singer for corporate events bangalore, female singer for wedding bangalore, bollywood female singer, multilingual singer"
     }
   },
   {
@@ -136,11 +139,12 @@ export const artists: Artist[] = [
     originalPriceIndicator: "₹30,000",
     bookingAmount: "₹7,500",
     images: ["/artists/overtune/1.jpg", "/artists/overtune/2.jpg", "/artists/overtune/3.png"],
+    imageAlts: ["English Singer in Bangalore for Corporate and Private Events – Overtune Rhythms"],
     videos: ["/artists/overtune/vid1.mp4", "/artists/overtune/vid2.mp4", "/artists/overtune/vid3.mp4"],
     seo: {
-      title: "Overtune Rhythms - Premium English & Bollywood Singer in Bangalore",
-      description: "Book Overtune Rhythms, a premium English and Bollywood singer in Bangalore with 8+ years experience for weddings, corporate and private events.",
-      keywords: "english singer in bangalore, bollywood singer in bangalore, soulful performer, premium event singer"
+      title: "English & Hindi Singer in Bangalore for Corporate & Private Events",
+      description: "Book Overtune Rhythms, an English and Hindi singer in Bangalore with 8+ years experience. Ideal for corporate events, weddings and premium private parties.",
+      keywords: "english singer in bangalore for corporate events, english singer bangalore, hindi singer bangalore, private event singer bangalore"
     }
   },
   {
@@ -170,15 +174,16 @@ export const artists: Artist[] = [
     originalPriceIndicator: "₹20,000",
     bookingAmount: "₹4,500",
     images: ["/artists/rahul/1.png", "/artists/rahul/2.png"],
+    imageAlts: ["Male Singer in Bangalore for House Parties and Corporate Events – Rahul"],
     videos: [
       "https://www.youtube.com/embed/EszPKw0BxMY",
       "https://www.youtube.com/embed/BR91aMO5E3I",
       "https://www.youtube.com/embed/2nhUd3WfeHQ"
     ],
     seo: {
-      title: "Rahul - Acoustic English & Bollywood Singer in Bangalore",
-      description: "Book Rahul for house parties, corporate events, and weddings in Bangalore. He sings in English, Kannada, and Hindi.",
-      keywords: "english singer in bangalore, kannada singer, bollywood singer, live acoustic music"
+      title: "Male Singer in Bangalore | English, Kannada & Bollywood Live Singer",
+      description: "Hire Rahul, a male singer in Bangalore performing English, Kannada and Bollywood songs. Perfect for house parties, corporate events and private celebrations.",
+      keywords: "male singer in bangalore, kannada singer in bangalore, english bollywood singer bangalore, house party singer bangalore"
     }
   },
   {
@@ -207,11 +212,12 @@ export const artists: Artist[] = [
     originalPriceIndicator: "₹25,000",
     bookingAmount: "₹6,000",
     images: ["/artists/hashtag/1.jpg"],
+    imageAlts: ["Live Band for Weddings and Corporate Events in Bangalore – HASHTAG Band"],
     videos: ["/artists/hashtag/vid1.mp4", "/artists/hashtag/vid2.mp4", "/artists/hashtag/vid3.mp4"],
     seo: {
-      title: "HASHTAG Band - Live Band in Bangalore | Urban Raaga",
-      description: "Book HASHTAG Band, a high-energy live band in Bangalore delivering dynamic performances across Hindi, Kannada, English, Tamil, and Telugu.",
-      keywords: "live band in Bangalore, Bollywood band Bangalore, Kannada band Bangalore, English band Bangalore, wedding band Bangalore"
+      title: "Live Band for Weddings & Corporate Events in Bangalore | HASHTAG Band",
+      description: "Book HASHTAG Band, a live band in Bangalore for weddings, corporate events and parties. Multi-language performances with high-energy live music experience.",
+      keywords: "live band for weddings and corporate events in bangalore, live band bangalore, wedding band bangalore, corporate event band bangalore"
     }
   }
 ];

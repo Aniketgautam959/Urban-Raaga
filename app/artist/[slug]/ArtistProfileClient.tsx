@@ -103,7 +103,7 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
       <section className="relative w-full h-[60vh] min-h-[500px] flex items-end pb-12 pt-32">
         <Image
           src={artist.images[0]}
-          alt={`${artist.name} - Live Singer for Booking in Bangalore`}
+          alt={artist.imageAlts?.[0] ?? `${artist.name} - Live Singer for Booking in Bangalore`}
           fill
           className="object-cover object-top"
           priority
