@@ -14,7 +14,7 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Urban Raaga",
-    "image": "https://urbanraaga.com/logo.png",
+    "image": "https://www.bangaloresinger.in/logo.png",
     "description": "Urban Raaga is Bangalore's trusted platform to book live singers and bands for weddings, parties, and corporate events.",
     "telephone": "+919424700519",
     "address": {
@@ -23,7 +23,7 @@ export default function Home() {
       "addressRegion": "Karnataka",
       "addressCountry": "IN"
     },
-    "url": "https://urbanraaga.com"
+    "url": "https://www.bangaloresinger.in"
   };
 
   return (

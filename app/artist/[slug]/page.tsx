@@ -29,9 +29,9 @@ export default function ArtistPage({ params }: { params: { slug: string } }) {
     "@context": "https://schema.org",
     "@type": "MusicGroup",
     "name": artist.name,
-    "image": artist.images[0].startsWith("http") ? artist.images[0] : `https://urbanraaga.com${artist.images[0]}`,
+    "image": artist.images[0].startsWith("http") ? artist.images[0] : `https://www.bangaloresinger.in${artist.images[0]}`,
     "description": artist.seo.description,
-    "url": `https://urbanraaga.com/artist/${params.slug}`
+    "url": `https://www.bangaloresinger.in/artist/${params.slug}`
   };
 
   return (
