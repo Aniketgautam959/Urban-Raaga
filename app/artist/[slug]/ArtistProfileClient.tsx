@@ -127,9 +127,15 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
               </span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 mb-8 tracking-tight drop-shadow-2xl">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 mb-4 tracking-tight drop-shadow-2xl">
               {artist.name}
             </h1>
+            
+            {artist.shortDescription && (
+              <p className="text-xl md:text-2xl text-gray-300 font-medium mb-8 max-w-2xl">
+                {artist.shortDescription}
+              </p>
+            )}
 
             <div className="flex flex-wrap items-center gap-4 text-sm font-semibold text-gray-400">
               <span className="flex items-center gap-2">
@@ -179,33 +185,35 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
                 About {artist.name.split(" ")[0]}
               </h2>
               <div className="prose prose-invert prose-lg max-w-none text-gray-300 leading-relaxed whitespace-pre-wrap">
-                {artist.fullDescription}
+                {artist.bio}
               </div>
             </div>
 
             {/* Performance Details */}
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 sm:p-10">
-              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <span className="w-8 h-8 rounded-full bg-[#FF2E2E]/10 flex items-center justify-center text-[#FF2E2E]">
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
-                </span>
-                Best For Events
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {artist.bestFor.map((item) => (
-                  <div key={item.category}>
-                    <h3 className="text-lg font-bold text-gray-200 mb-3">{item.category}</h3>
-                    <ul className="space-y-2">
-                      {item.events.map(event => (
-                        <li key={event} className="flex items-center gap-2 text-gray-400 inline-flex">
-                          <span className="text-[#FF2E2E]">■</span> {event}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+            {artist.bestFor && artist.bestFor.length > 0 && (
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 sm:p-10">
+                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                  <span className="w-8 h-8 rounded-full bg-[#FF2E2E]/10 flex items-center justify-center text-[#FF2E2E]">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                  </span>
+                  Best For Events
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {artist.bestFor.map((item) => (
+                    <div key={item.category}>
+                      <h3 className="text-lg font-bold text-gray-200 mb-3">{item.category}</h3>
+                      <ul className="space-y-2">
+                        {item.events.map(event => (
+                          <li key={event} className="flex items-center gap-2 text-gray-400 inline-flex">
+                            <span className="text-[#FF2E2E]">■</span> {event}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Media Gallery Grid */}
             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 sm:p-10">
