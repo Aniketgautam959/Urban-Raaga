@@ -195,7 +195,7 @@ export default function ArtistForm({ initial, mode }: ArtistFormProps) {
       bio: form.bio,
       shortDescription: form.shortDescription,
       coverImage: form.coverImage,
-      images: form.images.length ? form.images : [form.coverImage],
+      images: form.images.filter(Boolean).length ? form.images.filter(Boolean) : [form.coverImage],
       videos: form.videos,
       genres: form.genres.split(",").map((g) => g.trim()).filter(Boolean),
       location: form.location,

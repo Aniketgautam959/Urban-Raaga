@@ -3,6 +3,7 @@ export interface Artist {
   slug: string;
   name: string;
   title: string;
+  coverImage: string;
   shortDescription: string;
   bio: string;
   badges: string[];
@@ -38,6 +39,7 @@ export const artists: Artist[] = [
     slug: "devashish-music",
     name: "Devashish Music",
     title: "Wedding Singer in Bangalore",
+    coverImage: "/artists/devashish/5.jpg",
     shortDescription: "Book Devashish Music, a professional wedding singer in Bangalore, known for delivering powerful live performances across India and international stages.",
     bio: "With experience of 1000+ live shows, Devashish has performed for renowned personalities like Kajol and Aashish Chaudhary, along with multiple international shows in the UAE.\n\nHis expertise in Bollywood, Sufi, and retro music makes him a perfect choice for weddings, corporate events, and private parties.",
     badges: ["Top Performer", "Established Artist", "Urban Raaga's Choice"],
@@ -77,6 +79,7 @@ export const artists: Artist[] = [
     slug: "pallavi-singer",
     name: "Pallavi",
     title: "Female Singer in Bangalore",
+    coverImage: "/artists/pallavi/0.jpg",
     shortDescription: "Book Pallavi, a highly experienced female singer in Bangalore specializing in Bollywood, Kannada, Tamil, Telugu, and English music.",
     bio: "With over 23 years of professional experience, Pallavi is known for her soulful voice, powerful stage presence, and emotionally rich performances — making her a perfect choice for weddings, corporate events, and premium celebrations.\n\nPallavi is a versatile and accomplished singer with expertise across multiple genres including Bollywood, rock, folk, and Sufi music. Her ability to connect with audiences through emotion and authenticity makes every performance memorable.\n\nWhether it’s a romantic wedding set or a high-energy celebration, Pallavi brings unmatched passion and professionalism to the stage.",
     badges: ["Premium Performer", "Multilingual", "23+ Years Experience"],
@@ -117,6 +120,7 @@ export const artists: Artist[] = [
     slug: "overtune-rhythms",
     name: "Overtune Rhythms",
     title: "English & Bollywood Singer",
+    coverImage: "/artists/overtune/1.jpg",
     shortDescription: "Book Overtune Rhythms, a professional English singer in Bangalore and Bollywood singer in Bangalore, known for delivering soulful and expressive live performances.",
     bio: "With over 8 years of experience, Overtune Rhythms creates music that connects deeply with audiences — making him a perfect choice for weddings, corporate events, and premium private gatherings.\n\nHe specializes in Acoustic, Soft Rock, Pop, and Light Music across English and Bollywood genres, delivering emotional and classy performances that elevate the ambiance of any premium event.",
     badges: ["Soulful", "Premium Performer"],
@@ -152,6 +156,7 @@ export const artists: Artist[] = [
     slug: "rahul-acoustic",
     name: "Rahul",
     title: "UR Acoustic Singer",
+    coverImage: "/artists/rahul/1.png",
     shortDescription: "Book Rahul, a versatile English singer in Bangalore, Kannada singer in Bangalore, and Bollywood singer in Bangalore, known for delivering engaging live performances across multiple genres and events.",
     bio: "As a Bangalore-based artist, Rahul performs seamlessly in Hindi, English, and Kannada, making him an ideal choice for weddings, corporate events, and private parties.\n\nRahul is a multi-talented live singer in Bangalore who adapts his performance based on the audience and event vibe.\n\nWhether it’s a romantic Bollywood set, an energetic English performance, or a local Kannada music experience, Rahul brings versatility and professionalism to every stage.\n\nHe also plays multiple instruments including guitar, bass guitar, and piano, making his performances more dynamic and engaging.",
     badges: ["Multi-Language Performer", "Emerging Artist"],
@@ -191,6 +196,7 @@ export const artists: Artist[] = [
     slug: "hashtag-band",
     name: "HASHTAG Band",
     title: "Live Band in Bangalore",
+    coverImage: "/artists/hashtag/1.jpg",
     shortDescription: "Book HASHTAG Band, a high-energy live band in Bangalore known for delivering dynamic performances across multiple languages including Hindi, Kannada, English, Tamil, and Telugu.",
     bio: "HASHTAG Band is a versatile live music group based in Bangalore, specializing in multi-language performances that connect with every audience.\n\nWith expertise across Bollywood, regional, and international music, the band delivers powerful stage performances tailored to different event types.\n\nTheir ability to seamlessly switch between languages and genres makes them one of the most flexible and in-demand live bands in Bangalore.",
     badges: ["Seasoned Artist", "Budget Friendly", "Multi-Language Performer"],
