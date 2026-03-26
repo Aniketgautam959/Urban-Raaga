@@ -30,6 +30,7 @@ interface ArtistFormData {
   seoTitle: string;
   seoDescription: string;
   seoKeywords: string;
+  bestFor: { category: string; events: string }[];
 }
 
 interface ArtistFormProps {
@@ -48,6 +49,7 @@ const DEFAULT: ArtistFormData = {
   bookingAmount: "",
   status: "pending",
   seoTitle: "", seoDescription: "", seoKeywords: "",
+  bestFor: [{ category: "", events: "" }],
 };
 
 export default function ArtistForm({ initial, mode }: ArtistFormProps) {
@@ -61,6 +63,10 @@ export default function ArtistForm({ initial, mode }: ArtistFormProps) {
     seoTitle: (initial as any)?.seo?.title ?? "",
     seoDescription: (initial as any)?.seo?.description ?? "",
     seoKeywords: (initial as any)?.seo?.keywords ?? "",
+    bestFor: (initial as any)?.bestFor?.map((b: any) => ({
+      category: b.category,
+      events: Array.isArray(b.events) ? b.events.join(", ") : (b.events || "")
+    })) ?? DEFAULT.bestFor,
   });
 
   const [uploading, setUploading] = useState(false);
@@ -85,6 +91,21 @@ export default function ArtistForm({ initial, mode }: ArtistFormProps) {
 
   function removePricing(idx: number) {
     updateField("pricing", form.pricing.filter((_, i) => i !== idx));
+  }
+
+  function addBestFor() {
+    updateField("bestFor", [...form.bestFor, { category: "", events: "" }]);
+  }
+
+  function removeBestFor(idx: number) {
+    updateField("bestFor", form.bestFor.filter((_, i) => i !== idx));
+  }
+
+  function updateBestFor(idx: number, field: "category" | "events", value: string) {
+    const updated = form.bestFor.map((b, i) =>
+      i === idx ? { ...b, [field]: value } : b
+    );
+    updateField("bestFor", updated);
   }
 
   async function uploadFile(file: File, folder = "urban-raaga/artists"): Promise<string> {
@@ -192,6 +213,12 @@ export default function ArtistForm({ initial, mode }: ArtistFormProps) {
         description: form.seoDescription,
         keywords: form.seoKeywords,
       },
+      bestFor: form.bestFor
+        .filter(b => b.category.trim())
+        .map(b => ({
+          category: b.category.trim(),
+          events: b.events.split(",").map(e => e.trim()).filter(Boolean)
+        }))
     };
 
       const url = mode === "create" ? "/api/artists" : `/api/artists/${(initial as any)?._id}`;
@@ -356,6 +383,49 @@ export default function ArtistForm({ initial, mode }: ArtistFormProps) {
             <label className={labelCls}>Booking Amount (Advance)</label>
             <input className={inputCls} value={form.bookingAmount} onChange={(e) => updateField("bookingAmount", e.target.value)} placeholder="₹4,500" />
           </div>
+        </div>
+      </section>
+
+      {/* Best For Events */}
+      <section className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-5">
+        <h2 className="text-lg font-bold text-white">Best For Events</h2>
+        <div className="space-y-4">
+          {form.bestFor.map((b, i) => (
+            <div key={i} className="space-y-3 p-4 bg-white/5 rounded-xl border border-white/5 relative group">
+              <button 
+                type="button" 
+                onClick={() => removeBestFor(i)} 
+                className="absolute top-2 right-2 text-gray-500 hover:text-[#FF2E2E] transition-colors"
+              >
+                ✕
+              </button>
+              <div>
+                <label className={labelCls}>Category Name</label>
+                <input 
+                  className={inputCls} 
+                  value={b.category} 
+                  onChange={(e) => updateBestFor(i, "category", e.target.value)} 
+                  placeholder="e.g. Weddings (Primary Focus)" 
+                />
+              </div>
+              <div>
+                <label className={labelCls}>Events (comma-separated)</label>
+                <input 
+                  className={inputCls} 
+                  value={b.events} 
+                  onChange={(e) => updateBestFor(i, "events", e.target.value)} 
+                  placeholder="Sangeet & Mehendi, Reception & Cocktail" 
+                />
+              </div>
+            </div>
+          ))}
+          <button 
+            type="button" 
+            onClick={addBestFor} 
+            className="text-sm text-[#FF2E2E] font-semibold hover:underline"
+          >
+            + Add Event Category
+          </button>
         </div>
       </section>
 
