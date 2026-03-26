@@ -8,25 +8,29 @@ export const revalidate = 0;
 
 // GET /api/artists — public gets approved only; admin (authenticated) can get all
 export async function GET(req: NextRequest) {
-  await connectDB();
-  const { searchParams } = new URL(req.url);
-  const status = searchParams.get("status");
-  const slug = searchParams.get("slug");
+  try {
+    await connectDB();
+    const { searchParams } = new URL(req.url);
+    const status = searchParams.get("status");
+    const slug = searchParams.get("slug");
 
-  let query: Record<string, unknown> = {};
+    let query: Record<string, unknown> = {};
 
-  if (slug) {
-    query.slug = slug;
-  } else if (status === "all") {
-    query = {};
-  } else if (status) {
-    query.status = status;
-  } else {
-    query.status = "approved";
+    if (slug) {
+      query.slug = slug;
+    } else if (status === "all") {
+      query = {};
+    } else if (status) {
+      query.status = status;
+    } else {
+      query.status = "approved";
+    }
+
+    const artists = await Artist.find(query).sort({ createdAt: -1 }).lean();
+    return NextResponse.json({ artists });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message || "GET API Server Error" }, { status: 500 });
   }
-
-  const artists = await Artist.find(query).sort({ createdAt: -1 }).lean();
-  return NextResponse.json({ artists });
 }
 
 // POST /api/artists — Clerk protected
