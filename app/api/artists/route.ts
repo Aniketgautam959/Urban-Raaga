@@ -1,9 +1,9 @@
+import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Artist from "@/lib/models/Artist";
-import { requireAdmin } from "@/lib/auth";
 
-// GET /api/artists — public gets approved only, admin gets all
+// GET /api/artists — public gets approved only; admin (authenticated) can get all
 export async function GET(req: NextRequest) {
   await connectDB();
   const { searchParams } = new URL(req.url);
@@ -15,29 +15,25 @@ export async function GET(req: NextRequest) {
   if (slug) {
     query.slug = slug;
   } else if (status === "all") {
-    // No filter — return everything (admin view)
     query = {};
   } else if (status) {
     query.status = status;
   } else {
-    query.status = "approved"; // default: public only sees approved
+    query.status = "approved";
   }
 
   const artists = await Artist.find(query).sort({ createdAt: -1 }).lean();
   return NextResponse.json({ artists });
 }
 
-// POST /api/artists — admin only
+// POST /api/artists — Clerk protected
 export async function POST(req: NextRequest) {
-  const session = await requireAdmin(req);
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const { userId } = await auth();
+  if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   await connectDB();
   const body = await req.json();
 
-  // Auto-generate slug from name if not provided
   if (!body.slug) {
     body.slug = body.name
       .toLowerCase()

@@ -1,7 +1,7 @@
+import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Artist from "@/lib/models/Artist";
-import { requireAdmin } from "@/lib/auth";
 
 type Params = { params: { id: string } };
 
@@ -13,10 +13,10 @@ export async function GET(_req: NextRequest, { params }: Params) {
   return NextResponse.json({ artist });
 }
 
-// PUT /api/artists/:id — admin only
+// PUT /api/artists/:id — Clerk protected
 export async function PUT(req: NextRequest, { params }: Params) {
-  const session = await requireAdmin(req);
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const { userId } = await auth();
+  if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   await connectDB();
   const body = await req.json();
@@ -25,10 +25,10 @@ export async function PUT(req: NextRequest, { params }: Params) {
   return NextResponse.json({ artist });
 }
 
-// DELETE /api/artists/:id — admin only
+// DELETE /api/artists/:id — Clerk protected
 export async function DELETE(req: NextRequest, { params }: Params) {
-  const session = await requireAdmin(req);
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const { userId } = await auth();
+  if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   await connectDB();
   await Artist.findByIdAndDelete(params.id);

@@ -1,28 +1,28 @@
-import { NextRequest, NextResponse } from "next/server";
-import { verifyToken } from "@/lib/auth";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
-export async function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
+const isLoginPage = createRouteMatcher(["/admin/login"]);
 
-  // Only protect /admin routes (except /admin/login)
-  if (pathname.startsWith("/admin") && !pathname.startsWith("/admin/login")) {
-    const token = req.cookies.get("admin_token")?.value;
+export default clerkMiddleware((auth, req) => {
+  // Let the login page through
+  if (isLoginPage(req)) return NextResponse.next();
 
-    if (!token) {
-      return NextResponse.redirect(new URL("/admin/login", req.url));
-    }
-
-    try {
-      await verifyToken(token);
-      return NextResponse.next();
-    } catch {
-      return NextResponse.redirect(new URL("/admin/login", req.url));
+  // Protect all other /admin routes
+  if (isAdminRoute(req)) {
+    const { userId } = auth();
+    if (!userId) {
+      const loginUrl = new URL("/admin/login", req.url);
+      return NextResponse.redirect(loginUrl);
     }
   }
 
   return NextResponse.next();
-}
+});
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: [
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    "/(api|trpc)(.*)",
+  ],
 };

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const BASE_URL = "https://www.bangaloresinger.in";
 
@@ -48,11 +49,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="antialiased">
-        {children}
-        <WhatsAppButton />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className="antialiased">
+          {children}
+          <WhatsAppButton />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

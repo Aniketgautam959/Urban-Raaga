@@ -1,16 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { UserButton } from "@clerk/nextjs";
 
 export default function AdminNavbar() {
-  const router = useRouter();
-
-  async function handleLogout() {
-    await fetch("/api/admin/logout", { method: "POST" });
-    router.push("/admin/login");
-  }
-
   return (
     <aside className="w-56 min-h-screen bg-[#111] border-r border-white/10 flex flex-col p-6 fixed left-0 top-0">
       <div className="mb-10">
@@ -51,15 +44,11 @@ export default function AdminNavbar() {
         </Link>
       </nav>
 
-      <button
-        onClick={handleLogout}
-        className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-500 hover:text-[#FF2E2E] hover:bg-[#FF2E2E]/10 transition-colors"
-      >
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-        </svg>
-        Logout
-      </button>
+      {/* Clerk UserButton handles profile + sign out */}
+      <div className="flex items-center gap-3 px-3 py-2.5">
+        <UserButton afterSignOutUrl="/" />
+        <span className="text-sm text-gray-400">Account</span>
+      </div>
     </aside>
   );
 }
