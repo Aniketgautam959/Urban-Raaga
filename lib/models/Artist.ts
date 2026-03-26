@@ -3,6 +3,7 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 export interface IArtist extends Document {
   name: string;
   slug: string;
+  order: number;
   title: string;
   bio: string;
   shortDescription: string;
@@ -41,6 +42,7 @@ const ArtistSchema = new Schema<IArtist>(
   {
     name: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
+    order: { type: Number, default: 0 },
     title: { type: String, default: "" },
     bio: { type: String, default: "" },
     shortDescription: { type: String, default: "" },

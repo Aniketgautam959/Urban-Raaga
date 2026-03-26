@@ -13,6 +13,7 @@ interface Artist {
   totalBookings: string;
   coverImage: string;
   location: string;
+  order?: number;
 }
 
 const STATUS_COLOR = {
@@ -25,6 +26,38 @@ export default function AdminDashboard() {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [savingOrder, setSavingOrder] = useState(false);
+
+  async function saveOrder(newArtists: Artist[]) {
+    setSavingOrder(true);
+    const items = newArtists.map((a, idx) => ({ id: a._id, order: idx }));
+    await fetch("/api/artists/reorder", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items }),
+    });
+    setSavingOrder(false);
+  }
+
+  function moveUp(index: number) {
+    if (index === 0) return;
+    const newArtists = [...artists];
+    const temp = newArtists[index];
+    newArtists[index] = newArtists[index - 1];
+    newArtists[index - 1] = temp;
+    setArtists(newArtists);
+    saveOrder(newArtists);
+  }
+
+  function moveDown(index: number) {
+    if (index === artists.length - 1) return;
+    const newArtists = [...artists];
+    const temp = newArtists[index];
+    newArtists[index] = newArtists[index + 1];
+    newArtists[index + 1] = temp;
+    setArtists(newArtists);
+    saveOrder(newArtists);
+  }
 
   async function fetchArtists() {
     const res = await fetch("/api/artists?status=all", { cache: "no-store", next: { revalidate: 0 } });
@@ -114,6 +147,7 @@ export default function AdminDashboard() {
                 <thead>
                   <tr className="text-gray-500 text-xs uppercase tracking-widest bg-white/3">
                     <th className="text-left px-6 py-3">Artist</th>
+                    <th className="text-center px-4 py-3 w-24">Order</th>
                     <th className="text-left px-6 py-3">Status</th>
                     <th className="text-left px-6 py-3">Rating</th>
                     <th className="text-left px-6 py-3">Bookings</th>
@@ -121,7 +155,7 @@ export default function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
-                  {artists.map((artist) => (
+                  {artists.map((artist, idx) => (
                     <tr key={artist._id} className="hover:bg-white/3 transition-colors">
                       <td className="px-6 py-4 flex items-center gap-3">
                         {artist.coverImage ? (
@@ -134,6 +168,27 @@ export default function AdminDashboard() {
                         <div>
                           <p className="font-semibold text-white">{artist.name}</p>
                           <p className="text-gray-500 text-xs">{artist.title}</p>
+                        </div>
+                      </td>
+                      <td className="px-4 py-4 text-center border-l border-r border-white/5">
+                        <div className="flex flex-col items-center justify-center gap-1">
+                          <button
+                            onClick={() => moveUp(idx)}
+                            disabled={idx === 0 || savingOrder}
+                            className="text-gray-500 hover:text-white disabled:opacity-20 disabled:hover:text-gray-500 transition-colors"
+                            title="Move Up"
+                          >
+                            ▲
+                          </button>
+                          <span className="text-[10px] font-bold text-gray-400">{idx + 1}</span>
+                          <button
+                            onClick={() => moveDown(idx)}
+                            disabled={idx === artists.length - 1 || savingOrder}
+                            className="text-gray-500 hover:text-white disabled:opacity-20 disabled:hover:text-gray-500 transition-colors"
+                            title="Move Down"
+                          >
+                            ▼
+                          </button>
                         </div>
                       </td>
                       <td className="px-6 py-4">

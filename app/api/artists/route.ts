@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
       query.status = "approved";
     }
 
-    const artists = await Artist.find(query).sort({ createdAt: -1 }).lean();
+    const artists = await Artist.find(query).sort({ order: 1, createdAt: -1 }).lean();
     return NextResponse.json({ artists });
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "GET API Server Error" }, { status: 500 });
