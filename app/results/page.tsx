@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -10,7 +10,6 @@ import ArtistWhyChooseUs from "@/components/ArtistWhyChooseUs";
 import HowItWorks from "@/components/HowItWorks";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
-import { artists } from "@/lib/artists";
 import { useRouter } from "next/navigation";
 
 const LOCATION_OPTIONS = [
@@ -73,6 +72,17 @@ function RadioGroup({
 export default function ResultsPage() {
   const router = useRouter();
 
+  // Fetch artists from API (approved only)
+  const [allArtists, setAllArtists] = useState<any[]>([]);
+  const [loadingArtists, setLoadingArtists] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/artists?status=approved")
+      .then((r) => r.json())
+      .then((d) => { setAllArtists(d.artists || []); setLoadingArtists(false); })
+      .catch(() => setLoadingArtists(false));
+  }, []);
+
   // Filter states
   const [location, setLocation] = useState("Bangalore");
   const [showLocationSuggestions, setShowLocationSuggestions] = useState(false);
@@ -130,26 +140,26 @@ export default function ResultsPage() {
   const hasActiveFilters = setupType || guestCount || budget || venueType || selectedGenres.length > 0;
 
   const filteredArtists = useMemo(() => {
-    let list = [...artists];
+    let list = [...allArtists];
 
     // Genre filter
     if (selectedGenres.length > 0) {
       list = list.filter((a) =>
-        selectedGenres.some((g) => a.genres.map((x) => x.toLowerCase()).includes(g.toLowerCase()))
+        selectedGenres.some((g) => (a.genres || []).map((x: string) => x.toLowerCase()).includes(g.toLowerCase()))
       );
     }
 
-    // Setup type filter — match against artist pricing types
+    // Setup type filter
     if (setupType) {
       list = list.filter((a) =>
-        a.pricing?.some((p) => p.type.toLowerCase().includes(setupType.toLowerCase().split(" ")[0]))
+        (a.pricing || []).some((p: any) => p.type?.toLowerCase().includes(setupType.toLowerCase().split(" ")[0]))
       );
     }
 
     // Budget filter
     if (budget) {
       list = list.filter((a) => {
-        const minPrice = Math.min(...(a.pricing?.map((p) => p.price) || [0]));
+        const minPrice = Math.min(...((a.pricing || []).map((p: any) => p.price) || [0]));
         if (budget === "Under ₹15,000") return minPrice < 15000;
         if (budget === "₹15,000 – ₹30,000") return minPrice >= 15000 && minPrice <= 30000;
         if (budget === "₹30,000 – ₹60,000") return minPrice > 30000 && minPrice <= 60000;
@@ -163,20 +173,20 @@ export default function ResultsPage() {
       list.sort((a, b) => b.rating - a.rating);
     } else if (sortBy === "Price: Low to High") {
       list.sort((a, b) => {
-        const pA = Math.min(...(a.pricing?.map((p) => p.price) || [0]));
-        const pB = Math.min(...(b.pricing?.map((p) => p.price) || [0]));
+        const pA = Math.min(...((a.pricing || []).map((p: any) => p.price) || [0]));
+        const pB = Math.min(...((b.pricing || []).map((p: any) => p.price) || [0]));
         return pA - pB;
       });
     } else if (sortBy === "Price: High to Low") {
       list.sort((a, b) => {
-        const pA = Math.min(...(a.pricing?.map((p) => p.price) || [0]));
-        const pB = Math.min(...(b.pricing?.map((p) => p.price) || [0]));
+        const pA = Math.min(...((a.pricing || []).map((p: any) => p.price) || [0]));
+        const pB = Math.min(...((b.pricing || []).map((p: any) => p.price) || [0]));
         return pB - pA;
       });
     }
 
     return list;
-  }, [selectedGenres, setupType, sortBy]);
+  }, [allArtists, selectedGenres, setupType, budget, sortBy]);
 
   return (
     <main className="min-h-screen bg-[#0F0F0F] text-white selection:bg-[#FF2E2E] selection:text-white pb-0">
@@ -410,7 +420,7 @@ export default function ResultsPage() {
                     {/* Card Image */}
                     <div className="w-full sm:w-56 aspect-square sm:h-56 rounded-2xl overflow-hidden relative flex-shrink-0 bg-gray-900">
                       <Image
-                        src={artist.images[0]}
+                        src={(artist.images?.[0] || artist.coverImage) || "/placeholder.jpg"}
                         alt={artist.name}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -429,7 +439,7 @@ export default function ResultsPage() {
 
                       {/* Badges */}
                       <div className="flex flex-wrap gap-1.5 mb-3">
-                        {artist.badges.map((badge) => (
+                        {(artist.badges || []).map((badge: string) => (
                           <span key={badge} className={`px-2 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider rounded-full flex items-center gap-1 ${getBadgeStyle(badge)}`}>
                             <span className="text-current opacity-70">★</span> {badge}
                           </span>
@@ -441,7 +451,7 @@ export default function ResultsPage() {
 
                       {/* Genres */}
                       <div className="flex flex-wrap gap-1.5 mb-5">
-                        {artist.genres.slice(0, 5).map((genre) => (
+                        {(artist.genres || []).slice(0, 5).map((genre: string) => (
                           <span key={genre} className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-gray-300">
                             {genre}
                           </span>
