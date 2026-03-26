@@ -3,6 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Artist from "@/lib/models/Artist";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 type Params = { params: { id: string } };
 
 // GET /api/artists/:id
@@ -20,9 +23,16 @@ export async function PUT(req: NextRequest, { params }: Params) {
 
   await connectDB();
   const body = await req.json();
-  const artist = await Artist.findByIdAndUpdate(params.id, body, { new: true }).lean();
-  if (!artist) return NextResponse.json({ error: "Not found" }, { status: 404 });
-  return NextResponse.json({ artist });
+  try {
+    const artist = await Artist.findByIdAndUpdate(params.id, body, { new: true, runValidators: true }).lean();
+    if (!artist) return NextResponse.json({ error: "Not found" }, { status: 404 });
+    return NextResponse.json({ artist });
+  } catch (error: any) {
+    if (error.code === 11000) {
+      return NextResponse.json({ error: "An artist with this name/slug already exists." }, { status: 400 });
+    }
+    return NextResponse.json({ error: error.message || "Failed to update artist" }, { status: 400 });
+  }
 }
 
 // DELETE /api/artists/:id — Clerk protected

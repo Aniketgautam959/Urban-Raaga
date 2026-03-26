@@ -27,7 +27,7 @@ export default function AdminDashboard() {
   const [deleting, setDeleting] = useState<string | null>(null);
 
   async function fetchArtists() {
-    const res = await fetch("/api/artists?status=all");
+    const res = await fetch("/api/artists?status=all", { cache: "no-store", next: { revalidate: 0 } });
     const data = await res.json();
     setArtists(data.artists || []);
     setLoading(false);

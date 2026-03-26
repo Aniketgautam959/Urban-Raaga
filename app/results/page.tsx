@@ -77,7 +77,7 @@ export default function ResultsPage() {
   const [loadingArtists, setLoadingArtists] = useState(true);
 
   useEffect(() => {
-    fetch("/api/artists?status=approved")
+    fetch("/api/artists?status=approved", { cache: "no-store", next: { revalidate: 0 } })
       .then((r) => r.json())
       .then((d) => { setAllArtists(d.artists || []); setLoadingArtists(false); })
       .catch(() => setLoadingArtists(false));
@@ -142,6 +142,15 @@ export default function ResultsPage() {
   const filteredArtists = useMemo(() => {
     let list = [...allArtists];
 
+    // Location filter
+    if (location.trim()) {
+      const searchLoc = location.toLowerCase().trim();
+      list = list.filter((a) => 
+        (a.location || "").toLowerCase().includes(searchLoc) || 
+        (a.availableIn || []).some((loc: string) => loc.toLowerCase().includes(searchLoc))
+      );
+    }
+
     // Genre filter
     if (selectedGenres.length > 0) {
       list = list.filter((a) =>
@@ -151,8 +160,31 @@ export default function ResultsPage() {
 
     // Setup type filter
     if (setupType) {
+      const typeKey = setupType.toLowerCase().split(" ")[0]; // "solo", "duo", "trio", "full"
       list = list.filter((a) =>
-        (a.pricing || []).some((p: any) => p.type?.toLowerCase().includes(setupType.toLowerCase().split(" ")[0]))
+        (a.pricing || []).some((p: any) => p.type?.toLowerCase().includes(typeKey))
+      );
+    }
+
+    // Guest count & Venue type filters (if metadata exists in records)
+    // For now, we'll implement these as placeholders or check against categories if needed
+    if (venueType) {
+      list = list.filter((a) => 
+        (a.bestFor || []).some((bf: any) => 
+          bf.category?.toLowerCase().includes(venueType.toLowerCase()) ||
+          bf.events?.some((e: string) => e.toLowerCase().includes(venueType.toLowerCase()))
+        )
+      );
+    }
+
+    if (guestCount) {
+      // Guest count logic: Up to 20, 21 to 50, etc.
+      // This is harder to map directly without explicit fields, but we'll try to match bestFor
+      list = list.filter((a) => 
+        (a.bestFor || []).some((bf: any) => 
+          bf.category?.toLowerCase().includes("party") || 
+          bf.category?.toLowerCase().includes("wedding")
+        )
       );
     }
 
@@ -170,7 +202,7 @@ export default function ResultsPage() {
 
     // Sort
     if (sortBy === "Highest Rated") {
-      list.sort((a, b) => b.rating - a.rating);
+      list.sort((a, b) => (b.rating || 0) - (a.rating || 0));
     } else if (sortBy === "Price: Low to High") {
       list.sort((a, b) => {
         const pA = Math.min(...((a.pricing || []).map((p: any) => p.price) || [0]));
@@ -186,7 +218,7 @@ export default function ResultsPage() {
     }
 
     return list;
-  }, [allArtists, selectedGenres, setupType, budget, sortBy]);
+  }, [allArtists, location, selectedGenres, setupType, budget, sortBy, venueType, guestCount]);
 
   return (
     <main className="min-h-screen bg-[#0F0F0F] text-white selection:bg-[#FF2E2E] selection:text-white pb-0">
@@ -398,14 +430,20 @@ export default function ResultsPage() {
             )}
 
             {/* Cards List */}
-            <div className="space-y-6">
-              {filteredArtists.length === 0 ? (
-                <div className="text-center py-20 text-gray-500">
+            <div className="space-y-6 min-h-[400px]">
+              {loadingArtists ? (
+                <div className="flex flex-col items-center justify-center py-20 animate-pulse">
+                  <div className="w-12 h-12 border-4 border-[#FF2E2E]/20 border-t-[#FF2E2E] rounded-full animate-spin mb-4" />
+                  <p className="text-gray-500 font-medium">Finding the best artists for you...</p>
+                </div>
+              ) : filteredArtists.length === 0 ? (
+                <div className="text-center py-20 text-gray-500 bg-white/5 rounded-3xl border border-white/10">
                   <svg className="w-16 h-16 mx-auto mb-4 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <p className="text-lg font-semibold">No artists match your filters</p>
-                  <button onClick={resetFilters} className="mt-4 text-[#FF2E2E] text-sm font-semibold hover:underline">Clear filters</button>
+                  <p className="text-sm mt-1 mb-6">Try adjusting your filters or location to see more results.</p>
+                  <button onClick={resetFilters} className="px-6 py-2 bg-[#FF2E2E] text-white text-sm font-bold rounded-full hover:bg-[#FF2E2E]/80 transition-all">Clear All Filters</button>
                 </div>
               ) : (
                 filteredArtists.map((artist, idx) => (
@@ -481,17 +519,26 @@ export default function ResultsPage() {
                         </div>
                       </div>
 
-                      <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full">
-                        <div>
-                          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Starting from</p>
-                          <div className="flex items-center gap-2">
+                      <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row justify-between items-end gap-4 w-full">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-1">
                             {artist.originalPriceIndicator && (
-                              <p className="text-sm font-medium text-gray-500 line-through">{artist.originalPriceIndicator}</p>
+                              <div className="flex items-center gap-1.5">
+                                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">MRP:</span>
+                                <span className="text-sm font-medium text-gray-500 line-through decoration-[#FF2E2E]/40">{artist.originalPriceIndicator}</span>
+                              </div>
                             )}
-                            <p className="text-xl font-bold text-white">{artist.priceIndicator}</p>
+                            <div className="flex items-center gap-1.5">
+                              <span className="text-[10px] text-[#FF2E2E] font-bold uppercase tracking-wider">Deal Price:</span>
+                              <p className="text-xl font-black text-white">{artist.priceIndicator}</p>
+                            </div>
                           </div>
                           {artist.bookingAmount && (
-                            <p className="text-xs text-[#FF2E2E] mt-1 font-semibold">Booking Amount: {artist.bookingAmount}</p>
+                            <div className="flex items-center gap-2">
+                              <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Advance:</span>
+                              <p className="text-xs text-white font-bold tracking-tight">{artist.bookingAmount}</p>
+                              <span className="text-[10px] text-gray-600 font-medium italic">(Adjustable in total)</span>
+                            </div>
                           )}
                         </div>
 

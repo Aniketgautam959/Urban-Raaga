@@ -8,7 +8,7 @@ export default function ArtistEditClient({ id }: { id: string }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`/api/artists/${id}`)
+    fetch(`/api/artists/${id}`, { cache: "no-store", next: { revalidate: 0 } })
       .then((r) => r.json())
       .then((d) => { setArtist(d.artist); setLoading(false); });
   }, [id]);

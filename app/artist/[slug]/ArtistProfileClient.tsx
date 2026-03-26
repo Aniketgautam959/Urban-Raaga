@@ -280,15 +280,27 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
               
               <div className="space-y-4 mb-8">
                 {artist.pricing.map(pkg => (
-                  <div key={pkg.type} className="flex flex-col p-4 bg-black/40 rounded-xl border border-white/5">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-bold text-white">{pkg.type}</span>
-                      <div className="flex items-center gap-3">
-                        <span className="text-sm font-medium text-gray-500 line-through">₹{(pkg.price + 5000).toLocaleString("en-IN")}</span>
-                        <span className="font-black text-[#FF2E2E] text-lg">₹{pkg.price.toLocaleString("en-IN")}</span>
+                  <div key={pkg.type} className="flex flex-col p-5 bg-black/40 rounded-2xl border border-white/5 hover:border-[#FF2E2E]/30 transition-colors group">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-bold text-gray-200 group-hover:text-white transition-colors">{pkg.type}</span>
+                      <div className="flex items-center gap-4">
+                        <div className="text-right">
+                          <span className="block text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-0.5">MRP</span>
+                          <span className="text-sm font-medium text-gray-500 line-through decoration-[#FF2E2E]/40">₹{(pkg.price + 5000).toLocaleString("en-IN")}</span>
+                        </div>
+                        <div className="text-right">
+                          <span className="block text-[9px] text-[#FF2E2E] font-bold uppercase tracking-widest mb-0.5 whitespace-nowrap">Deal Price</span>
+                          <span className="font-black text-white text-xl tracking-tight">₹{pkg.price.toLocaleString("en-IN")}</span>
+                        </div>
                       </div>
                     </div>
-                    <span className="text-xs text-gray-400 text-right">Booking Amount: <strong className="text-white">₹{(pkg.price * 0.3).toLocaleString("en-IN")}</strong> (30%)</span>
+                    <div className="flex items-center justify-between pt-3 border-t border-white/5">
+                      <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest">Advance Payment</span>
+                      <div className="flex items-center gap-1.5">
+                        <strong className="text-white font-bold">₹{(pkg.price * 0.3).toLocaleString("en-IN")}</strong>
+                        <span className="text-[9px] text-gray-600 font-medium">(30%)</span>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>

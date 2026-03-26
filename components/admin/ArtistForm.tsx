@@ -24,6 +24,7 @@ interface ArtistFormData {
   badges: string;
   pricing: Pricing[];
   priceIndicator: string;
+  originalPriceIndicator: string;
   bookingAmount: string;
   status: "approved" | "pending" | "rejected";
   seoTitle: string;
@@ -42,7 +43,9 @@ const DEFAULT: ArtistFormData = {
   genres: "", location: "Bangalore", availableIn: "",
   rating: 4.5, totalBookings: "0", badges: "",
   pricing: [{ type: "Solo", price: 0 }],
-  priceIndicator: "", bookingAmount: "",
+  priceIndicator: "",
+  originalPriceIndicator: "",
+  bookingAmount: "",
   status: "pending",
   seoTitle: "", seoDescription: "", seoKeywords: "",
 };
@@ -140,6 +143,7 @@ export default function ArtistForm({ initial, mode }: ArtistFormProps) {
       badges: form.badges.split(",").map((b) => b.trim()).filter(Boolean),
       pricing: form.pricing,
       priceIndicator: form.priceIndicator,
+      originalPriceIndicator: form.originalPriceIndicator,
       bookingAmount: form.bookingAmount,
       status: form.status,
       seo: {
@@ -149,25 +153,33 @@ export default function ArtistForm({ initial, mode }: ArtistFormProps) {
       },
     };
 
-    const url = mode === "create" ? "/api/artists" : `/api/artists/${(initial as any)?._id}`;
-    const method = mode === "create" ? "POST" : "PUT";
+      const url = mode === "create" ? "/api/artists" : `/api/artists/${(initial as any)?._id}`;
+      const method = mode === "create" ? "POST" : "PUT";
 
-    const res = await fetch(url, {
-      method,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+      try {
+        const res = await fetch(url, {
+          method,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
 
-    if (res.ok) {
-      setSuccess(mode === "create" ? "Artist created successfully!" : "Artist updated successfully!");
-      setTimeout(() => router.push("/admin/dashboard"), 1000);
-    } else {
-      const data = await res.json();
-      setError(data.error || "Something went wrong");
+        if (res.ok) {
+          setSuccess(mode === "create" ? "Artist created successfully!" : "Artist updated successfully!");
+          setTimeout(() => router.push("/admin/dashboard"), 1000);
+        } else {
+          try {
+            const data = await res.json();
+            setError(data.error || "Something went wrong saving the artist.");
+          } catch (e) {
+            setError(`Server error (${res.status}). Please check server logs.`);
+          }
+        }
+      } catch (err: any) {
+        setError(err.message || "Network error. Failed to connect.");
+      } finally {
+        setSaving(false);
+      }
     }
-    setSaving(false);
-  }
-
   const inputCls = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm outline-none focus:border-[#FF2E2E] transition-colors placeholder-gray-600";
   const labelCls = "block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2";
 
@@ -290,13 +302,17 @@ export default function ArtistForm({ initial, mode }: ArtistFormProps) {
           ))}
           <button type="button" onClick={addPricing} className="text-sm text-[#FF2E2E] font-semibold hover:underline">+ Add pricing tier</button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
           <div>
-            <label className={labelCls}>Price Indicator</label>
+            <label className={labelCls}>Original Price (MRP)</label>
+            <input className={inputCls} value={form.originalPriceIndicator} onChange={(e) => updateField("originalPriceIndicator", e.target.value)} placeholder="e.g. ₹20,000" />
+          </div>
+          <div>
+            <label className={labelCls}>Price Indicator (Deal Price)</label>
             <input className={inputCls} value={form.priceIndicator} onChange={(e) => updateField("priceIndicator", e.target.value)} placeholder="starts from ₹15,000" />
           </div>
           <div>
-            <label className={labelCls}>Booking Amount</label>
+            <label className={labelCls}>Booking Amount (Advance)</label>
             <input className={inputCls} value={form.bookingAmount} onChange={(e) => updateField("bookingAmount", e.target.value)} placeholder="₹4,500" />
           </div>
         </div>
