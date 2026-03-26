@@ -4,6 +4,9 @@ import ArtistProfileClient from "./ArtistProfileClient";
 import { connectDB } from "@/lib/mongodb";
 import Artist from "@/lib/models/Artist";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const BASE_URL = "https://www.bangaloresinger.in";
 
 async function getArtist(slug: string) {
