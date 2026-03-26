@@ -88,37 +88,78 @@ export default function ArtistForm({ initial, mode }: ArtistFormProps) {
   }
 
   async function uploadFile(file: File, folder = "urban-raaga/artists"): Promise<string> {
+    // 1. Get secure signature from our backend
+    const sigRes = await fetch("/api/upload/signature", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ folder }),
+    });
+    
+    if (!sigRes.ok) throw new Error("Failed to get upload signature");
+    const sigData = await sigRes.json();
+    
+    // 2. Upload directly to Cloudinary (bypassing Vercel limits)
     const fd = new FormData();
     fd.append("file", file);
-    fd.append("folder", folder);
-    const res = await fetch("/api/upload", { method: "POST", body: fd });
-    const data = await res.json();
-    return data.url as string;
+    fd.append("api_key", sigData.apiKey);
+    fd.append("timestamp", sigData.timestamp);
+    fd.append("signature", sigData.signature);
+    fd.append("folder", sigData.folder);
+
+    const uploadRes = await fetch(
+      `https://api.cloudinary.com/v1_1/${sigData.cloudName}/auto/upload`,
+      { method: "POST", body: fd }
+    );
+    
+    const uploadData = await uploadRes.json();
+    if (!uploadRes.ok) throw new Error(uploadData.error?.message || "Cloudinary upload failed");
+    
+    return uploadData.secure_url;
   }
 
   async function handleCoverUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploading(true);
-    const url = await uploadFile(file);
-    updateField("coverImage", url);
-    setUploading(false);
+    try {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      setUploading(true);
+      setError("");
+      const url = await uploadFile(file);
+      updateField("coverImage", url);
+    } catch (err: any) {
+      setError(err.message || "Failed to upload cover image");
+    } finally {
+      setUploading(false);
+    }
   }
 
   async function handleGalleryUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const files = Array.from(e.target.files || []);
-    setUploading(true);
-    const urls = await Promise.all(files.map((f) => uploadFile(f)));
-    updateField("images", [...form.images, ...urls]);
-    setUploading(false);
+    try {
+      const files = Array.from(e.target.files || []);
+      if (!files.length) return;
+      setUploading(true);
+      setError("");
+      const urls = await Promise.all(files.map((f) => uploadFile(f)));
+      updateField("images", [...form.images, ...urls]);
+    } catch (err: any) {
+      setError(err.message || "Failed to upload gallery images");
+    } finally {
+      setUploading(false);
+    }
   }
 
   async function handleVideoUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const files = Array.from(e.target.files || []);
-    setUploading(true);
-    const urls = await Promise.all(files.map((f) => uploadFile(f, "urban-raaga/videos")));
-    updateField("videos", [...form.videos, ...urls]);
-    setUploading(false);
+    try {
+      const files = Array.from(e.target.files || []);
+      if (!files.length) return;
+      setUploading(true);
+      setError("");
+      const urls = await Promise.all(files.map((f) => uploadFile(f, "urban-raaga/videos")));
+      updateField("videos", [...form.videos, ...urls]);
+    } catch (err: any) {
+      setError(err.message || "Failed to upload videos");
+    } finally {
+      setUploading(false);
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
