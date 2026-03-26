@@ -17,7 +17,7 @@ async function seed() {
     }
     await Artist.create({
       ...a,
-      bio: a.fullDescription,
+      bio: a.bio,
       coverImage: a.images[0] || "",
       status: "approved",
       imageAlts: (a as any).imageAlts || [],
