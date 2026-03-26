@@ -95,31 +95,33 @@ export default function ResultsPage() {
   const [budget, setBudget] = useState("");
 
   const getBadgeStyle = (badge: string) => {
-    switch (badge.toLowerCase()) {
-      case "top performer":
-        return "bg-amber-500/20 text-amber-400 border border-amber-500/30";
-      case "premium performer":
-        return "bg-yellow-500/20 text-yellow-300 border border-yellow-500/30";
-      case "soulful":
-        return "bg-orange-500/20 text-orange-400 border border-orange-500/30";
-      case "established artist":
-      case "seasoned artist":
-        return "bg-blue-500/20 text-blue-300 border border-blue-500/30";
-      case "urban raaga's choice":
-      case "emerging artist":
-        return "bg-gradient-to-r from-purple-600/30 to-pink-600/30 text-purple-300 border border-purple-500/30";
-      case "23+ years experience":
-        return "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30";
-      case "budget friendly":
-        return "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
-      case "multi-language performer":
-      case "multi lang":
-      case "multilingual":
-      case "multi-language live band":
-        return "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30";
-      default:
-        return "bg-[#FF2E2E]/20 text-[#FF2E2E] border border-[#FF2E2E]/30";
+    const lowerBadge = badge.toLowerCase();
+    
+    // Hardcoded high-importance badges
+    if (lowerBadge === "top performer") return "bg-amber-500/20 text-amber-400 border border-amber-500/30";
+    if (lowerBadge === "premium performer") return "bg-yellow-500/20 text-yellow-300 border border-yellow-500/30";
+    if (lowerBadge === "soulful") return "bg-orange-500/20 text-orange-400 border border-orange-500/30";
+    if (lowerBadge === "established artist" || lowerBadge === "seasoned artist") return "bg-blue-500/20 text-blue-300 border border-blue-500/30";
+    if (lowerBadge === "urban raaga's choice" || lowerBadge === "emerging artist") return "bg-gradient-to-r from-purple-600/30 to-pink-600/30 text-purple-300 border border-purple-500/30";
+
+    // Dynamic coloring for everything else
+    const palettes = [
+      "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30", // Emerald
+      "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30", // Cyan
+      "bg-rose-500/20 text-rose-300 border border-rose-500/30", // Rose
+      "bg-violet-500/20 text-violet-300 border border-violet-500/30", // Violet
+      "bg-sky-500/20 text-sky-300 border border-sky-500/30", // Sky
+      "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30", // Indigo
+      "bg-teal-500/20 text-teal-300 border border-teal-500/30", // Teal
+    ];
+
+    // Simple deterministic hash to pick a color
+    let hash = 0;
+    for (let i = 0; i < badge.length; i++) {
+      hash = badge.charCodeAt(i) + ((hash << 5) - hash);
     }
+    const index = Math.abs(hash) % palettes.length;
+    return palettes[index];
   };
 
   const toggleGenre = (genre: string) => {
