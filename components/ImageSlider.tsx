@@ -102,7 +102,7 @@ export default function ImageSlider() {
                   alt={slides[current].alt}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 1280px) 100vw, 1280px"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
                   priority={current === 0}
                 />
               </div>

@@ -74,6 +74,7 @@ export default function WhoWeAre() {
                   alt="Live band and singers performing at a wedding event in Bangalore"
                   fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
                 />
               </motion.div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

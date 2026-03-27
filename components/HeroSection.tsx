@@ -49,6 +49,7 @@ export default function HeroSection() {
             fill
             className="object-cover"
             priority
+            sizes="100vw"
           />
         </motion.div>
       {/* Overlay */}

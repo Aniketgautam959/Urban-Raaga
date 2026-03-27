@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 const BASE_URL = "https://www.bangaloresinger.in";
 
@@ -51,7 +58,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className="antialiased">
+        <body className={`${inter.className} antialiased font-sans`}>
           {children}
           <WhatsAppButton />
         </body>

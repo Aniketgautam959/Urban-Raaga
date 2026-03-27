@@ -109,6 +109,7 @@ export default function ArtistProfileClient({ artist }: { artist: Artist }) {
           fill
           className="object-cover object-top"
           priority
+          sizes="100vw"
         />
         {/* Dark Overlays for text readability and premium look */}
         <div className="absolute inset-0 bg-black/30" />
