@@ -25,9 +25,9 @@ export default function Navbar() {
             <Image 
               src="/logo.png" 
               alt="Urban Raaga - Live Music Booking Platform Logo" 
-              width={160} 
-              height={64} 
-              className="h-14 w-auto object-contain rounded-xl overflow-hidden border border-gray-100/50"
+              width={140} 
+              height={56} 
+              className="h-14 w-[140px] object-contain rounded-xl overflow-hidden border border-gray-100/50"
               priority
             />
           </Link>
@@ -56,6 +56,7 @@ export default function Navbar() {
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+            aria-label={menuOpen ? "Close Menu" : "Open Menu"}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {menuOpen ? (
