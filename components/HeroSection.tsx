@@ -37,6 +37,12 @@ export default function HeroSection() {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
+        <motion.div
+           initial={{ scale: 1.0 }}
+           animate={{ scale: 1.08 }}
+           transition={{ duration: 15, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
+           className="absolute inset-0 w-full h-full"
+        >
           <Image
             src="/slider-1.jpg"
             alt="Live music concert and band performance in Bangalore by Urban Raaga"
@@ -44,8 +50,8 @@ export default function HeroSection() {
             className="object-cover"
             priority
             sizes="100vw"
-            quality={90}
           />
+        </motion.div>
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/80" />
 
