@@ -62,9 +62,13 @@ export default async function ArtistPage({ params }: { params: { slug: string } 
     "embedUrl": src.includes("youtube") ? src : undefined,
   }));
 
+  const minPrice = artist.pricing && artist.pricing.length > 0
+    ? Math.min(...artist.pricing.map((p: any) => p.price))
+    : 10000;
+
   const artistSchema = {
     "@context": "https://schema.org",
-    "@type": "MusicGroup",
+    "@type": ["MusicGroup", "Product"],
     "@id": `${artistUrl}/#artist`,
     "name": artist.name,
     "url": artistUrl,
@@ -76,6 +80,17 @@ export default async function ArtistPage({ params }: { params: { slug: string } 
       "ratingValue": String(artist.rating || 4.5),
       "reviewCount": String(artist.totalBookings || "1").replace("+", ""),
       "bestRating": "5",
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": artistUrl,
+      "priceCurrency": "INR",
+      "price": String(minPrice),
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "Urban Raaga"
+      }
     },
     ...(videoObjects.length > 0 && { "video": videoObjects }),
   };
