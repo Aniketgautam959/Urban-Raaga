@@ -1,8 +1,14 @@
 import { MetadataRoute } from 'next'
-import { artists } from '@/lib/artists'
+import { connectDB } from "@/lib/mongodb"
+import Artist from "@/lib/models/Artist"
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const dynamic = 'force-dynamic'
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.bangaloresinger.in'
+
+  await connectDB()
+  const dbArtists = await Artist.find({ status: "approved" }).lean()
 
   // Static routes
   const routes = [
@@ -20,9 +26,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   // Dynamic artist routes
-  const artistRoutes = artists.map((artist) => ({
+  const artistRoutes = dbArtists.map((artist: any) => ({
     url: `${baseUrl}/artist/${artist.slug}`,
-    lastModified: new Date(),
+    lastModified: artist.updatedAt ? new Date(artist.updatedAt) : new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.9,
   }))
