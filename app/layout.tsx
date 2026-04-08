@@ -25,6 +25,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: BASE_URL,
   },
+  // Google Search Console site verification (add NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION to .env.local)
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+  },
   openGraph: {
     title: "Book Live Singers in Bangalore – Verified Artists for Weddings & Events",
     description:

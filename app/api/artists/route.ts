@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Artist from "@/lib/models/Artist";
+import { notifyArtistIndexing } from "@/lib/googleIndexing";
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -51,6 +52,14 @@ export async function POST(req: NextRequest) {
 
   try {
     const artist = await Artist.create(body);
+
+    // 🔍 If the artist is created directly as "approved", notify Google immediately
+    if (artist.status === "approved" && artist.slug) {
+      notifyArtistIndexing(artist.slug, "URL_UPDATED").catch((e) =>
+        console.error("[Indexing API] POST notify error:", e)
+      );
+    }
+
     return NextResponse.json({ artist }, { status: 201 });
   } catch (error: any) {
     if (error.code === 11000) {
