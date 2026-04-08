@@ -62,9 +62,13 @@ export default async function ArtistPage({ params }: { params: { slug: string } 
     "embedUrl": src.includes("youtube") ? src : undefined,
   }));
 
-  const minPrice = artist.pricing && artist.pricing.length > 0
+  const extractedPrice = artist.pricing && artist.pricing.length > 0
     ? Math.min(...artist.pricing.map((p: any) => p.price))
     : 10000;
+  const finalPrice = extractedPrice > 0 ? extractedPrice : 10000;
+
+  const rawBooking = parseInt(String(artist.totalBookings || "1").replace(/\D/g, ""));
+  const finalReviewCount = isNaN(rawBooking) || rawBooking === 0 ? 1 : rawBooking;
 
   const artistSchema = {
     "@context": "https://schema.org",
@@ -78,14 +82,14 @@ export default async function ArtistPage({ params }: { params: { slug: string } 
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": String(artist.rating || 4.5),
-      "reviewCount": String(artist.totalBookings || "1").replace("+", ""),
+      "reviewCount": String(finalReviewCount),
       "bestRating": "5",
     },
     "offers": {
       "@type": "Offer",
       "url": artistUrl,
       "priceCurrency": "INR",
-      "price": String(minPrice),
+      "price": String(finalPrice),
       "availability": "https://schema.org/InStock",
       "seller": {
         "@type": "Organization",
